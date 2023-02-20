@@ -9,6 +9,7 @@ module.exports = {
     options.tableName = "Spots";
     return queryInterface.bulkInsert(options, [
       {
+        ownerId: 1,
         address: '1086 Robbs Flat Road',
         city: 'East Haakon',
         state: 'South Dakota',
@@ -20,6 +21,7 @@ module.exports = {
         price: 650.00
       },
       {
+        ownerId: 2,
         address: '12421 Oceanview Way',
         city: 'Carey',
         state: 'Florida',
@@ -31,6 +33,7 @@ module.exports = {
         price: 1200.00
       },
       {
+        ownerId: 3,
         address: '8201 Co Rd 59',
         city: 'Verbena',
         state: 'Alabama',
@@ -42,6 +45,7 @@ module.exports = {
         price: 350.00
       },
       {
+        ownerId: 1,
         address: '311 E Market Street Suite 107',
         city: 'Lima',
         state: 'Ohio',
@@ -57,7 +61,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
-    return queryInterface.bulkDelete(options, null, {});
+    return queryInterface.bulkDelete(options);
 
   }
 };
