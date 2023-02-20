@@ -25,9 +25,15 @@ module.exports = {
       },
       review: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       stars: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1,
+          max: 5
+        }
       },
       createdAt: {
         allowNull: false,
