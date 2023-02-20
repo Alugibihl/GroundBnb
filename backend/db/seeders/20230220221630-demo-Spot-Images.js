@@ -1,0 +1,30 @@
+'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
+    return queryInterface.bulkInsert(options, [
+      {
+        url: 'images.url',
+        preview: true
+      },
+      {
+        url: 'photo.jpeg',
+        preview: false
+      },
+      {
+        url: 'pic.url',
+        preview: false
+      },
+    ], {})
+  },
+
+  async down(queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
+    return queryInterface.bulkDelete(options);
+  }
+};
