@@ -13,43 +13,48 @@ router.get('/', async (req, res) => {
         include: [
             {
                 model: SpotImage,
-
             },
-            {
-                model: Review,
-                attributes: {
-                    include: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']]
-                }
-            }
         ]
 
 
     })
     let spotsList = []
-    spots.forEach(spot => {
+    for (let spot of spots) {
         spotsList.push(spot.toJSON())
-    });
-    spotsList.forEach(spot => {
-        spot.SpotImages.forEach(image => {
+    }
+    for (let spot of spotsList) {
+        // find avgRating
+        const reviewsBySpot = await Review.findOne({
+            where: {
+                spotId: spot.id
+            },
+            attributes: {
+                include: [
+                    [sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]
+                ]
+            }
+        })
+        // console.log(reviewsBySpot.toJSON())
+        let spotAvgReview = reviewsBySpot.toJSON().avgRating
+        if (spotAvgReview) {
+            spot.avgRating = spotAvgReview
+        } else {
+            spot.avgRating = "No Review Yet"
+        }
+        spot.avgRating
 
+        for (let image of spot.SpotImages) {
             if (image.preview === true) {
                 spot.previewImage = image.url
             }
-        })
+        }
         if (!spot.previewImage) {
             spot.previewImage = 'No preview image found'
         }
 
-        // spot.Reviews.forEach(review => {
-        //     [sequelize.fn("AVG", sequelize.col('stars')), 'avgRating']
-
-
-
-
-        // })
         delete spot.SpotImages
-        //delete spot.Reviews
-    })
+        delete spot.Reviews
+    }
 
     res.json(spotsList)
 })
