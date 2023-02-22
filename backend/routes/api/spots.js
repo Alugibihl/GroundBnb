@@ -173,7 +173,7 @@ router.get('/:spotId', async (req, res) => {
         include: [
             {
                 model: SpotImage,
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
+                attributes: { exclude: ['spotId', 'createdAt', 'updatedAt'] }
             },
             {
                 model: User,
@@ -206,22 +206,17 @@ router.get('/:spotId', async (req, res) => {
                 ]
             }
         })
-        //console.log(reviewsBySpotCount.toJSON())
-        let numberReviewsBySpot = reviewsBySpotCount.numReviews
-        spot.numReviews = numberReviewsBySpot
-        console.log(reviewsBySpotCount)
+        //find the object you want at index, then the container, then the value
+        spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
         if (spotAvgReview) {
             spot.avgStarRating = spotAvgReview
         } else {
             spot.avgStarRating = "No Review Yet"
         }
-
-        let images = []
-        for (let image of spot.SpotImages) {
-            images.push(image)
+        if (spots.User) {
+            spots.owner = spots.User
         }
-        spot.SpotImages = images
         delete spot.Users
         // delete spot.SpotImages
         delete spot.Reviews
@@ -232,6 +227,8 @@ router.get('/:spotId', async (req, res) => {
             statusCode: 404
         })
     }
+
+
     res.json(spotsList[0])
 })
 
