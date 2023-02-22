@@ -31,6 +31,28 @@ const validateSignup = [
         .withMessage("Last Name is required"),
     handleValidationErrors
 ];
+
+//lookup user by username and/or email
+//if i can find it, throw error for email or user accordingly rerurn
+//if not proceed with signup
+if (User.email) {
+    return res.status(403).json({
+        "message": "User already exists",
+        "statusCode": 403,
+        "errors": {
+            "email": "User with that email already exists"
+        }
+    })
+}
+if (User.username) {
+    return res.status(403).json({
+        "message": "User already exists",
+        "statusCode": 403,
+        "errors": {
+            "username": "User with that username already exists"
+        }
+    })
+}
 // Sign up
 router.post(
     '/',
