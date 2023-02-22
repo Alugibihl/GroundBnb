@@ -16,12 +16,12 @@ module.exports = {
       {
         spotId: 2,
         url: 'photo.jpeg',
-        preview: false
+        preview: true
       },
       {
         spotId: 3,
         url: 'pic.url',
-        preview: false
+        preview: true
       },
       {
         spotId: 4,
