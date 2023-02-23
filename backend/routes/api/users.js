@@ -35,36 +35,67 @@ const validateSignup = [
 //lookup user by username and/or email
 //if i can find it, throw error for email or user accordingly rerurn
 //if not proceed with signup
-if (User.email) {
-    return res.status(403).json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-            "email": "User with that email already exists"
-        }
-    })
-}
-if (User.username) {
-    return res.status(403).json({
-        "message": "User already exists",
-        "statusCode": 403,
-        "errors": {
-            "username": "User with that username already exists"
-        }
-    })
-}
+// if (User.email) {
+//     return res.status(403).json({
+//         "message": "User already exists",
+//         "statusCode": 403,
+//         "errors": {
+//             "email": "User with that email already exists"
+//         }
+//     })
+// }
+// if (User.username) {
+//     return res.status(403).json({
+//         "message": "User already exists",
+//         "statusCode": 403,
+//         "errors": {
+//             "username": "User with that username already exists"
+//         }
+//     })
+// }
 // Sign up
 router.post(
     '/',
     validateSignup,
     async (req, res) => {
         const { email, password, username, firstName, lastName } = req.body;
-        const user = await User.signup({ email, username, password, firstName, lastName });
-        await setTokenCookie(res, user);
+        let user
+        try {
+            user = await User.signup({ email, username, password, firstName, lastName });
+            await setTokenCookie(res, user);
+        }
+        catch (err) {
+            if (err.name === 'SequelizeUniqueConstraintError') {
+                switch (err.errors[0].path) {
+                    case 'username': return res.status(403).json({
+                        "message": "User already exists",
+                        "statusCode": 403,
+                        "errors": {
+                            "username": "User with that username already exists"
+                        }
+                    })
+                    case 'email': return res.status(403).json({
+                        "message": "User already exists",
+                        "statusCode": 403,
+                        "errors": {
+                            "email": "User with that email already exists"
+                        }
+                    })
+                    default: return res.status(403).json({
+                        "message": "Uniqueness constraint failed",
+                        "statusCode": 403,
+                        "Error": 'Uniqueness failed'
+                    })
+                }
+
+            }
+        }
+
         return res.json({
             user: user
         });
     }
+
 );
 // npm install &&
 // npm run build &&

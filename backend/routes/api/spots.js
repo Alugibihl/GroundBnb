@@ -97,6 +97,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post("/", requireAuth, validateSpot, async (req, res) => {
+
     // const { id } = req.params.id
     const ownerId = req.user.id
     //console.log(ownerId)
@@ -232,6 +233,14 @@ router.get('/:spotId', async (req, res) => {
 //adds an image to a spot based on id
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spotId = req.params.spotId
+    const owner = await Spot.findByPk(spotId)
+    if (req.user.id !== owner.ownerId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
+        })
+    }
+
     const { url, preview } = req.body
     const image = await SpotImage.create({ spotId, url, preview })
     const pic = image.toJSON()
@@ -250,6 +259,13 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const updated = await Spot.findByPk(req.params.spotId)
+    // console.log(req.user.id, 'next', updated.ownerId)
+    if (req.user.id !== updated.ownerId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
+        })
+    }
     if (!updated) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
@@ -268,13 +284,33 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     if (name !== undefined) { updated.name = name }
     if (description !== undefined) { updated.description = description }
     if (price !== undefined) { updated.price = price }
-    console.log(updated, updated.id, updated.spotId)
-
+    //console.log(updated, updated.id, updated.spotId)
     await updated.save()
     res.json(updated)
 })
 
-
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId
+    const spot = await Spot.findByPk(spotId)
+    console.log(spot)
+    if (req.user.id !== spot.ownerId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
+        })
+    }
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    await spot.destoy();
+    res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+})
 
 
 
