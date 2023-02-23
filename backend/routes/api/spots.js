@@ -349,20 +349,34 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const spotId = req.params.spotId
-    const spot = await Spot.findByPk(spotId)
+    const spot = await Spot.findByPk(spotId, {
+        include: [{ model: Review }]
+    })
     const userId = req.user.id
-    const { review, stars } = req.body
-    const reviews = await Review.create({ userId, spotId, review, stars })
     if (!spot) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
-
+    // console.log(spotId, userId, spot);
+    const { review, stars } = req.body
+    const reviews = await Review.create({ userId, spotId, review, stars })
+    //console.log(spot.Reviews.toJSON())
+    let reviewList = []
+    for (let thing of spot.Reviews) {
+        reviewList.push(thing.dataValues.userId);
+    }
+    for (let userCheck of reviewList) {
+        if (userCheck === userId) {
+            return res.status(403).json({
+                "message": "User already has a review for this spot",
+                "statusCode": 403
+            })
+        }
+    }
     res.json(reviews)
 })
-
 
 
 module.exports = router;
