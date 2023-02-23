@@ -47,6 +47,19 @@ const validateSpot = [
     handleValidationErrors
 ]
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Review text is required"),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .isInt()
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
 
 // to make a route, add the files above and at the bottom
 // add to index at the top and as middleware
@@ -334,7 +347,21 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json({ Reviews: reviews })
 })
 
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+    const spotId = req.params.spotId
+    const spot = await Spot.findByPk(spotId)
+    const userId = req.user.id
+    const { review, stars } = req.body
+    const reviews = await Review.create({ userId, spotId, review, stars })
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
 
+    res.json(reviews)
+})
 
 
 

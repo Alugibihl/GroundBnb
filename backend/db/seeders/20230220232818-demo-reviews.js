@@ -12,30 +12,30 @@ module.exports = {
         spotId: 1,
         userId: 1,
         review: 'Clean, pretty',
-        stars: 4.0
+        stars: 4
       },
       {
         spotId: 1,
         userId: 2,
         review: 'Could use some love',
-        stars: 3.0
+        stars: 3
       },
       {
         spotId: 2,
         userId: 2,
         review: 'Glad we came, will definitely come again',
-        stars: 5.0
+        stars: 5
       },
       {
         spotId: 3,
         userId: 3,
         review: 'Waste of money, avoid this place',
-        stars: 1.0
+        stars: 1
       }, {
         spotId: 4,
         userId: 1,
         review: 'I think this is just a coffee shop, the let me sleep in a chair, good coffee',
-        stars: 3.5
+        stars: 3
       },
     ], {})
   },
