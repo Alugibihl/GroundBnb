@@ -1,6 +1,6 @@
 const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, Sequelize, sequelize } = require('../../db/models');
+const { User, Spot, SpotImage, Review, ReviewImage, Sequelize, sequelize } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -292,7 +292,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const spotId = req.params.spotId
     const spot = await Spot.findByPk(spotId)
-    console.log(spot)
+    //console.log(spot)
     if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
             "message": "Forbidden",
@@ -312,7 +312,27 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     })
 })
 
-
+router.get('/:spotId/reviews', async (req, res) => {
+    const reviews = await Review.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: User,
+                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+            },
+            {
+                model: ReviewImage,
+                attributes: { exclude: ['createdAt', 'updatedAt', 'reviewId'] }
+            },
+        ]
+    })
+    if (!reviews) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    res.json({ Reviews: reviews })
+})
 
 
 
