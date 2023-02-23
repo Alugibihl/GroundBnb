@@ -47,6 +47,7 @@ const validateSpot = [
     handleValidationErrors
 ]
 
+
 // to make a route, add the files above and at the bottom
 // add to index at the top and as middleware
 router.get('/', async (req, res) => {
@@ -98,10 +99,10 @@ router.get('/', async (req, res) => {
 router.post("/", requireAuth, validateSpot, async (req, res) => {
     // const { id } = req.params.id
     const ownerId = req.user.id
-    console.log(ownerId)
+    //console.log(ownerId)
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
-    console.log(ownerId, address, city, state, country, lat, lng, name, description, price);
+    //console.log(ownerId, address, city, state, country, lat, lng, name, description, price);
 
     return res.status(201).json(spot)
 }
@@ -164,6 +165,8 @@ router.get('/current', requireAuth, async (req, res) => {
 })
 
 
+
+
 //get the spot by id, if none exist, give an error
 router.get('/:spotId', async (req, res) => {
     const spots = await Spot.findAll({
@@ -205,8 +208,7 @@ router.get('/:spotId', async (req, res) => {
                     [sequelize.fn('COUNT', sequelize.col("review")), "numReviews"]
                 ]
             }
-        })
-        //find the object you want at index, then the container, then the value
+        }) //find the object you want at index, then the container, then the value
         spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
         if (spotAvgReview) {
@@ -214,10 +216,8 @@ router.get('/:spotId', async (req, res) => {
         } else {
             spot.avgStarRating = "No Review Yet"
         }
-        if (spots.User) {
-            spots.owner = spots.User
-        }
-        delete spot.Users
+        spot.Owners = spot.User
+        delete spot.User
         // delete spot.SpotImages
         delete spot.Reviews
     }
@@ -227,11 +227,52 @@ router.get('/:spotId', async (req, res) => {
             statusCode: 404
         })
     }
-
-
-    res.json(spotsList[0])
+    res.json(spotsList)
+})
+//adds an image to a spot based on id
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId
+    const { url, preview } = req.body
+    const image = await SpotImage.create({ spotId, url, preview })
+    const pic = image.toJSON()
+    console.log(pic)
+    if (!spotId) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    delete pic.spotId
+    delete pic.createdAt
+    delete pic.updatedAt
+    res.json(pic)
 })
 
+router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
+    const updated = await Spot.findByPk(req.params.spotId)
+    if (!updated) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    if (address !== undefined) { updated.address = address }
+    if (city !== undefined) { updated.city = city }
+    if (state !== undefined) { updated.state = state }
+    if (country !== undefined) { updated.country = country }
+    if (address !== undefined) { updated.address = address }
+    if (city !== undefined) { updated.city = city }
+    if (lat !== undefined) { updated.lat = lat }
+    if (lng !== undefined) { updated.lng = lng }
+    if (name !== undefined) { updated.name = name }
+    if (description !== undefined) { updated.description = description }
+    if (price !== undefined) { updated.price = price }
+    console.log(updated, updated.id, updated.spotId)
+
+    await updated.save()
+    res.json(updated)
+})
 
 
 
