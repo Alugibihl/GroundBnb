@@ -107,7 +107,6 @@ router.put('/:reviewId', requireAuth, validateReviews, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
 
     const rottenReview = await Review.findByPk(req.params.reviewId)
-    console.log(rottenReview);
     if (!rottenReview) {
         return res.status(404).json({
             "message": "Review couldn't be found",
