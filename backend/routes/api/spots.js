@@ -1,6 +1,6 @@
 const express = require('express');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, Sequelize, sequelize } = require('../../db/models');
+const { User, Booking, Spot, SpotImage, Review, ReviewImage, Sequelize, sequelize } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -59,6 +59,8 @@ const validateReview = [
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
+
+
 
 
 // to make a route, add the files above and at the bottom
@@ -247,23 +249,21 @@ router.get('/:spotId', async (req, res) => {
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spotId = req.params.spotId
     const owner = await Spot.findByPk(spotId)
+    if (!owner) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
     if (req.user.id !== owner.ownerId) {
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": 403
         })
     }
-
     const { url, preview } = req.body
     const image = await SpotImage.create({ spotId, url, preview })
     const pic = image.toJSON()
-    console.log(pic)
-    if (!spotId) {
-        return res.status(404).json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        })
-    }
     delete pic.spotId
     delete pic.createdAt
     delete pic.updatedAt
@@ -377,6 +377,62 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     }
     res.json(reviews)
 })
+
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const user = req.user.id
+    const booking = await Booking.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: User,
+                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+            }
+        ],
+    })
+
+    if (!booking) {
+        res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    let bookings = booking.toJSON()
+    if (user !== bookings.userId) {
+        delete bookings.User
+        delete bookings.id
+        delete bookings.userId
+        delete bookings.createdAt
+        delete bookings.updatedAt
+    }
+    res.json({ Bookings: [bookings] })
+})
+
+// router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
+//     const userId = req.user.id
+//     const spotId = req.params.spotId
+//     const spot = await Spot.findByPk(spotId)
+//     if (!spot) {
+//         return res.status(404).json({
+//             "message": "Spot couldn't be found",
+//             "statusCode": 404
+//         })
+//     }
+//     if (spot.ownerId === userId) {
+//         return res.status(400).json({
+//             message: 'You own this property.'
+//         })
+//     }
+
+//     const { startDate, endDate } = req.body
+//     const booking = await Booking.create({ spotId, userId, startDate, endDate })
+
+
+//     res.json(booking)
+// })
+
+
+
+
 
 
 module.exports = router;
