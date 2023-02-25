@@ -83,7 +83,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
     const totalImages = await ReviewImage.findAll({
         where: {
-            reviewid: reviewId
+            reviewId: reviewId
         },
     })
 
