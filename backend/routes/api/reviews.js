@@ -14,6 +14,7 @@ const validateReviews = [
         .exists({ checkFalsy: true })
         .notEmpty()
         .isInt()
+        .isIn([1, 2, 3, 4, 5])
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
@@ -30,7 +31,7 @@ router.get('/current', requireAuth, async (req, res) => {
             },
             {
                 model: Spot,
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
+                attributes: { exclude: ['description', 'createdAt', 'updatedAt'] }
             },
             {
                 model: ReviewImage,
@@ -38,23 +39,46 @@ router.get('/current', requireAuth, async (req, res) => {
             },
         ]
     })
-    res.json({ Reviews: reviews })
+    let spotsList = []
+    let thing
+    for (let spot of reviews) {
+        thing = spot.toJSON()
+
+        const spotId = thing.Spot.id;
+        const images = await SpotImage.findAll({
+            where: { spotId: spotId },
+        })
+        for (let image of images) {
+            if (image.dataValues.preview === true) {
+                console.log(image.dataValues.url);
+                thing.Spot.previewImage = image.dataValues.url
+            }
+            if (!thing.Spot.previewImage) {
+                thing.Spot.previewImage = 'No preview image found'
+            }
+            if (!spotsList.includes(thing)) {
+                spotsList.push(thing)
+            }
+        }
+    }
+    console.log(spotsList)
+    res.json({ Reviews: spotsList })
 })
 
 
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId
     const review = await Review.findByPk(reviewId)
-    if (req.user.id !== review.userId) {
-        return res.status(403).json({
-            "message": "Forbidden",
-            "statusCode": 403
-        })
-    }
     if (!review) {
         return res.status(404).json({
             "message": "Review couldn't be found",
             "statusCode": 404
+        })
+    }
+    if (req.user.id !== review.userId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
         })
     }
     const totalImages = await ReviewImage.findAll({
