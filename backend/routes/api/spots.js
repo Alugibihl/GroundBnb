@@ -404,16 +404,16 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     const spotId = req.params.spotId
     const spot = await Spot.findByPk(spotId)
     //console.log(spot)
-    if (req.user.id !== spot.ownerId) {
-        return res.status(403).json({
-            "message": "Forbidden",
-            "statusCode": 403
-        })
-    }
     if (!spot) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
+        })
+    }
+    if (req.user.id !== spot.ownerId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
         })
     }
     await spot.destroy();
@@ -568,6 +568,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
+                "errors": {
+                    "startDate": "Start date conflicts with an existing booking",
+                    "endDate": "End date conflicts with an existing booking"
+                }
             })
         }
         // console.log(startingDateTime, bookedStartTime);

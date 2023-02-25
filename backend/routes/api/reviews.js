@@ -109,16 +109,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
 router.put('/:reviewId', requireAuth, validateReviews, async (req, res) => {
     const updated = await Review.findByPk(req.params.reviewId)
-    if (req.user.id !== updated.userId) {
-        return res.status(403).json({
-            "message": "Forbidden",
-            "statusCode": 403
-        })
-    }
     if (!updated) {
         return res.status(404).json({
             "message": "Review couldn't be found",
             "statusCode": 404
+        })
+    }
+    if (req.user.id !== updated.userId) {
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": 403
         })
     }
     const { review, stars } = req.body
