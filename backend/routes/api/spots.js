@@ -188,11 +188,7 @@ router.get('/', async (req, res) => {
         }
     }
     const spots = await Spot.findAll({
-        include: [
-            {
-                model: SpotImage,
-            },
-        ],
+        include: [{ model: SpotImage }],
         where,
         ...pagination
     })
@@ -205,11 +201,7 @@ router.get('/', async (req, res) => {
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]
-                ]
-            }
+            attributes: [[sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]]
         })
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
         if (spotAvgReview) {
@@ -252,11 +244,7 @@ router.get('/current', requireAuth, async (req, res) => {
         where: {
             ownerId: req.user.id
         },
-        include: [
-            {
-                model: SpotImage,
-            },
-        ]
+        include: [{ model: SpotImage }]
     })
     let spotsList = []
     for (let spot of spots) {
@@ -268,11 +256,7 @@ router.get('/current', requireAuth, async (req, res) => {
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]
-                ]
-            }
+            attributes: [[sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]]
         })
         // console.log(reviewsBySpot.toJSON())
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
@@ -330,21 +314,13 @@ router.get('/:spotId', async (req, res) => {
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]
-                ]
-            }
+            attributes: [[sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]]
         })
         const reviewsBySpotCount = await Review.findAll({
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [sequelize.fn('COUNT', sequelize.col("review")), "numReviews"]
-                ]
-            }
+            attributes: [[sequelize.fn('COUNT', sequelize.col("review")), "numReviews"]]
         }) //find the object you want at index, then the container, then the value
         spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
