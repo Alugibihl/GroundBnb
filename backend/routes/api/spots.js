@@ -434,8 +434,8 @@ router.get('/:spotId/reviews', async (req, res) => {
             },
         ]
     })
-    // console.log(reviews);
-    if (!reviews[0]) {
+    //console.log(reviews);
+    if (!reviews.length) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
@@ -445,12 +445,19 @@ router.get('/:spotId/reviews', async (req, res) => {
     let thing
     for (let spot of reviews) {
         thing = spot.toJSON()
-
         const thingSpotId = thing.id;
         const images = await SpotImage.findAll({
             where: { spotId: thing.spotId },
         })
-        console.log(images);
+        if (!images.length) {
+            thing.previewImage = 'No preview image found'
+            if (!spotsList.includes(thing)) {
+                spotsList.push(thing)
+
+            }
+        }
+        // console.log(thing);
+        // console.log(images);
         for (let image of images) {
             if (image.dataValues.preview === true) {
                 // console.log(image.dataValues.url);
@@ -486,8 +493,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     }
     // console.log(spotId, userId, spot);
     const { review, stars } = req.body
-    const reviews = await Review.create({ userId, spotId, review, stars })
-    //console.log(spot.Reviews.toJSON())
     let reviewList = []
     for (let thing of spot.Reviews) {
         reviewList.push(thing.dataValues.userId);
@@ -500,6 +505,9 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             })
         }
     }
+    const reviews = await Review.create({ userId, spotId, review, stars })
+    //console.log(spot.Reviews.toJSON())
+
     console.log(reviews.toJSON());
     res.json(reviews)
 })
