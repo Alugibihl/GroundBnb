@@ -421,7 +421,8 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 //should return the reviews for a spot based on a spotid
 router.get('/:spotId/reviews', async (req, res) => {
     const spotId = req.params.spotId
-    const reviews = await Review.findByPk(spotId, {
+    const reviews = await Review.findAll({
+        where: { spotId: spotId },
         include: [
             {
                 model: User,
@@ -433,14 +434,43 @@ router.get('/:spotId/reviews', async (req, res) => {
             },
         ]
     })
-    if (!reviews) {
+    // console.log(reviews);
+    if (!reviews[0]) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
-    res.json({ Reviews: [reviews] })
+    let spotsList = []
+    let thing
+    for (let spot of reviews) {
+        thing = spot.toJSON()
+
+        const thingSpotId = thing.id;
+        const images = await SpotImage.findAll({
+            where: { spotId: thing.spotId },
+        })
+        console.log(images);
+        for (let image of images) {
+            if (image.dataValues.preview === true) {
+                // console.log(image.dataValues.url);
+                thing.previewImage = image.dataValues.url
+            }
+            if (!thing.previewImage) {
+                thing.previewImage = 'No preview image found'
+            }
+            if (!spotsList.includes(thing)) {
+                // console.log(spotsList);
+                spotsList.push(thing)
+
+            }
+        }
+    }
+    // console.log(spotsList)
+    res.json({ Reviews: spotsList })
+    // res.json({ Reviews: [reviews] })
 })
+
 //should allow the creation of a valid review based on a spotid
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const spotId = req.params.spotId
@@ -470,6 +500,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             })
         }
     }
+    console.log(reviews.toJSON());
     res.json(reviews)
 })
 
