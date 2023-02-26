@@ -59,10 +59,10 @@ const validateReview = [
         .exists({ checkFalsy: true })
         .notEmpty()
         .isInt()
+        .isIn([1, 2, 3, 4, 5])
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
-
 
 
 // to make a route, add the files above and at the bottom
@@ -285,9 +285,6 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ "spots": spotsList })
 })
 
-
-
-
 //get the spot by id, if none exist, give an error
 router.get('/:spotId', async (req, res) => {
     const spots = await Spot.findAll({
@@ -340,7 +337,6 @@ router.get('/:spotId', async (req, res) => {
             statusCode: 404
         })
     }
-
     res.json(spotsList[0])
 })
 //adds an image to a spot based on id
@@ -422,10 +418,11 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
         "statusCode": 200
     })
 })
-
+//should return the reviews for a spot based on a spotid
 router.get('/:spotId/reviews', async (req, res) => {
     const spotId = req.params.spotId
-    const reviews = await Review.findByPk(spotId, {
+    const reviews = await Review.findAll({
+        where: { spotId: spotId },
         include: [
             {
                 model: User,
@@ -437,15 +434,51 @@ router.get('/:spotId/reviews', async (req, res) => {
             },
         ]
     })
-    if (!reviews) {
+    //console.log(reviews);
+    if (!reviews.length) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
-    res.json({ Reviews: [reviews] })
+    let spotsList = []
+    let thing
+    for (let spot of reviews) {
+        thing = spot.toJSON()
+        const thingSpotId = thing.id;
+        const images = await SpotImage.findAll({
+            where: { spotId: thing.spotId },
+        })
+        if (!images.length) {
+            thing.previewImage = 'No preview image found'
+            if (!spotsList.includes(thing)) {
+                spotsList.push(thing)
+
+            }
+        }
+        // console.log(thing);
+        // console.log(images);
+        for (let image of images) {
+            if (image.dataValues.preview === true) {
+                // console.log(image.dataValues.url);
+                thing.previewImage = image.dataValues.url
+            }
+            if (!thing.previewImage) {
+                thing.previewImage = 'No preview image found'
+            }
+            if (!spotsList.includes(thing)) {
+                // console.log(spotsList);
+                spotsList.push(thing)
+
+            }
+        }
+    }
+    // console.log(spotsList)
+    res.json({ Reviews: spotsList })
+    // res.json({ Reviews: [reviews] })
 })
 
+//should allow the creation of a valid review based on a spotid
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const spotId = req.params.spotId
     const spot = await Spot.findByPk(spotId, {
@@ -460,8 +493,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     }
     // console.log(spotId, userId, spot);
     const { review, stars } = req.body
-    const reviews = await Review.create({ userId, spotId, review, stars })
-    //console.log(spot.Reviews.toJSON())
     let reviewList = []
     for (let thing of spot.Reviews) {
         reviewList.push(thing.dataValues.userId);
@@ -474,13 +505,18 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             })
         }
     }
+    const reviews = await Review.create({ userId, spotId, review, stars })
+    //console.log(spot.Reviews.toJSON())
+
+    console.log(reviews.toJSON());
     res.json(reviews)
 })
 
-
+//should return all bookings of a spot with information based on user status
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const user = req.user.id
-    const booking = await Booking.findByPk(req.params.spotId, {
+    const booking = await Booking.findAll({
+        where: { spotId: req.params.spotId },
         include: [
             {
                 model: User,
@@ -488,22 +524,25 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
             }
         ],
     })
-
     if (!booking) {
         res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
-    let bookings = booking.toJSON()
-    if (user !== bookings.userId) {
-        delete bookings.User
-        delete bookings.id
-        delete bookings.userId
-        delete bookings.createdAt
-        delete bookings.updatedAt
+    let booked = []
+    for (let myBooking of booking) {
+        let booking = myBooking.toJSON()
+        if (user !== booking.userId) {
+            delete booking.User
+            delete booking.id
+            delete booking.userId
+            delete booking.createdAt
+            delete booking.updatedAt
+        }
+        booked.push(booking)
     }
-    res.json({ Bookings: [bookings] })
+    res.json({ Bookings: booked })
 })
 
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
