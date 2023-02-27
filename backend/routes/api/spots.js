@@ -524,7 +524,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
             }
         ],
     })
-    if (!booking) {
+    if (!booking.length) {
         res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
@@ -554,12 +554,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             spotId: spotId
         }
     })
-    if (!spot) {
-        return res.status(404).json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        })
-    }
+
     if (spot.ownerId === userId) {
         return res.status(400).json({
             message: 'You own this property.'
