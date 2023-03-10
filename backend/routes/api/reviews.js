@@ -50,7 +50,7 @@ router.get('/current', requireAuth, async (req, res) => {
         })
         for (let image of images) {
             if (image.dataValues.preview === true) {
-               // console.log(image.dataValues.url);
+
                 thing.Spot.previewImage = image.dataValues.url
             }
             if (!thing.Spot.previewImage) {
@@ -61,7 +61,7 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         }
     }
-    console.log(spotsList)
+
     res.json({ Reviews: spotsList })
 })
 
