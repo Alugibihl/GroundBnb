@@ -1,8 +1,0 @@
-form {
-    display: flex;
-    align-items: center;
-    margin-top: 40px;
-    gap: 20px;
-    flex-direction: column;
-    width: 45%;
-}
