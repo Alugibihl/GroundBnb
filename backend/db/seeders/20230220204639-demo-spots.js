@@ -26,8 +26,8 @@ module.exports = {
         city: 'Carey',
         state: 'Florida',
         country: 'United States',
-        lat: 14.193740,
-        lng: -79.076780,
+        lat: null,
+        lng: null,
         name: 'Carribean Cozy',
         description: 'Experience the ocean like never before by sleeping in it!',
         price: 1200.00
