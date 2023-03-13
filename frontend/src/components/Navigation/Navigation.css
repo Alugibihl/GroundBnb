@@ -1,3 +1,36 @@
 .hidden {
     display: none;
 }
+
+.nameLogo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nameLogo>img {
+    height: 50px;
+}
+
+.header {
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 70px;
+    width: 100%;
+    color: rgb(58, 20, 20);
+    font-size: 24pt;
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    border-bottom: solid lightgray 2px;
+    align-items: center;
+}
+
+.navbar {
+    border: solid rgb(58, 20, 20) 1px;
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 10px;
+    gap: 50px;
+}
