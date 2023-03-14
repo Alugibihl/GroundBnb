@@ -39,7 +39,7 @@ export const createSpot = (data) => async (dispatch) => {
             let error;
             if (response.status === 422) {
                 error = await response.json();
-                throw new ValidationError(error.errors, response.statusText);
+                console.error(error)
             } else {
                 let errorJSON;
                 error = await response.text();

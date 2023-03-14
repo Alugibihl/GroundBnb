@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpots } from '../../store/spotsReducer'
 import { useEffect } from 'react'
-import SingleSpot from './spot'
+import SingleSpot from './Spot'
 import './Spots.css'
 
 const AllSpots = () => {

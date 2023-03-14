@@ -32,6 +32,7 @@ function ProfileButton({ user }) {
     const closeMenu = () => setShowMenu(false);
 
     const logout = (e) => {
+        console.log('on click logout')
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
@@ -45,7 +46,7 @@ function ProfileButton({ user }) {
                 <i className="fa-solid fa-bars" />
                 <i className="fas fa-user-circle" />
             </button>
-            <ul className={ulClassName} ref={ulRef}>
+            <ul className={`${ulClassName} top`} ref={ulRef}>
                 {user ? (
                     <>
                         <li>{user.username}</li>

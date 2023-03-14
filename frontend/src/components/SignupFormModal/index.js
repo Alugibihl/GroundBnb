@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
@@ -15,10 +15,22 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
+    useEffect((props) => {
+        let err = {}
+        if (email.length < 1 || !email.includes('@') || !email.includes('.')) { err.email = 'Please enter a valid email.' }
+        if (username.length < 4) { err.username = 'Username must be atleast 4 characters long.' }
+        if (username.length > 30) { err.username = 'Username must be shorter than 30 characters' }
+      
+        if (firstName.length < 2 || firstName.length > 30) { err.firstName = 'First name must be between 2 and 30 characters.' }
+        if (lastName.length < 2 || lastName.length > 30) { err.lastName = 'Last name must be between 2 and 30 characters.' }
+        if (password.length < 6) { err.password = 'Passwords must be atleast 6 characters long.' }
+        setErrors(err)
+    }, [email, username, firstName, lastName, password])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-            setErrors([]);
+            setErrors({});
             return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
                 .then(closeModal)
                 .catch(async (res) => {
@@ -42,6 +54,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.email}</p>
                 <label>
                     Username
                     <input
@@ -51,6 +64,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.username}</p>
                 <label>
                     First Name
                     <input
@@ -60,6 +74,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.firstName}</p>
                 <label>
                     Last Name
                     <input
@@ -69,6 +84,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.lastName}</p>
                 <label>
                     Password
                     <input
@@ -78,6 +94,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.password}</p>
                 <label>
                     Confirm Password
                     <input

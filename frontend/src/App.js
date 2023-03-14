@@ -5,8 +5,9 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormModal from "./components/SignupFormModal";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import AllSpots from "./components/Spots/allSpots";
+import AllSpots from "./components/Spots/AllSpots";
 import SpotDetails from "./components/Spots/SpotDetails";
+import CreateSpotForm from "./components/Spots/CreatSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,8 +29,12 @@ function App() {
           <Route path={'/spots/:spotId'}>
             <SpotDetails />
           </Route>
+          <Route path={'/spots/new'}>
+            <CreateSpotForm />
+          </Route>
         </Switch>
-      )}
+      )
+      }
     </>
   );
 }
