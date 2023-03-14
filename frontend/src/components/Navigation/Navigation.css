@@ -5,6 +5,7 @@
 .nameLogo {
     display: flex;
     justify-content: flex-start;
+
 }
 
 .nameLogo>img {
@@ -12,7 +13,6 @@
 }
 
 .header {
-    text-decoration: none;
     padding-left: 20px;
     padding-right: 20px;
     height: 70px;
@@ -28,9 +28,9 @@
 }
 
 .navbar {
-    border: solid rgb(58, 20, 20) 1px;
+    border: solid rgb(58, 20, 20) 2px;
     display: flex;
     justify-content: flex-end;
-    border-radius: 10px;
-    gap: 50px;
+    border-radius: 20px;
+    margin-right: 20px;
 }

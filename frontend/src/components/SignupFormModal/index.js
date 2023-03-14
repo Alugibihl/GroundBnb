@@ -12,7 +12,7 @@ function SignupFormModal() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
@@ -33,9 +33,6 @@ function SignupFormModal() {
         <>
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
                 <label>
                     Email
                     <input
