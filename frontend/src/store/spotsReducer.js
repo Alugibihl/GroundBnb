@@ -1,13 +1,19 @@
 
 const LOAD = "spots/LOAD";
 const ADD = 'spots/ADD';
+const EDIT = 'spots/EDIT'
+
 const load = (list) => ({
     type: LOAD,
     list,
 });
-const add = (list) => ({
+const add = (spot) => ({
     type: ADD,
-    list
+    spot: spot
+})
+const edit = (spot) => ({
+    type: EDIT,
+    spot: spot
 })
 const initialState = {}
 export const getSpots = () => async (dispatch) => {
@@ -18,7 +24,6 @@ export const getSpots = () => async (dispatch) => {
     }
 };
 export const getSpotsDetail = (id) => async (dispatch) => {
-    console.log(id);
     const response = await fetch(`/api/spots/${id}`);
 
     if (response.ok) {
@@ -27,37 +32,30 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     }
 };
 export const createSpot = (data) => async (dispatch) => {
-    try {
-        const response = await fetch('api/spots', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        })
-        if (!response.ok) {
-            let error;
-            if (response.status === 422) {
-                error = await response.json();
-                console.error(error)
-            } else {
-                let errorJSON;
-                error = await response.text();
-                try {
-                    errorJSON = JSON.parse(error)
-                } catch {
-                    throw new Error(error)
-                }
-                throw new Error(`${errorJSON.title}: ${errorJSON.message}`);
-            }
-        }
-        const spot = await response.json()
-        dispatch(add(spot))
-        return spot
-    } catch (error) {
-        throw error
-    }
+    const response = await fetch('/api/spots', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    const spot = await response.json()
+    dispatch(add(spot))
+    return spot
 }
+export const editSpot = (spotToUpdate) => async (dispatch) => {
+    const req = await fetch(`/api/spots/${spotToUpdate.id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(spotToUpdate)
+    })
+    const data = req.json()
+    const spot = data
+    dispatch(edit(spot))
+}
+
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
@@ -79,6 +77,10 @@ const spotsReducer = (state = initialState, action) => {
                     ...action.list
                 }
             }
+        case EDIT:
+            const editedState = { ...state }
+            editedState[action.list.id] = action.list
+            return editedState
         default:
             return state
     }

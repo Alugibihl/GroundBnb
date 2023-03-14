@@ -15,9 +15,14 @@
 }
 
 .aligned {
-    display: inline-flex;
-    justify-content: space-between;
+    display: flex;
     font-size: 14pt;
+    width: 100%;
+}
+
+.average-rating {
+    display: flex;
+    justify-self: flex-end;
 }
 
 .spots-board {

@@ -15,15 +15,15 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    useEffect((props) => {
+    useEffect(() => {
         let err = {}
         if (email.length < 1 || !email.includes('@') || !email.includes('.')) { err.email = 'Please enter a valid email.' }
         if (username.length < 4) { err.username = 'Username must be atleast 4 characters long.' }
         if (username.length > 30) { err.username = 'Username must be shorter than 30 characters' }
-      
         if (firstName.length < 2 || firstName.length > 30) { err.firstName = 'First name must be between 2 and 30 characters.' }
         if (lastName.length < 2 || lastName.length > 30) { err.lastName = 'Last name must be between 2 and 30 characters.' }
         if (password.length < 6) { err.password = 'Passwords must be atleast 6 characters long.' }
+        if (confirmPassword !== password) { err.confirmPassword = 'Confirm Password field must be the same as the Password field' }
         setErrors(err)
     }, [email, username, firstName, lastName, password])
 
@@ -38,7 +38,7 @@ function SignupFormModal() {
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        return
     };
 
     return (
@@ -48,7 +48,7 @@ function SignupFormModal() {
                 <label>
                     Email
                     <input
-                        type="text"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -104,7 +104,8 @@ function SignupFormModal() {
                         required
                     />
                 </label>
-                <button type="submit">Sign Up</button>
+                <p className="errors">{errors.confirmPassword}</p>
+                <button disabled={Object.values(errors).length > 0} type="submit">Sign Up</button>
             </form>
         </>
     );

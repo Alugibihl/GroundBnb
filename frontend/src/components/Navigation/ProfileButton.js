@@ -46,15 +46,14 @@ function ProfileButton({ user }) {
                 <i className="fa-solid fa-bars" />
                 <i className="fas fa-user-circle" />
             </button>
-            <ul className={`${ulClassName} top`} ref={ulRef}>
+            <div className={`${ulClassName} top`} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
-                        <li>{user.email}</li>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
+                        <p>{user.username}</p>
+                        <p>{user.firstName} {user.lastName}</p>
+                        <p>{user.email}</p>
+                        <button onClick={logout}>Log Out</button>
+
                     </>
                 ) : (
                     <>
@@ -70,7 +69,7 @@ function ProfileButton({ user }) {
                         />
                     </>
                 )}
-            </ul>
+            </div>
         </>
     );
 }
