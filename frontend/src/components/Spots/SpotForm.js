@@ -4,7 +4,6 @@ import { createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 import * as sessionActions from "../../store/session";
 
-
 function SpotForm({ formType }) {
     const [country, setCountry] = useState("")
     const [address, setAddress] = useState("")
@@ -17,7 +16,7 @@ function SpotForm({ formType }) {
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch()
     const history = useHistory()
-    console.log('description', sessionActions)
+    // console.log('description', sessionActions)
     useEffect(() => {
         const err = {}
         if (country !== 'United States') { err.country = "We are only able to provide our services to the United States at this time" }
@@ -29,13 +28,20 @@ function SpotForm({ formType }) {
         setErrors(err)
     }, [country, address, city, state, description, title, price, image])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const spotAspects = { country, address, city, state, description, title, price, image }
-        formType === "Create Spot" ? dispatch(createSpot(spotAspects))
-            : dispatch(editSpot(spotAspects))
-        history.push(`/spots/${spotAspects.id}`)
-
+        let createdSpot
+        if (formType === "Edit Spot") { await dispatch(editSpot(spotAspects)) }
+        else {
+            console.log('fish')
+            createdSpot = await dispatch(createSpot(spotAspects))
+            console.log('createdSpot', createdSpot);
+            if (createdSpot) {
+                setErrors({})
+                history.push(`/spots/${spotAspects.id}`)
+            }
+        }
     }
 
     return (

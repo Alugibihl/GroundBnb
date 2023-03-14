@@ -9,7 +9,7 @@ const load = (list) => ({
 });
 const add = (spot) => ({
     type: ADD,
-    spot: spot
+    spot
 })
 const edit = (spot) => ({
     type: EDIT,
@@ -51,9 +51,10 @@ export const editSpot = (spotToUpdate) => async (dispatch) => {
         },
         body: JSON.stringify(spotToUpdate)
     })
-    const data = req.json()
+    const data = await req.json()
     const spot = data
     dispatch(edit(spot))
+    return spot
 }
 
 const spotsReducer = (state = initialState, action) => {
