@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
             <div className='nameLogo'>
                 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.iconsdb.com%2Ficons%2Fdownload%2Fguacamole-green%2Fairbnb-512.jpg&f=1&nofb=1&ipt=f8fe3513725d315ae2a565903eb780bd7816d0dd30cd71d46bc129f93a9dcfab&ipo=images" alt='groundbnb Logo' />
                 <NavLink exact to="/">groundbnb</NavLink> </div>
-            <div className='right-header'><NavLink className="new-spot-link" to={'/spots/new'}>Become a Host</NavLink>
+            <div className='right-header'><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink>
                 <div className='navbar'>
                     {isLoaded && (
                         <ProfileButton user={sessionUser} />

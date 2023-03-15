@@ -9,6 +9,7 @@ import AllSpots from "./components/Spots/AllSpots";
 import SpotDetails from "./components/Spots/SpotDetails";
 import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import EditSpotForm from "./components/Spots/EditSpotForm";
+import ManageSpots from "./components/Spots/ManageSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,19 +23,22 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormModal />
           </Route>
           <Route path={'/'} exact>
             <AllSpots />
           </Route>
-          <Route path={'/spots/:spotId'}>
-            <SpotDetails />
-          </Route>
-          <Route path={'/spots/new'}>
+          <Route exact path={'/spots/new'}>
             <CreateSpotForm />
           </Route>
-          <Route path={'/spots/:spotId/edit'}>
+          <Route exact path={'/spots/current'}>
+            <ManageSpots />
+          </Route>
+          <Route exact path={'/spots/:spotId'}>
+            <SpotDetails />
+          </Route>
+          <Route exact path={'/spots/:spotId/edit'}>
             <EditSpotForm />
           </Route>
         </Switch>

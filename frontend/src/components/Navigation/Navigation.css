@@ -1,6 +1,5 @@
 .hidden {
     display: none;
-
 }
 
 .top {
@@ -9,6 +8,11 @@
 
 .nameLogo>img {
     height: 50px;
+}
+
+.nameLogo {
+    display: flex;
+    align-items: center;
 }
 
 .header {
@@ -30,12 +34,12 @@
 .right-header {
     display: flex;
     margin-right: 30px;
-    gap: 10rem;
+    gap: 17rem;
 }
 
 .navbar {
-    border-radius: 5px;
-    padding: 3px;
+    display: flex;
+    align-content: center;
 }
 
 .profile-dropdown {
@@ -43,6 +47,17 @@
     background-color: white;
     padding: 3px;
     right: 5%;
-    top: 35%;
+    top: 85%;
     border: 2px solid black;
+    text-align: center;
+}
+
+.current-user {
+    text-decoration: none;
+    color: rgb(58, 20, 20);
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }

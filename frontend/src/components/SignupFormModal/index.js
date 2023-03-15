@@ -25,7 +25,7 @@ function SignupFormModal() {
         if (password.length < 6) { err.password = 'Passwords must be atleast 6 characters long.' }
         if (confirmPassword !== password) { err.confirmPassword = 'Confirm Password field must be the same as the Password field' }
         setErrors(err)
-    }, [email, username, firstName, lastName, password])
+    }, [email, username, firstName, lastName, password, confirmPassword])
 
     const handleSubmit = (e) => {
         e.preventDefault();
