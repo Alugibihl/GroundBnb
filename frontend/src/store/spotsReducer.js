@@ -4,6 +4,11 @@ const LOAD = "spots/LOAD";
 const ADD = 'spots/ADD';
 const EDIT = 'spots/EDIT'
 const ADD_IMAGE = '/spots/ADD_IMAGE'
+const PART_LOAD = '/spots/PART_LOAD'
+const partLoad = (spots) => ({
+    type: PART_LOAD,
+    spots
+})
 const load = (list) => ({
     type: LOAD,
     list,
@@ -28,6 +33,16 @@ export const getSpots = () => async (dispatch) => {
         dispatch(load(list));
     }
 };
+export const getUserSpots = () => async (dispatch) => {
+    console.log('in get user spots thunk')
+    const response = await csrfFetch(`/api/spots/current`);
+    if (response.ok) {
+        const spots = await response.json();
+        console.log('in get userspot response', spots);
+        dispatch(partLoad(spots));
+    }
+};
+
 export const getSpotsDetail = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
 
@@ -66,15 +81,16 @@ export const addImage = (data) => async (dispatch) => {
     dispatch(addToSpot(images))
     return images
 }
-
-
 export const editSpot = (spotToUpdate) => async (dispatch) => {
-    const req = await csrfFetch(`/api/spots/${spotToUpdate.id}`, {
+    let { spotAspects, spotsId } = spotToUpdate
+    let id = spotsId.id
+    console.log(id)
+    const req = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(spotToUpdate)
+        body: JSON.stringify(spotAspects)
     })
     const data = await req.json()
     const spot = data
@@ -89,6 +105,10 @@ const spotsReducer = (state = initialState, action) => {
             const allSpots = { ...state }
             action.list.Spots.forEach(spot => allSpots[spot.id] = spot);
             return { ...allSpots, ...state }
+        case PART_LOAD:
+            const allUserSpots = {}
+            action.spots.spots.forEach(spot => allUserSpots[spot.id] = spot);
+            return { ...allUserSpots }
         case ADD:
             console.log('add case running in spot reducer', action)
             if (!state[action.spot.id]) {

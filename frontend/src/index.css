@@ -10,3 +10,18 @@ button {
     font-size: 14pt;
     text-align: center;
 }
+
+Link {
+    color: rgb(58, 20, 20);
+    text-decoration: none;
+}
+
+a {
+    color: rgb(58, 20, 20);
+    text-decoration: none;
+}
+
+.errors {
+    color: red;
+    font-size: 10pt;
+}

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addImage, createSpot } from "../../store/spotsReducer";
+import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
-function SpotForm({ formType }) {
+function SpotForm({ formType, spotsId }) {
     console.log('spot form running');
     const [country, setCountry] = useState("")
     const [address, setAddress] = useState("")
@@ -24,6 +24,7 @@ function SpotForm({ formType }) {
         if (city.length < 2) { err.city = "Please enter a valid City." }
         if (state.length < 2) { err.state = "Please Enter a valid State." }
         if (description.length < 30) { err.description = 'Please write a description atleast 30 characters long.' }
+        if (!name.length) { err.name = 'Title is Required' }
         if (price < 1 || price > 10000) { err.price = 'Price must be between $1 and $10000 nightly' }
         if (!image) { err.image = 'At least 1 image of your property is required' }
         setErrors(err)
@@ -33,18 +34,30 @@ function SpotForm({ formType }) {
         console.log('handle submit running')
         e.preventDefault();
         const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
-
-        let createdSpot
-        createdSpot = await dispatch(createSpot(spotAspects))
-        const spotImages = { image, spotId: createdSpot.id }
-
-        if (createdSpot) {
-            let createdImage = await dispatch(addImage(spotImages))
-            console.log('createdImage', createdImage);
-            console.log('created spot', createdSpot)
-            console.log('if created spot running', createdSpot)
-            setErrors({})
-            history.push(`/spots/${createdSpot.id}`)
+        let createdSpot;
+        let updatedSpot;
+        if (formType === "Edit Spot") {
+            updatedSpot = await dispatch(editSpot(spotAspects, spotsId))
+            const spotImages = { image, spotsId }
+            if (updatedSpot) {
+                let createdImage = await dispatch(addImage(spotImages))
+                console.log('createdImage', createdImage);
+                console.log('created spot', updatedSpot)
+                console.log('if created spot running', updatedSpot)
+                setErrors({})
+                history.push(`/spots/${spotsId}`)
+            }
+        } else {
+            createdSpot = await dispatch(createSpot(spotAspects))
+            const spotImages = { image, spotId: createdSpot.id }
+            if (createdSpot) {
+                let createdImage = await dispatch(addImage(spotImages))
+                console.log('createdImage', createdImage);
+                console.log('created spot', createdSpot)
+                console.log('if created spot running', createdSpot)
+                setErrors({})
+                history.push(`/spots/${createdSpot.id}`)
+            }
         }
     }
 
