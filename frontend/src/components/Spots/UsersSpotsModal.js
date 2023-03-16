@@ -1,37 +1,26 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { deleteSpot } from '../../store/spotsReducer';
 import OpenModalButton from "../OpenModalButton";
-import { getUserSpots } from "../../store/spotsReducer";
 
-const UsersSpotsModal = () => {
-    const spot = useSelector((state) => state.spots)
+
+const UsersSpotsModal = ({ spot }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    console.log('in userspotsmodal', spot.id);
-    useEffect(() => {
-        dispatch(getUserSpots())
-    }, [dispatch])
+    console.log('this is spot in modal', spot)
 
-    let deleter = () => {
-        let current = '/spots/current'
-        dispatch(deleteSpot(spot.id))
-        history.push(current)
+    let deleter = async () => {
+        await dispatch(deleteSpot(spot.id))
     };
-
 
     return (
         <>
-            <OpenModalButton />
             <div className="modalBackround">
                 <div className="modalContainer">
                     <div className="modal-title"></div><h2 >Confirm Delete</h2></div>
                 <div className="modal-question">
-                    <p>Are you sure you want to remove this spot <br />
+                    <p>Are you sure you want to remove this <br /> spot
                         from the listings?</p></div>
-                <div className="continue-button"><button onClick={deleter}>Yes (Delete Spot)</button></div>
-                <div className="cancel-button"><button >No (Keep Spot)</button></div>
+                <div className="delete-buttons"> <div className="continue-button"><OpenModalButton onButtonClick={deleter} buttonText='Yes (Delete Spot)' /></div>
+                    <div className="cancel-button"> <OpenModalButton buttonText='NO (Keep Spot)' />  </div></div>
             </div>
         </>
     )

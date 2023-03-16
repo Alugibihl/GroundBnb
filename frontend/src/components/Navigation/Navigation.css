@@ -34,7 +34,7 @@
 .right-header {
     display: flex;
     margin-right: 30px;
-    gap: 17rem;
+    gap: 20px;
 }
 
 .navbar {

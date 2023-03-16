@@ -5,6 +5,7 @@ import * as sessionActions from "../../store/session";
 import './SignupFormModal.css';
 
 function SignupFormModal() {
+
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -14,6 +15,22 @@ function SignupFormModal() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (password === confirmPassword) {
+            setErrors({});
+            return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+
+        return
+    };
 
     useEffect(() => {
         let err = {}
@@ -27,19 +44,6 @@ function SignupFormModal() {
         setErrors(err)
     }, [email, username, firstName, lastName, password, confirmPassword])
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (password === confirmPassword) {
-            setErrors({});
-            return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
-        }
-        return
-    };
 
     return (
         <>

@@ -31,7 +31,7 @@ const edit = (spot) => ({
     type: EDIT,
     spot: spot
 })
-const initialState = {}
+
 export const getSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
@@ -111,7 +111,7 @@ export const editSpot = (spotToUpdate) => async (dispatch) => {
     dispatch(edit(spot))
     return spot
 }
-
+const initialState = {}
 const spotsReducer = (state = initialState, action) => {
     console.log('reducer running')
     switch (action.type) {
@@ -122,6 +122,7 @@ const spotsReducer = (state = initialState, action) => {
         case PART_LOAD:
             const allUserSpots = {}
             action.spots.spots.forEach(spot => allUserSpots[spot.id] = spot);
+            console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
             console.log('add case running in spot reducer', action)
@@ -154,12 +155,7 @@ const spotsReducer = (state = initialState, action) => {
             return editedState
         case REMOVE_SPOT: {
             const removedState = { ...state };
-            let states = Object.values(removedState)
-            for (let place of states) {
-                if (place.spotId === action.spotId) {
-                    delete removedState[place.id]
-                }
-            }
+            delete removedState[action.spotId]
             return removedState
         }
         default:
