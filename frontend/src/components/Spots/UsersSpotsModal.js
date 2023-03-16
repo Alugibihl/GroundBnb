@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteSpot } from '../../store/spotsReducer';
 import OpenModalButton from "../OpenModalButton";
+import { getUserSpots } from "../../store/spotsReducer";
 
 const UsersSpotsModal = () => {
-    const spot = useSelector((state) => state.spot)
+    const spot = useSelector((state) => state.spots)
     const dispatch = useDispatch()
     const history = useHistory()
+    console.log('in userspotsmodal', spot.id);
+    useEffect(() => {
+        dispatch(getUserSpots())
+    }, [dispatch])
 
     let deleter = () => {
         let current = '/spots/current'
@@ -25,7 +31,7 @@ const UsersSpotsModal = () => {
                     <p>Are you sure you want to remove this spot <br />
                         from the listings?</p></div>
                 <div className="continue-button"><button onClick={deleter}>Yes (Delete Spot)</button></div>
-                <div className="cancel-button"><button onClick={}>No (Keep Spot)</button></div>
+                <div className="cancel-button"><button >No (Keep Spot)</button></div>
             </div>
         </>
     )

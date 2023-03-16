@@ -8,7 +8,7 @@ const UsersSpots = ({ spot }) => {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-
+    console.log('in user spots', spot)
 
     const openMenu = () => {
         if (showMenu) return;
