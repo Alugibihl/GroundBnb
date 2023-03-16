@@ -5,6 +5,8 @@ const ADD = 'spots/ADD';
 const EDIT = 'spots/EDIT'
 const ADD_IMAGE = '/spots/ADD_IMAGE'
 const PART_LOAD = '/spots/PART_LOAD'
+const REMOVE_SPOT = '/spots/REMOVE_SPOT'
+
 const partLoad = (spots) => ({
     type: PART_LOAD,
     spots
@@ -16,6 +18,10 @@ const load = (list) => ({
 const add = (spot) => ({
     type: ADD,
     spot
+})
+const removeSpot = (spotId) => ({
+    type: REMOVE_SPOT,
+    spotId
 })
 const addToSpot = (spotImages) => ({
     type: ADD_IMAGE,
@@ -42,7 +48,6 @@ export const getUserSpots = () => async (dispatch) => {
         dispatch(partLoad(spots));
     }
 };
-
 export const getSpotsDetail = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
 
@@ -65,7 +70,16 @@ export const createSpot = (data) => async (dispatch) => {
     dispatch(add(spot))
     return spot
 }
-
+export const deleteSpot = (spotId) => async (dispatch) => {
+    await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    dispatch(removeSpot(spotId))
+    return spotId
+}
 export const addImage = (data) => async (dispatch) => {
     let { spotId, image } = data
     console.log('add image thunk running', 'spotId', data);
@@ -83,7 +97,7 @@ export const addImage = (data) => async (dispatch) => {
 }
 export const editSpot = (spotToUpdate) => async (dispatch) => {
     let { spotAspects, spotsId } = spotToUpdate
-    let id = spotsId.id
+    let id = spotsId
     console.log(id)
     const req = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT',
@@ -136,8 +150,18 @@ const spotsReducer = (state = initialState, action) => {
             }
         case EDIT:
             const editedState = { ...state }
-            editedState[action.list.id] = action.list
+            editedState[action.spot.id] = action.spot
             return editedState
+        case REMOVE_SPOT: {
+            const removedState = { ...state };
+            let states = Object.values(removedState)
+            for (let place of states) {
+                if (place.spotId === action.spotId) {
+                    delete removedState[place.id]
+                }
+            }
+            return removedState
+        }
         default:
             return state
     }

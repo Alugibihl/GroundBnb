@@ -36,9 +36,12 @@ function SpotForm({ formType, spotsId }) {
         const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
         let createdSpot;
         let updatedSpot;
+        console.log('this is my spotsId', spotsId)
         if (formType === "Edit Spot") {
-            updatedSpot = await dispatch(editSpot(spotAspects, spotsId))
-            const spotImages = { image, spotsId }
+            console.log('this is my spotsId', spotsId)
+            updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
+            let spotId = spotsId
+            const spotImages = { image, spotId }
             if (updatedSpot) {
                 let createdImage = await dispatch(addImage(spotImages))
                 console.log('createdImage', createdImage);

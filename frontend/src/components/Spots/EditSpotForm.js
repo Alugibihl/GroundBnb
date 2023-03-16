@@ -6,15 +6,15 @@ import SpotForm from "./SpotForm";
 
 const EditSpotForm = () => {
     const dispatch = useDispatch()
-    const spotsId = useParams()
-    const currentSpot = useSelector((state) => state.spots[spotsId])
-    console.log('this is the current spot', currentSpot)
+    const { spotId } = useParams()
+    const currentSpot = useSelector((state) => state.spots[spotId])
+    console.log('this is the current spot', currentSpot, spotId)
     useEffect(() => {
-        dispatch(getSpotsDetail())
-    }, [dispatch])
+        dispatch(getSpotsDetail(spotId))
+    }, [dispatch, spotId])
 
     return (
-        <SpotForm spotId={spotsId} formType="Edit Spot" />
+        <SpotForm spotsId={spotId} formType="Edit Spot" />
     )
 }
 
