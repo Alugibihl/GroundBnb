@@ -1,19 +1,13 @@
-import { useEffect, ulRef, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useModal } from '../../context/Modal';
-
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
-
+import { useState, useRef, useEffect } from 'react';
 import './Spots.css'
 import UsersSpotsModal from './UsersSpotsModal'
 
 const UsersSpots = ({ spot }) => {
-
-    const [showMenu, setShowMenu] = useState(false);
-    const { closeModal } = useModal()
     const history = useHistory()
-    const dispatch = useDispatch()
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
 
     const openMenu = () => {
@@ -41,7 +35,6 @@ const UsersSpots = ({ spot }) => {
         let update = `/spots/${spot.id}/edit`;
         history.push(update)
     }
-
     return (
         <>
             <nav className='spot-card'>
@@ -52,8 +45,8 @@ const UsersSpots = ({ spot }) => {
                         </div>  </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
                 <div ><button onClick={updater}>Update</button>
-                    <OpenModalMenuItem spot={spot} itemText='Delete'
-                        modalComponent={UsersSpotsModal} /></div>
+                    <OpenModalMenuItem itemText='Delete'
+                        onItemClick={closeMenu} modalComponent={<UsersSpotsModal />} /></div>
             </nav>
         </>
     );
