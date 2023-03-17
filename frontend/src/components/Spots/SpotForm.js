@@ -4,19 +4,18 @@ import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
 function SpotForm({ formType, spotsId }) {
-    console.log('spot form running');
     const [country, setCountry] = useState("")
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [description, setDescription] = useState("")
     const [name, setName] = useState("")
-    const [price, setPrice] = useState(1)
+    const [price, setPrice] = useState("")
     const [image, setImage] = useState("")
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch()
     const history = useHistory()
-    // console.log('description', sessionActions)
+
     useEffect(() => {
         const err = {}
         if (country !== 'United States' && country !== 'united states') { err.country = "We are only able to provide our services to the United States at this time" }

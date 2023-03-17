@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const ADD = 'reviews/ADD';
 const SPOT_LOAD = 'reviews/SPOT_LOAD'
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
+const CLEANER = 'reviews/CLEANER'
 
 const spotLoad = (reviews) => ({
     type: SPOT_LOAD,
@@ -16,6 +17,9 @@ const add = (review) => ({
 const removeReview = (reviewId) => ({
     type: DELETE_REVIEW,
     reviewId
+})
+export const cleanUp = () => ({
+    type: CLEANER
 })
 export const getReviewsbyUser = () => async (dispatch) => {
     console.log('in get reviews by user')
@@ -79,6 +83,8 @@ const reviewReducer = (state = initialState, action) => {
             delete removedState[action.reviewId]
             return removedState
         }
+        case CLEANER:
+            return initialState
         default:
             return state
     }
