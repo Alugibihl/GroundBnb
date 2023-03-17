@@ -2,9 +2,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react'
 import { getSpotsDetail } from '../../store/spotsReducer'
-import { getReviewsBySpot } from '../../store/reviewReducer'
+import { cleanUp, getReviewsBySpot } from '../../store/reviewReducer'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import UsersReviewsModal from '../Reviews/UsersReviewsModal'
+import CreateReviewForm from '../Reviews/CreatReviewForm'
 
 const SpotDetails = () => {
     const { spotId } = useParams()
@@ -17,12 +18,12 @@ const SpotDetails = () => {
     const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
         dispatch(getSpotsDetail(spotId))
-        if (spotId) {
-            console.log('inside of the use effect!!!!!!!!!!!!!!!!11')
-            dispatch(getReviewsBySpot(spotId))
-        }
+        console.log('inside of the use effect!!!!!!!!!!!!!!!!11')
+        dispatch(getReviewsBySpot(spotId))
+        return () => dispatch(cleanUp())
     }, [dispatch, spotId])
-    console.log('spot reviews!!!!!!!!!!!!!!', spotReviews, reviewData)
+    console.log('spot reviews!!!!!!!!!!!!!!', reviewData, 'user', user)
+    console.log('spotsinfo', spotsInfo)
     useEffect(() => {
         if (!showMenu) return;
 
@@ -35,12 +36,23 @@ const SpotDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
-    if (!reviewData) {
-        return null
-    }
+    // if (!reviewData.length) {
+    //     return null
+    // }
     let date = (time) => {
         let updated = new Date(time)
         return updated
+    }
+    let reviewMadness = (reviewCount) => {
+        if (reviewCount > 1) {
+            return (<div>{reviewCount.numReviews} Reviews</div>)
+        } else if (reviewCount.numReviews === 1) {
+            return (<div>{reviewCount.numReviews} Review</div>)
+        } else {
+            return (<div><button><OpenModalMenuItem itemText='Post Your Review'
+                onItemClick={closeMenu} modalComponent={<CreateReviewForm spotId={reviewCount.id} />} /></button>
+                <div>Be the first to post a review!</div></div>)
+        }
     }
     return (
         <>
@@ -54,11 +66,11 @@ const SpotDetails = () => {
                         <div>{spotsInfo?.description}</div> </div>
                     <div className='reserve-box'>${spotsInfo?.price}.00 night <i className="fa-solid fa-star">
                     </i>{spotsInfo?.avgStarRating}
-                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : `${spotsInfo?.numReviews} reviews`}</div>
+                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : `${spotsInfo} Reviews`}</div>
                         <button className='reserve-a-spot'>Reserve</button></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
-                        </i>{spotsInfo?.avgStarRating}{spotsInfo?.numReviews === 0 ?  :}{spotsInfo?.numReviews === 1 ? "1 Review" : `${spotsInfo?.numReviews} reviews`}</div>
+                        </i>{spotsInfo?.avgStarRating}{reviewMadness(spotsInfo?.numReviews)}</div>
                         {reviewData?.map((review) => {
                             return <span key={review.id} > <div>{review.User.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
