@@ -48,16 +48,19 @@
     padding: 3px;
     right: 5%;
     top: 85%;
-    border: 2px solid black;
+    border: 2px solid rgb(58, 20, 20);
     text-align: center;
 }
 
-.current-user {
+.current-links {
     text-decoration: none;
     color: rgb(58, 20, 20);
-    border-bottom: 2px solid black;
-    border-top: 2px solid black;
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid rgb(58, 20, 20);
+    border-top: 2px solid rgb(58, 20, 20);
+    gap: 5px;
 }

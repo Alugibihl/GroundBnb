@@ -1,25 +1,13 @@
 import { NavLink, useHistory } from 'react-router-dom';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import { useState, useRef, useEffect } from 'react';
-import './Spots.css'
 import UsersSpotsModal from './UsersSpotsModal'
-import { createContext, useContext } from 'react';
-
-// export const newSpot = createContext()
-// export const useThisSpot = () => useContext(newSpot)
+import './Spots.css'
 
 const UsersSpots = ({ spot }) => {
-    // const [myspot] = useState(spot)
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-    console.log('in user spots', spot)
-
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
-
     useEffect(() => {
         if (!showMenu) return;
 
@@ -28,9 +16,7 @@ const UsersSpots = ({ spot }) => {
                 setShowMenu(false);
             }
         };
-
         document.addEventListener('click', closeMenu);
-
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
@@ -42,7 +28,9 @@ const UsersSpots = ({ spot }) => {
     }
     return (
         <>
+
             <nav className='spot-card'>
+
                 <NavLink to={`/spots/${spot.id}`}>
                     <img alt={spot.name} src={spot.previewImage}></img>
                     <div className='aligned'><div className='card-location'>{spot.city}, {spot.state}</div><div className='average-rating'>
@@ -50,8 +38,8 @@ const UsersSpots = ({ spot }) => {
                         </div>  </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
                 <div ><button onClick={updater}>Update</button>
-                    <OpenModalMenuItem itemText='Delete'
-                        onItemClick={closeMenu} modalComponent={<UsersSpotsModal spot={spot} />} /></div>
+                    <button><OpenModalMenuItem itemText='Delete'
+                        onItemClick={closeMenu} modalComponent={<UsersSpotsModal spot={spot} />} /> </button></div>
             </nav>
         </>
     );

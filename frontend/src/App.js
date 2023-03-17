@@ -10,6 +10,8 @@ import SpotDetails from "./components/Spots/SpotDetails";
 import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import EditSpotForm from "./components/Spots/EditSpotForm";
 import ManageSpots from "./components/Spots/ManageSpots";
+import ManageReviews from "./components/Reviews/ManageReviews";
+import CreateReviewForm from "./components/Reviews/CreatReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,18 +31,25 @@ function App() {
           <Route path={'/'} exact>
             <AllSpots />
           </Route>
+          <Route exact path={'/reviews/current'}>
+            <ManageReviews />
+          </Route>
+          <Route exact path={'/spots/:spotId/reviews/new'}>
+            <CreateReviewForm />
+          </Route>
           <Route exact path={'/spots/new'}>
             <CreateSpotForm />
           </Route>
           <Route exact path={'/spots/current'}>
             <ManageSpots />
           </Route>
-          <Route exact path={'/spots/:spotId'}>
-            <SpotDetails />
-          </Route>
           <Route exact path={'/spots/:spotId/edit'}>
             <EditSpotForm />
           </Route>
+          <Route exact path={'/spots/:spotId'}>
+            <SpotDetails />
+          </Route>
+
         </Switch>
       )
       }

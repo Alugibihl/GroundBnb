@@ -45,7 +45,6 @@ function SpotForm({ formType, spotsId }) {
             if (updatedSpot) {
                 let createdImage = await dispatch(addImage(spotImages))
                 console.log('createdImage', createdImage);
-                console.log('created spot', updatedSpot)
                 console.log('if created spot running', updatedSpot)
                 setErrors({})
                 history.push(`/spots/${spotsId}`)
@@ -104,6 +103,7 @@ function SpotForm({ formType, spotsId }) {
                         required
                     />
                 </label>
+                <p className="errors">{errors.city}</p>
                 <label>
                     State
                     <input

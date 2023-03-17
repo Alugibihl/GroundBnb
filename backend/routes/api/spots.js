@@ -207,7 +207,7 @@ router.get('/', async (req, res) => {
         if (spotAvgReview) {
             spot.avgRating = spotAvgReview
         } else {
-            spot.avgRating = "No Review Yet"
+            spot.avgRating = "New"
         }
         spot.avgRating
         for (let image of spot.SpotImages) {
@@ -263,7 +263,7 @@ router.get('/current', requireAuth, async (req, res) => {
         if (spotAvgReview) {
             spot.avgRating = spotAvgReview
         } else {
-            spot.avgRating = "No Review Yet"
+            spot.avgRating = "New"
         }
         spot.avgRating
         for (let image of spot.SpotImages) {
@@ -324,7 +324,7 @@ router.get('/:spotId', async (req, res) => {
         if (spotAvgReview) {
             spot.avgStarRating = spotAvgReview
         } else {
-            spot.avgStarRating = "No Review Yet"
+            spot.avgStarRating = "New"
         }
         spot.Owner = spot.User
         delete spot.User
@@ -426,7 +426,7 @@ router.get('/:spotId/reviews', async (req, res) => {
         include: [
             {
                 model: User,
-                attributes: { exclude: ['username', 'email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+                attributes: { exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt'] }
             },
             {
                 model: ReviewImage,
@@ -490,7 +490,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             "statusCode": 404
         })
     }
-    // console.log(spotId, userId, spot);
+
     const { review, stars } = req.body
     let reviewList = []
     for (let thing of spot.Reviews) {
