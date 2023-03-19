@@ -3,21 +3,46 @@ import { useDispatch } from "react-redux";
 import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
-function SpotForm({ formType, spotsId }) {
-    const [country, setCountry] = useState("")
-    const [address, setAddress] = useState("")
-    const [city, setCity] = useState("")
-    const [state, setState] = useState("")
-    const [description, setDescription] = useState("")
-    const [name, setName] = useState("")
-    const [price, setPrice] = useState("")
-    const [image, setImage] = useState("")
-    const [errors, setErrors] = useState({})
-    const dispatch = useDispatch()
-    const history = useHistory()
+function SpotForm({ formType, spotsId, initialValues }) {
+    // console.log('here we gooooooo', initialValues)
+    const [country, setCountry] = useState(initialValues?.country !== null ? initialValues?.country : "");
+    const [address, setAddress] = useState(initialValues?.address !== null ? initialValues?.address : "");
+    const [city, setCity] = useState(initialValues?.city !== null ? initialValues?.city : "");
+    const [state, setState] = useState(initialValues?.state !== null ? initialValues?.state : "");
+    const [description, setDescription] = useState(initialValues?.description !== null ? initialValues?.description : "");
+    const [name, setName] = useState(initialValues?.name !== null ? initialValues?.name : "");
+    const [price, setPrice] = useState(initialValues?.price !== null ? initialValues?.price : "");
+    const [image, setImage] = useState(initialValues?.image !== null ? initialValues?.image : "");
+    const [errors, setErrors] = useState({});
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
-        const err = {}
+        setCountry(initialValues?.country !== null ? initialValues?.country : "");
+        setAddress(initialValues?.address !== null ? initialValues?.address : "");
+        setCity(initialValues?.city !== null ? initialValues?.city : "");
+        setState(initialValues?.state !== null ? initialValues?.state : "");
+        setDescription(initialValues?.description !== null ? initialValues?.description : "");
+        setName(initialValues?.name !== null ? initialValues?.name : "");
+        setPrice(initialValues?.price !== null ? initialValues?.price : "");
+        setImage(initialValues?.image !== null ? initialValues?.image : "");
+    }, [initialValues]);
+
+    useEffect(() => {
+        setCountry(country)
+        setAddress(address)
+        setCity(city)
+        setState(state)
+        setDescription(description)
+        setName(name)
+        setPrice(price)
+        setImage(image)
+    }, [country, address, city, state, description, name, price, image])
+
+    const handleSubmit = async (e) => {
+        console.log('handle submit running')
+        e.preventDefault();
+        let err = {}
         if (country !== 'United States' && country !== 'united states') { err.country = "We are only able to provide our services to the United States at this time" }
         if (address.length < 4) { err.address = "Please provide a valid Address." }
         if (city.length < 2) { err.city = "Please enter a valid City." }
@@ -27,44 +52,41 @@ function SpotForm({ formType, spotsId }) {
         if (price < 1 || price > 10000) { err.price = 'Price must be between $1 and $10000 nightly' }
         if (!image) { err.image = 'At least 1 image of your property is required' }
         setErrors(err)
-    }, [country, address, city, state, description, name, price, image])
-
-    const handleSubmit = async (e) => {
-        console.log('handle submit running')
-        e.preventDefault();
-        const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
-        let createdSpot;
-        let updatedSpot;
-        console.log('this is my spotsId', spotsId)
-        if (formType === "Edit Spot") {
-            console.log('this is my spotsId', spotsId)
-            updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
-            let spotId = spotsId
-            const spotImages = { image, spotId }
-            if (updatedSpot) {
-                let createdImage = await dispatch(addImage(spotImages))
-                console.log('createdImage', createdImage);
-                console.log('if created spot running', updatedSpot)
-                setErrors({})
-                history.push(`/spots/${spotsId}`)
+        if (Object.keys(err).length === 0) { // check if there are any errors
+            const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
+            let createdSpot;
+            let updatedSpot;
+            if (formType === "Edit Spot") {
+                updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
+                let spotId = spotsId
+                const spotImages = { image, spotId }
+                if (updatedSpot) {
+                    let createdImage = await dispatch(addImage(spotImages))
+                    console.log('createdImage', createdImage);
+                    console.log('if created spot running', updatedSpot)
+                    setErrors({})
+                    history.push(`/spots/${spotsId}`)
+                }
+            } else {
+                createdSpot = await dispatch(createSpot(spotAspects))
+                const spotImages = { image, spotId: createdSpot.id }
+                if (createdSpot) {
+                    let createdImage = await dispatch(addImage(spotImages))
+                    console.log('createdImage', createdImage);
+                    console.log('created spot', createdSpot)
+                    setErrors({})
+                    history.push(`/spots/${createdSpot.id}`)
+                }
             }
         } else {
-            createdSpot = await dispatch(createSpot(spotAspects))
-            const spotImages = { image, spotId: createdSpot.id }
-            if (createdSpot) {
-                let createdImage = await dispatch(addImage(spotImages))
-                console.log('createdImage', createdImage);
-                console.log('created spot', createdSpot)
-                console.log('if created spot running', createdSpot)
-                setErrors({})
-                history.push(`/spots/${createdSpot.id}`)
-            }
+            setErrors({})
         }
     }
 
     return (
         <div className="formatter">
-            <h1>Create a new Spot</h1>
+            <h2 className={formType === "Edit Spot" ? 'hidden' : 'formTitle'}>Create a new Spot</h2>
+            <h2 className={formType !== "Edit Spot" ? 'hidden' : 'formTitle'}>Update your Spot</h2>
             <h2 >Where's your place located?</h2>
             <h3>Guests will only get access to your exact address once they booked a<br />
                 reservation.
@@ -131,7 +153,6 @@ function SpotForm({ formType, spotsId }) {
                     <h2>Create a title for your spot</h2>
                     Catch guests' attention with a spot title that highlights what makes <br />
                     your place special.
-
                     <input
                         type="text"
                         placeholder="Name of your spot"
@@ -163,8 +184,32 @@ function SpotForm({ formType, spotsId }) {
                         placeholder="Preview Image URL"
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
-                        required
+                        required={formType !== "Edit Spot"}
                     />
+                    {/* <input
+                        type="url"
+                        placeholder="Image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                    <input
+                        type="url"
+                        placeholder="Image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                    <input
+                        type="url"
+                        placeholder="Image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                    <input
+                        type="url"
+                        placeholder="Image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    /> */}
                 </label>
                 <p className="errors">{errors.image}</p>
                 <button disabled={Object.values(errors).length > 0} type="submit">Create Spot</button>

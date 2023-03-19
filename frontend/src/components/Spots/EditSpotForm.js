@@ -8,13 +8,23 @@ const EditSpotForm = () => {
     const dispatch = useDispatch()
     const { spotId } = useParams()
     const currentSpot = useSelector((state) => state.spots[spotId])
+    console.log('this is the current spot', currentSpot)
+    const initialValues = {
+        country: currentSpot.country,
+        address: currentSpot.address,
+        city: currentSpot.city,
+        state: currentSpot.state,
+        description: currentSpot.description,
+        name: currentSpot.name,
+        price: currentSpot.price
+    }
     console.log('this is the current spot', currentSpot, spotId)
     useEffect(() => {
         dispatch(getSpotsDetail(spotId))
     }, [dispatch, spotId])
 
     return (
-        <SpotForm spotsId={spotId} formType="Edit Spot" />
+        <SpotForm formType="Edit Spot" spotsId={spotId} initialValues={initialValues} />
     )
 }
 

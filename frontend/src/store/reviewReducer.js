@@ -50,8 +50,8 @@ export const getReviewsBySpot = (spotId) => async (dispatch) => {
     }
 }
 export const createReview = (data) => async (dispatch) => {
-    console.log('create spot thunk running')
-    const response = await csrfFetch(`/api/spots/${data.id}/reviews`, {
+    console.log('create spot thunk running', data)
+    const response = await csrfFetch(`/api/spots/${data.spotId}/reviews`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -74,9 +74,7 @@ const reviewReducer = (state = initialState, action) => {
             console.log('add case running in review reducer', action)
             return {
                 ...state,
-                [action.review.id]: {
-                    ...action.review
-                }
+                [action.review.id]: action.review
             }
         case DELETE_REVIEW: {
             const removedState = { ...state };
