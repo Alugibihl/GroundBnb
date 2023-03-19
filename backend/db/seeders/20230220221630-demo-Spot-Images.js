@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fz%2Fabandoned-village-made-cave-houses-which-located-mardin-turkey-hills-city-134881353.jpg&f=1&nofb=1&ipt=daae127acd29ff5d68acad39e57207fe12fe0c9a1aaa592bcb866cff2914a824&ipo=imagesl',
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fz%2Fabandoned-village-made-cave-houses-which-located-mardin-turkey-hills-city-134881353.jpg&f=1&nofb=1&ipt=daae127acd29ff5',
         preview: false
       },
       {
@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.gannett-cdn.com%2F-mm-%2F2e56892f6a349ad47192b530425d443fb365e5e9%2Fr%3Dx1803%26c%3D3200x1800%2Fhttps%2Fmedia.gannett-cdn.com%2F29906170001%2F29906170001_5716851009001_5716851192001-vs.jpg%3FpubId%3D29906170001&f=1&nofb=1&ipt=46957868c1192011df24bcb3623b2867e33242a146bf56a87e8444625f735448&ipo=images',
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.gannett-cdn.com%2F-mm-%2F2e56892f6a349ad471920%2Fhttps%2Fmedia.gannett-cdn.com%2F29906170001%2F29906170001_5716851009001_5716851192001-vs.jpg%3F',
         preview: false
       },
       {
