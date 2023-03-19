@@ -1,4 +1,27 @@
 /* TODO Add site wide styles */
 html {
-    background-color: rgba(72, 104, 72, 0.872);
+    color: rgb(58, 20, 20);
+    font-size: 14pt;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+button {
+    color: #9ae17b;
+    font-size: 14pt;
+    text-align: center;
+}
+
+Link {
+    color: rgb(58, 20, 20);
+    text-decoration: none;
+}
+
+a {
+    color: rgb(58, 20, 20);
+    text-decoration: none;
+}
+
+.errors {
+    color: red;
+    font-size: 10pt;
 }

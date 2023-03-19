@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import './SignupFormModal.css';
 
 function SignupFormModal() {
+
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -12,13 +13,14 @@ function SignupFormModal() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-            setErrors([]);
+            setErrors({});
             return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
                 .then(closeModal)
                 .catch(async (res) => {
@@ -26,25 +28,37 @@ function SignupFormModal() {
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+
+        return
     };
+
+    useEffect(() => {
+        let err = {}
+        if (email.length < 1 || !email.includes('@') || !email.includes('.')) { err.email = 'Please enter a valid email.' }
+        if (username.length < 4) { err.username = 'Username must be atleast 4 characters long.' }
+        if (username.length > 30) { err.username = 'Username must be shorter than 30 characters' }
+        if (firstName.length < 2 || firstName.length > 30) { err.firstName = 'First name must be between 2 and 30 characters.' }
+        if (lastName.length < 2 || lastName.length > 30) { err.lastName = 'Last name must be between 2 and 30 characters.' }
+        if (password.length < 6) { err.password = 'Passwords must be atleast 6 characters long.' }
+        if (confirmPassword !== password) { err.confirmPassword = 'Confirm Password field must be the same as the Password field' }
+        setErrors(err)
+    }, [email, username, firstName, lastName, password, confirmPassword])
+
 
     return (
         <>
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
                 <label>
                     Email
                     <input
-                        type="text"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </label>
+                <p className="errors">{errors.email}</p>
                 <label>
                     Username
                     <input
@@ -54,6 +68,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.username}</p>
                 <label>
                     First Name
                     <input
@@ -63,6 +78,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.firstName}</p>
                 <label>
                     Last Name
                     <input
@@ -72,6 +88,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.lastName}</p>
                 <label>
                     Password
                     <input
@@ -81,6 +98,7 @@ function SignupFormModal() {
                         required
                     />
                 </label>
+                <p className="errors">{errors.password}</p>
                 <label>
                     Confirm Password
                     <input
@@ -90,7 +108,8 @@ function SignupFormModal() {
                         required
                     />
                 </label>
-                <button type="submit">Sign Up</button>
+                <p className="errors">{errors.confirmPassword}</p>
+                <button disabled={Object.values(errors).length > 0} type="submit">Sign Up</button>
             </form>
         </>
     );

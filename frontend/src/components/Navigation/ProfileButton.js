@@ -4,9 +4,11 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { NavLink, useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -32,9 +34,11 @@ function ProfileButton({ user }) {
     const closeMenu = () => setShowMenu(false);
 
     const logout = (e) => {
+        console.log('on click logout')
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
+        history.push('/')
     };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -42,17 +46,17 @@ function ProfileButton({ user }) {
     return (
         <>
             <button onClick={openMenu}>
+                <i className="fa-solid fa-bars" />
                 <i className="fas fa-user-circle" />
             </button>
-            <ul className={ulClassName} ref={ulRef}>
+            <div className={`${ulClassName} top`} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
-                        <li>{user.email}</li>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
+                        <p>Hello, {user.username}<br />
+                            {user.email}</p>
+                        <p className="current-links"><NavLink className={"current-user-spots"} to={'/spots/current'}>Manage Spots</NavLink>                            <NavLink className={"current-user-reviews"} to={'/reviews/current'}>Manage Reviews</NavLink></p>
+                        <button onClick={logout}>Log Out</button>
+
                     </>
                 ) : (
                     <>
@@ -68,7 +72,7 @@ function ProfileButton({ user }) {
                         />
                     </>
                 )}
-            </ul>
+            </div>
         </>
     );
 }
