@@ -88,8 +88,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
             <h2 className={formType === "Edit Spot" ? 'hidden' : 'formTitle'}>Create a new Spot</h2>
             <h2 className={formType !== "Edit Spot" ? 'hidden' : 'formTitle'}>Update your Spot</h2>
             <h2 >Where's your place located?</h2>
-            <h3>Guests will only get access to your exact address once they booked a<br />
-                reservation.
+            <h3>Guests will only get access to your exact address once they booked a reservation.
             </h3>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -138,7 +137,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <p className="errors">{errors.state}</p>
                 <label>
                     <h2>Describe your place to guests</h2>
-                    Mention the best features of your space, any special amentities like <br />
+                    Mention the best features of your space, any special amentities like
                     fast wifi or parking, and what you love about the neighborhood.
                     <input
                         type="textarea"
@@ -151,7 +150,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <p className="errors">{errors.description}</p>
                 <label>
                     <h2>Create a title for your spot</h2>
-                    Catch guests' attention with a spot title that highlights what makes <br />
+                    Catch guests' attention with a spot title that highlights what makes
                     your place special.
                     <input
                         type="text"
@@ -164,7 +163,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <p className="errors">{errors.name}</p>
                 <label>
                     <h2>Set a base price for your spot</h2>
-                    Competitive pricing can help your listing stand out and rank higher<br />
+                    Competitive pricing can help your listing stand out and rank higher
                     in search results.
                     <div>$
                         <input

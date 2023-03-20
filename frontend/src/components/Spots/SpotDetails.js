@@ -66,12 +66,11 @@ const SpotDetails = () => {
                     <div className='reserve-box'>${spotsInfo?.price}.00 night <i className="fa-solid fa-star">
                     </i>{spotsInfo?.avgStarRating}
                         <div> {spotsInfo?.numReviews === 1 ? "1 Review" : `${spotsInfo} Reviews`}</div>
-                        <button className='reserve-a-spot'>Reserve</button></div>
+                        <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
                         </i>{spotsInfo?.avgStarRating}{reviewMadness(spotsInfo?.numReviews)}</div>
                         {reviewData?.map((review) => {
-                            console.log(review)
                             return <span key={review.id} > <div>{review.User ? review.User.username : user.user.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                 <div>{review.review}</div>

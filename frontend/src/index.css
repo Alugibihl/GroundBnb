@@ -9,6 +9,7 @@ button {
     color: #9ae17b;
     font-size: 14pt;
     text-align: center;
+    border-radius: 5px;
 }
 
 Link {
@@ -16,9 +17,38 @@ Link {
     text-decoration: none;
 }
 
+form {
+    box-sizing: border-box;
+}
+
+form h2 {
+    text-align: center;
+}
+
+.formatter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: fit-content;
+    margin: 10px 25%;
+}
+
+.formatter h2 {
+    text-align: center;
+}
+
+.formatter h3 {
+    text-align: left;
+}
+
 a {
     color: rgb(58, 20, 20);
     text-decoration: none;
+}
+
+input {
+    width: 97%;
 }
 
 .errors {

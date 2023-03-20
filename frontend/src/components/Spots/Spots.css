@@ -3,15 +3,17 @@
 }
 
 .spot-card {
-    width: 350px;
-    height: 300px;
+    border: 2px black solid;
+    border-width: 20%;
     display: flex;
     flex-direction: column;
 }
 
 .spot-card img {
-    width: 350px;
-    height: 300px;
+    max-width: 450px;
+    height: auto;
+    min-width: 200px;
+
 }
 
 .aligned {
@@ -26,15 +28,8 @@
 }
 
 .spots-board {
-    display: inline-flex;
-    gap: 30px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 2%;
     flex-wrap: wrap;
-}
-
-@media screen and (min-width: 1500px) {
-    .spot-card {
-        width: 23%;
-        height: 20%;
-        gap: 30px;
-    }
 }
