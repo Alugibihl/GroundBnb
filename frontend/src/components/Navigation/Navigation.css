@@ -8,6 +8,7 @@
 
 .nameLogo>img {
     height: 50px;
+    border-radius: 20%;
 }
 
 .nameLogo {
@@ -37,9 +38,14 @@
     gap: 20px;
 }
 
-.navbar {
+.navbar>button {
     display: flex;
+    gap: 5px;
     align-content: center;
+    border-radius: 21px;
+    padding: 5px 5px 5px 12px;
+    border: 1px solid rgb(58, 20, 20);
+    background-color: transparent;
 }
 
 .profile-dropdown {

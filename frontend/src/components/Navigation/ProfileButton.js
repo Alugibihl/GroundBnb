@@ -54,7 +54,10 @@ function ProfileButton({ user }) {
                     <>
                         <p>Hello, {user.username}<br />
                             {user.email}</p>
-                        <p className="current-links"><NavLink className={"current-user-spots"} to={'/spots/current'}>Manage Spots</NavLink>                            <NavLink className={"current-user-reviews"} to={'/reviews/current'}>Manage Reviews</NavLink></p>
+                        <p className="current-links"><NavLink className={"current-user-spots"}
+                         to={'/spots/current'}>Manage Spots</NavLink>
+                          <NavLink className={"current-user-reviews"}
+                          to={'/reviews/current'}>Manage Reviews</NavLink></p>
                         <button onClick={logout}>Log Out</button>
 
                     </>
@@ -70,6 +73,7 @@ function ProfileButton({ user }) {
                             onItemClick={closeMenu}
                             modalComponent={<SignupFormModal />}
                         />
+
                     </>
                 )}
             </div>
