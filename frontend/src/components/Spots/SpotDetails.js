@@ -42,8 +42,10 @@ const SpotDetails = () => {
     }
     let reviewMadness = (reviewCount) => {
         if (reviewCount > 1) {
+            console.log('this is reviewcount', reviewCount)
             return (<div>{reviewCount} Reviews</div>)
         } else if (reviewCount === 1) {
+            console.log('this is reviewcount', reviewCount)
             return (<div>{reviewCount} Review</div>)
         } else {
             console.log('this is reviewcount', reviewCount)
@@ -52,20 +54,28 @@ const SpotDetails = () => {
                 <div>Be the first to post a review!</div></div>)
         }
     }
+    let imageManipulator = (imageArr) => {
+        return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
+            return idx !== 0 && idx <= 4 ? <img className='support-pics' src={image.url} alt='unavailable' /> : null
+        }
+        )}
+        </div>)
+
+    }
     return (
         <>
             {spotsInfo?.name
                 ? <div> < h3 className='spotName' >{spotsInfo?.name}</h3>
                     <div className='subtitle'>{spotsInfo?.city}, {spotsInfo?.state}, {spotsInfo?.country}</div>
-                    <div>{spotsInfo?.SpotImages?.map(image =>
-                        <img key={image.id} alt={image.id} src={image.url}></img>
-                    )}</div>
+                    <div ><div className='images-box'>
+                        <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
+                        {imageManipulator(spotsInfo?.SpotImages)}</div></div>
                     <div className='spot-host description-box'>
                         <div>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
                         <div>{spotsInfo?.description}</div> </div>
                     <div className='reserve-box'>${spotsInfo?.price}.00 night <i className="fa-solid fa-star">
                     </i>{spotsInfo?.avgStarRating}
-                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : `${spotsInfo} Reviews`}</div>
+                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div>
                         <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
@@ -84,7 +94,6 @@ const SpotDetails = () => {
 
                         })}
                     </div>
-
                 </div>
                 : (<div>Loading</div>)
             }

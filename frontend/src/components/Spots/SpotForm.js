@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
@@ -16,6 +16,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
+    const Images = useSelector((state) => state.spots[spotsId].SpotImages)
 
     useEffect(() => {
         setCountry(initialValues?.country !== null ? initialValues?.country : "");
@@ -57,6 +58,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
             let createdSpot;
             let updatedSpot;
             if (formType === "Edit Spot") {
+                console.log('WE MADE IT!@@@!!!!!!!!!!!!!!!!!!!!!!');
                 updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
                 let spotId = spotsId
                 const spotImages = { image, spotId }
@@ -85,6 +87,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
 
     return (
         <div className="formatter">
+            {console.log('here is that slice of state yall wanted', Images)}
             <h2 className={formType === "Edit Spot" ? 'hidden' : 'formTitle'}>Create a new Spot</h2>
             <h2 className={formType !== "Edit Spot" ? 'hidden' : 'formTitle'}>Update your Spot</h2>
             <h2 >Where's your place located?</h2>
@@ -177,14 +180,19 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <p className="errors">{errors.price}</p>
                 <label>
                     <h2>Liven up your spot with photos</h2>
-                    Submit a link to a photo to publish a spot
-                    <input
-                        type="url"
-                        placeholder="Preview Image URL"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        required={formType !== "Edit Spot"}
-                    />
+                    Submit a link to a photo to publish a spot {
+                        Images?.map((image) => {
+                            return <div className="edit-images" key={image.id}><img src={image.url} alt='unavailable' />
+                                <input
+                                    type="url"
+                                    placeholder="Preview Image URL"
+                                    value={image.url}
+                                    onChange={(e) => setImage(e.target.value)}
+                                    required={formType !== "Edit Spot"}
+                                />
+                            </div>
+                        })
+                    }
                     {/* <input
                         type="url"
                         placeholder="Image URL"

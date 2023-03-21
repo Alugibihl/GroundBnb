@@ -55,3 +55,8 @@ input {
     color: red;
     font-size: 10pt;
 }
+
+.edit-images img {
+    width: 50px;
+    height: 50px;
+}
