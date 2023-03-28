@@ -3,15 +3,14 @@
 }
 
 .spot-card {
-    border: 2px black solid;
-    border-width: 20%;
+    width: 20%;
     display: flex;
     flex-direction: column;
 }
 
 .spot-card img {
-    max-width: 450px;
-    height: auto;
+    width: 325px;
+    height: 325px;
     min-width: 200px;
 
 }
@@ -32,4 +31,39 @@
     display: flex;
     gap: 2%;
     flex-wrap: wrap;
+}
+
+.images-box {
+    width: 90%;
+    height: 30vw;
+    display: flex;
+    border: 2px red solid;
+    margin: 0px 5%;
+    box-sizing: border-box;
+}
+
+.main-pic {
+    height: 100%;
+    width: 50%;
+}
+
+.support-pics {
+    height: 50%;
+    width: 50%;
+}
+
+.images-box-internal {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.reserve-box {
+    border: 2px solid black;
+    margin-right: 50px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box;
 }
