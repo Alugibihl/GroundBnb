@@ -4,7 +4,6 @@ import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
 function SpotForm({ formType, spotsId, initialValues }) {
-    // console.log('here we gooooooo', initialValues)
     const [country, setCountry] = useState(initialValues?.country !== null ? initialValues?.country : "");
     const [address, setAddress] = useState(initialValues?.address !== null ? initialValues?.address : "");
     const [city, setCity] = useState(initialValues?.city !== null ? initialValues?.city : "");
@@ -16,7 +15,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
-    const Images = useSelector((state) => state.spots[spotsId].SpotImages)
+    const Images = useSelector((state) => state.spots[spotsId]?.SpotImages)
 
     useEffect(() => {
         setCountry(initialValues?.country !== null ? initialValues?.country : "");

@@ -56,9 +56,8 @@ const SpotDetails = () => {
     }
     let imageManipulator = (imageArr) => {
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
-            return idx !== 0 && idx <= 4 ? <img className='support-pics' src={image.url} alt='unavailable' /> : null
-        }
-        )}
+            return idx !== 0 && idx <= 4 ? <img key={image.id} className='support-pics' src={image.url} alt='unavailable' /> : null
+        })}
         </div>)
 
     }
@@ -68,8 +67,8 @@ const SpotDetails = () => {
                 ? <div> < h3 className='spotName' >{spotsInfo?.name}</h3>
                     <div className='subtitle'>{spotsInfo?.city}, {spotsInfo?.state}, {spotsInfo?.country}</div>
                     <div ><div className='images-box'>
-                        <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
-                        {imageManipulator(spotsInfo?.SpotImages)}</div></div>
+                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
+                        {imageManipulator(spotsInfo.SpotImages)}</div></div>
                     <div className='spot-host description-box'>
                         <div>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
                         <div>{spotsInfo?.description}</div> </div>

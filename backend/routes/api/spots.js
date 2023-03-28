@@ -205,6 +205,7 @@ router.get('/', async (req, res) => {
         })
         let spotAvgReview = reviewsBySpot.toJSON().avgRating
         if (spotAvgReview) {
+            console.log('look at me!!!', spotAvgRating);
             spot.avgRating = spotAvgReview
         } else {
             spot.avgRating = "New"
