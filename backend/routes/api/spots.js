@@ -203,9 +203,9 @@ router.get('/', async (req, res) => {
             },
             attributes: [[sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]]
         })
-        let spotAvgReview = reviewsBySpot.toJSON().avgRating
-        if (spotAvgReview) {
-            console.log('look at me!!!', spotAvgRating);
+        let spotAvgReviews = reviewsBySpot.toJSON().avgRating
+        if (spotAvgReviews) {
+            let spotAvgReview = spotAvgReviews.toFixed(1)
             spot.avgRating = spotAvgReview
         } else {
             spot.avgRating = "New"
@@ -260,8 +260,9 @@ router.get('/current', requireAuth, async (req, res) => {
             attributes: [[sequelize.fn('AVG', sequelize.col("stars")), "avgRating"]]
         })
 
-        let spotAvgReview = reviewsBySpot.toJSON().avgRating
-        if (spotAvgReview) {
+        let spotAvgReviews = reviewsBySpot.toJSON().avgRating
+        if (spotAvgReviews) {
+            let spotAvgReview = spotAvgReviews.toFixed(1)
             spot.avgRating = spotAvgReview
         } else {
             spot.avgRating = "New"
@@ -321,8 +322,9 @@ router.get('/:spotId', async (req, res) => {
             attributes: [[sequelize.fn('COUNT', sequelize.col("review")), "numReviews"]]
         }) //find the object you want at index, then the container, then the value
         spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
-        let spotAvgReview = reviewsBySpot.toJSON().avgRating
-        if (spotAvgReview) {
+        let spotAvgReviews = reviewsBySpot.toJSON().avgRating
+        if (spotAvgReviews) {
+            let spotAvgReview = spotAvgReviews.toFixed(1)
             spot.avgStarRating = spotAvgReview
         } else {
             spot.avgStarRating = "New"
