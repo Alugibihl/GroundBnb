@@ -17,9 +17,11 @@ const SpotDetails = () => {
     const reviewData = Object.values(spotReviews)
     const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
+        console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
-
+        console.log('in spot detail getSpotsDetail dispatch')
         dispatch(getReviewsBySpot(spotId))
+        console.log('in spot detail getReviewsbySpot dispatch')
         return () => dispatch(cleanUp())
     }, [dispatch, spotId])
 
@@ -59,23 +61,24 @@ const SpotDetails = () => {
             return idx !== 0 && idx <= 4 ? <img key={image.id} className='support-pics' src={image.url} alt='unavailable' /> : null
         })}
         </div>)
-
     }
+
     return (
         <>
             {spotsInfo?.name
-                ? <div> < h3 className='spotName' >{spotsInfo?.name}</h3>
+                ? <div className='format-me'> < h3 className='spotName' >{spotsInfo?.name}</h3>
                     <div className='subtitle'>{spotsInfo?.city}, {spotsInfo?.state}, {spotsInfo?.country}</div>
-                    <div ><div className='images-box'>
-                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
-                        {imageManipulator(spotsInfo.SpotImages)}</div></div>
+                 <div className='images-box'>
+                    <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
+                        {imageManipulator(spotsInfo.SpotImages)}</div>
+                        <div className='bottom-spot'>
                     <div className='spot-host description-box'>
                         <div>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
                         <div>{spotsInfo?.description}</div> </div>
-                    <div className='reserve-box'>${spotsInfo?.price}.00 night <i className="fa-solid fa-star">
-                    </i>{spotsInfo?.avgStarRating}
-                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div>
-                        <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div>
+                    <div className='reserve-box'> <div className='top-row-box'>${spotsInfo?.price}.00 night <div> <i className="fa-solid fa-star">
+                    </i>{spotsInfo?.avgStarRating} </div>
+                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
+                        <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
                         </i>{spotsInfo?.avgStarRating}{reviewMadness(spotsInfo?.numReviews)}</div>
@@ -90,7 +93,6 @@ const SpotDetails = () => {
                                 <button><OpenModalMenuItem itemText='Post Your Review'
                                     onItemClick={closeMenu} modalComponent={<CreateReviewForm closeMenu={closeMenu} spotId={review?.id} />} /></button>
                             </span>
-
                         })}
                     </div>
                 </div>

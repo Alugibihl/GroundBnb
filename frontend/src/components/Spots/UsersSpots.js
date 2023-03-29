@@ -30,7 +30,6 @@ const UsersSpots = ({ spot }) => {
         <>
 
             <nav className='spot-card'>
-
                 <NavLink to={`/spots/${spot.id}`}>
                     <img alt={spot.name} src={spot.previewImage}></img>
                     <div className='aligned'><div className='card-location'>{spot.city}, {spot.state}</div><div className='average-rating'>
