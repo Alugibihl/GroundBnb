@@ -6,7 +6,9 @@ html {
 }
 
 button {
-    color: #9ae17b;
+    color: rgb(58, 20, 20);
+    background-color: #9ae17b;
+    box-shadow: 2px 2px rgb(58, 20, 20);
     font-size: 14pt;
     text-align: center;
     border-radius: 5px;
@@ -63,4 +65,26 @@ input {
 
 img {
     border-radius: 5%;
+}
+.cancel-button button{
+    background-color: lightgrey;
+    width: 95%;
+}
+.delete-buttons button{
+    width: 95%;
+
+}
+.modal-content {
+    text-align: center;
+}
+.modal-backround{
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: px;
+}
+.i {
+display: flex;
+flex-direction: row;
 }

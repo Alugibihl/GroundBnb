@@ -3,7 +3,6 @@
 }
 
 .spot-card {
-    width: 20%;
     display: flex;
     flex-direction: column;
 }
@@ -11,8 +10,7 @@
 .spot-card img {
     width: 325px;
     height: 325px;
-    min-width: 200px;
-
+    min-width: 300px;
 }
 
 .aligned {
@@ -23,22 +21,25 @@
 
 .average-rating {
     display: flex;
-    justify-self: flex-end;
+}
+
+.card-location {
+    width: 85%;
 }
 
 .spots-board {
     box-sizing: border-box;
     display: flex;
+    justify-content: flex-start;
     gap: 2%;
     flex-wrap: wrap;
 }
 
 .images-box {
-    width: 90%;
+    width: 94%;
     height: 30vw;
     display: flex;
-    border: 2px red solid;
-    margin: 0px 5%;
+    margin: 10px 3%;
     box-sizing: border-box;
 }
 
@@ -59,11 +60,61 @@
 }
 
 .reserve-box {
-    border: 2px solid black;
-    margin-right: 50px;
+    margin: 5px 10pt 5px 0px;
+    border: 4px solid rgb(58, 20, 20);
+    width: 20rem;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: column;
     position: relative;
     box-sizing: border-box;
+    border-radius: 3%;
+    font-size: 12pt;
+}
+
+.bottom-spot {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(58, 20, 20);
+
+}
+
+.top-row-box {
+    margin: 7px 7px 0px 7px;
+    display: flex;
+    gap: 7px;
+}
+
+.format-me {
+    margin: 0px 15px;
+}
+
+.reserve-a-spot {
+    margin-bottom: 5px;
+    color: rgb(58, 20, 20);
+    background-color: #9ae17b;
+    width: 85%;
+    box-shadow: 2px 2px rgb(58, 20, 20);
+}
+
+.longer-description {
+    text-align: center;
+}
+
+.title-page-position {
+    margin-left: 10pt;
+}
+
+.description-box {
+    font-size: 12pt;
+}
+
+.spot-host .description-box {
+    width: 95%;
+    margin-left: 10pt;
+}
+
+.spot-host {
+    font-size: 12pt;
 }

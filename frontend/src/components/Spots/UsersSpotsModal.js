@@ -13,7 +13,7 @@ const UsersSpotsModal = ({ spot }) => {
 
     return (
         <>
-            <div className="modalBackround">
+            <div className="modal-backround">
                 <div className="modalContainer">
                     <div className="modal-title"></div><h2 >Confirm Delete</h2></div>
                 <div className="modal-question">

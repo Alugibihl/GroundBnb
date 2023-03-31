@@ -50,7 +50,6 @@ export const getUserSpots = () => async (dispatch) => {
 };
 export const getSpotsDetail = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
-
     if (response.ok) {
         const spot = await response.json();
         dispatch(add(spot));
@@ -133,13 +132,14 @@ const spotsReducer = (state = initialState, action) => {
                 }
                 return newState
             }
-            return {
+           const newState = {
                 ...state,
                 [action.spot.id]: {
                     ...state[action.spot.id],
                     ...action.spot
                 }
             }
+            return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
             return {

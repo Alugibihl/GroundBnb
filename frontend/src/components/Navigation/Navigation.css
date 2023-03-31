@@ -6,7 +6,7 @@
     z-index: 50;
 }
 
-.nameLogo>img {
+.nameLogo img {
     height: 50px;
     border-radius: 20%;
 }
@@ -45,17 +45,23 @@
     border-radius: 21px;
     padding: 5px 5px 5px 12px;
     border: 1px solid rgb(58, 20, 20);
-    background-color: transparent;
+    background-color: #9ae17b;
 }
 
 .profile-dropdown {
     position: absolute;
     background-color: white;
-    padding: 3px;
+    font-size: 18pt;
+    padding: 0px 3px;
     right: 5%;
     top: 85%;
     border: 2px solid rgb(58, 20, 20);
     text-align: center;
+}
+
+.profile-dropdown button {
+    position: relative;
+    bottom: 7pt;
 }
 
 .current-links {
