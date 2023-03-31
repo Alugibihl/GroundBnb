@@ -51,8 +51,9 @@ const SpotDetails = () => {
             return (<div>{reviewCount} Review</div>)
         } else {
             console.log('this is reviewcount', reviewCount)
-            return (<div><button><OpenModalMenuItem itemText='Post Your Review'
-                onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button>
+            return (<div>
+                <button><OpenModalMenuItem itemText='Post Your Review'
+                    onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button>
                 <div>Be the first to post a review!</div></div>)
         }
     }
@@ -68,17 +69,17 @@ const SpotDetails = () => {
             {spotsInfo?.name
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo?.name}</h3>
                     <div className='subtitle'>{spotsInfo?.city}, {spotsInfo?.state}, {spotsInfo?.country}</div>
-                 <div className='images-box'>
-                    <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
+                    <div className='images-box'>
+                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
                         {imageManipulator(spotsInfo.SpotImages)}</div>
-                        <div className='bottom-spot'>
-                    <div className='spot-host description-box'>
-                        <div>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
-                        <div>{spotsInfo?.description}</div> </div>
-                    <div className='reserve-box'> <div className='top-row-box'>${spotsInfo?.price}.00 night <div> <i className="fa-solid fa-star">
-                    </i>{spotsInfo?.avgStarRating} </div>
-                        <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
-                        <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
+                    <div className='bottom-spot'>
+                        <div className='spot-host description-box'>
+                            <div className='spot-host'>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
+                            <div className='description-box'>{spotsInfo?.description}</div> </div>
+                        <div className='reserve-box'> <div className='top-row-box'>${spotsInfo?.price}.00 night <div> <i className="fa-solid fa-star">
+                        </i>{spotsInfo?.avgStarRating} </div>
+                            <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
+                            <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
                         </i>{spotsInfo?.avgStarRating}{reviewMadness(spotsInfo?.numReviews)}</div>

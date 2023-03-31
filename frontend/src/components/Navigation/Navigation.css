@@ -51,11 +51,16 @@
 .profile-dropdown {
     position: absolute;
     background-color: white;
-    padding: 3px;
+    font-size: 18pt;
+    padding: 0px 3px;
     right: 5%;
     top: 85%;
     border: 2px solid rgb(58, 20, 20);
     text-align: center;
+}
+.profile-dropdown button{
+    position: relative;
+    bottom: 7pt;
 }
 
 .current-links {
