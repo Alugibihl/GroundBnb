@@ -136,8 +136,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     />
                 </label>
                 <p className="errors">{errors.state}</p>
-                    <h2>Describe your place to guests</h2>
-                    <label className="longer-description">
+                <h2>Describe your place to guests</h2>
+                <label className="longer-description">
                     Mention the best features of your space, any special amentities like
                     fast wifi or parking, and what you love about the neighborhood.
                     <input
@@ -149,9 +149,9 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     />
                 </label>
                 <p className="errors">{errors.description}</p>
-                    <h2>Create a title for your spot</h2>
-                    <label className="longer-description">
-                            Catch guests' attention with a spot title that highlights what makes
+                <h2>Create a title for your spot</h2>
+                <label className="longer-description">
+                    Catch guests' attention with a spot title that highlights what makes
                     your place special.
                     <input
                         type="text"
@@ -177,11 +177,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 </label>
                 <p className="errors">{errors.price}</p>
                 <h2>Liven up your spot with photos</h2>
-                    <label className="longer-description">
+                <label className="longer-description">
                     Submit a link to a photo to publish a spot
                     {formType === "Edit Spot" ?
-                    images?.map((pic) => {
-                            return <div className="edit-images" ><img key={pic.id} src={pic.url} alt='unavailable' />
+                        images?.map((pic) => {
+                            return <div key={pic.id} className="edit-images" ><img src={pic.url} alt='unavailable' />
                                 <input
                                     type="url"
                                     placeholder="Preview Image URL"
@@ -189,21 +189,21 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                     onChange={(e) => setImage(e.target.value)}
                                     required
                                 />
-                                   </div>
-}) :
-                         <input
-                        type="url"
-                        placeholder="Preview Image URL"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        required
-                    />
-                    }
+                            </div>
+                        }) :
                         <input
+                            type="url"
+                            placeholder="Preview Image URL"
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
+                            required
+                        />
+                    }
+                    {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
                         type="url"
                         placeholder="Preview Image URL"
                         value={image}
-                        onChange={(e) => setImage(e.target.value)}/>
+                        onChange={(e) => setImage(e.target.value)} />}
                 </label>
                 <p className="errors">{errors.image}</p>
                 <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0} type="submit">Create Spot</button>

@@ -6,7 +6,7 @@
     z-index: 50;
 }
 
-.nameLogo>img {
+.nameLogo img {
     height: 50px;
     border-radius: 20%;
 }
@@ -58,7 +58,8 @@
     border: 2px solid rgb(58, 20, 20);
     text-align: center;
 }
-.profile-dropdown button{
+
+.profile-dropdown button {
     position: relative;
     bottom: 7pt;
 }
