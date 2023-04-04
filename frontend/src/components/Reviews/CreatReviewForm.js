@@ -1,14 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
 import { createReview } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
-
+import './Reviews.css'
+import { useHistory } from "react-router-dom";
 const CreateReviewForm = () => {
- 
+
     const spots = useSelector((state) => state.spots)
-    console.log('yeeeeeeeeeeeeeeeeeeeeee', spots)
-    const history = useHistory()
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
@@ -16,6 +14,7 @@ const CreateReviewForm = () => {
     const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
     const spotsId = Object.values(spots)
+    const history = useHistory()
     let spotId = spotsId[0].id
     console.log('spotsId', spotsId, 'spotId', spotId)
     useEffect(() => {
@@ -33,8 +32,10 @@ const CreateReviewForm = () => {
 
     useEffect(() => {
         const err = {}
+        if (!review.length) { err.review = 'Review cannot be empty.' }
+        if (stars < 1 || stars > 5) { err.stars = 'Review must be a number 1 through 5' }
         setErrors(err)
-    }, [])
+    }, [review, stars])
 
 
     const handleSubmit = async (e) => {
@@ -45,8 +46,9 @@ const CreateReviewForm = () => {
         const createdReview = await dispatch(createReview(reviewDetails))
         if (createdReview)
             setErrors({})
-        // history.push('/reviews/current')
         closeMenu()
+        history.push('/reviews/current')
+
     }
     const onChange = (number) => {
         setStars(parseInt(number));
@@ -55,16 +57,18 @@ const CreateReviewForm = () => {
         <div className="review-form">
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
+                {errors.review ? <p className="errors">{ }</p> : null}
+                {errors.stars ? <p className="errors">{ }</p> : null}
                 <label>
                     <input
-                 type="textarea"
-                placeholder="Leave your review here..."
-                    value={review}
-             onChange={(e) => setReview(e.target.value)}
-                 required
+                        type="textarea"
+                        placeholder="Leave your review here..."
+                        value={review}
+                        onChange={(e) => setReview(e.target.value)}
+                        required
                     />
                 </label>
-                <label>
+                <label className="star-listing">
                     <StarsRatingInput disabled={false}
                         onChange={onChange} stars={stars} />
                     Stars

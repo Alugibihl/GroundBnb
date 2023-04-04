@@ -1,0 +1,8 @@
+.star-listing {
+    display: flex;
+    justify-content: center;
+}
+
+.rating-input {
+    display: flex;
+}
