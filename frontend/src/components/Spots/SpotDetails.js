@@ -12,6 +12,7 @@ const SpotDetails = () => {
     const dispatch = useDispatch()
     const spotsInfo = useSelector((state) => state.spots[spotId])
     const spotReviews = useSelector((state) => state.reviews)
+    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews);
     const user = useSelector((state) => state.session)
     const ulRef = useRef();
     const reviewData = Object.values(spotReviews)
@@ -19,7 +20,7 @@ const SpotDetails = () => {
     useEffect(() => {
         console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
-        console.log('in spot detail getSpotsDetail dispatch')
+        // console.log('in spot detail getSpotsDetail dispatch')
         dispatch(getReviewsBySpot(spotId))
         console.log('in spot detail getReviewsbySpot dispatch')
         return () => dispatch(cleanUp())
@@ -66,28 +67,28 @@ const SpotDetails = () => {
 
     return (
         <>
-            {spotsInfo?.name
-                ? <div className='format-me'> < h3 className='spotName' >{spotsInfo?.name}</h3>
-                    <div className='subtitle'>{spotsInfo?.city}, {spotsInfo?.state}, {spotsInfo?.country}</div>
-                    <div className='images-box'>
-                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
-                        {imageManipulator(spotsInfo.SpotImages)}</div>
+            {Object.values(spotsInfo)?.length > 0
+                ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
+                    <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
+                    {/* <div className='images-box'>
+                        <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
+                        {imageManipulator(spotsInfo?.SpotImages)}</div> */}
                     <div className='bottom-spot'>
                         <div className='spot-host description-box'>
-                            <div className='spot-host'>Hosted by {spotsInfo?.Owner?.firstName} {spotsInfo?.Owner?.lastName}</div>
-                            <div className='description-box'>{spotsInfo?.description}</div> </div>
-                        <div className='reserve-box'> <div className='top-row-box'>${spotsInfo?.price}.00 night <div> <i className="fa-solid fa-star">
-                        </i>{spotsInfo?.avgStarRating} </div>
-                            <div> {spotsInfo?.numReviews === 1 ? "1 Review" : spotsInfo?.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
+                            <div className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</div>
+                            <div className='description-box'>{spotsInfo.description}</div> </div>
+                        <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div> <i className="fa-solid fa-star">
+                        </i>{spotsInfo.avgStarRating} </div>
+                            <div> {spotsInfo.numReviews === 1 ? "1 Review" : spotsInfo.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
                             <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
-                        </i>{spotsInfo?.avgStarRating}{reviewMadness(spotsInfo?.numReviews)}</div>
-                        {reviewData?.map((review) => {
+                        </i>{spotsInfo.avgStarRating}{reviewMadness(spotsInfo.numReviews)}</div>
+                        {reviewData.map((review) => {
                             return <span key={review.id} > <div>{review.User ? review.User.username : user.user.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                 <div>{review.review}</div>
-                                {review.User?.id === user.user.id ?
+                                {review.User.id === user.user.id ?
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
                                     </button></div> : null}

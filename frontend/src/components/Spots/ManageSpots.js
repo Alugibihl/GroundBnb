@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserSpots } from "../../store/spotsReducer";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import UsersSpots from "./UsersSpots";
 import './Spots.css'
 
@@ -12,7 +12,6 @@ const ManageSpots = () => {
     useEffect(() => {
         dispatch(getUserSpots())
     }, [dispatch])
-    console.log("fish", userSpots);
     let spots = Object.values(userSpots)
     if (!spots.length) { return null }
     return (

@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
 import './Reviews.css'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 const CreateReviewForm = () => {
-
+    const user = useSelector((state) => state.session)
     const spots = useSelector((state) => state.spots)
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
     const [errors, setErrors] = useState("")
-    const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
     const spotsId = Object.values(spots)
     const history = useHistory()
+    const ulRef = useRef();
+    let { id } = useParams()
     let spotId = spotsId[0].id
-    console.log('spotsId', spotsId, 'spotId', spotId)
+    console.log('spotsId', spotsId, 'spotId', spotId, 'other', user, spots)
     useEffect(() => {
         if (!showMenu) return;
 
@@ -34,6 +35,7 @@ const CreateReviewForm = () => {
         const err = {}
         if (!review.length) { err.review = 'Review cannot be empty.' }
         if (stars < 1 || stars > 5) { err.stars = 'Review must be a number 1 through 5' }
+
         setErrors(err)
     }, [review, stars])
 
