@@ -20,7 +20,7 @@ const SpotDetails = () => {
     useEffect(() => {
         console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
-        // console.log('in spot detail getSpotsDetail dispatch')
+        console.log('in spot detail getSpotsDetail dispatch')
         dispatch(getReviewsBySpot(spotId))
         console.log('in spot detail getReviewsbySpot dispatch')
         return () => dispatch(cleanUp())
@@ -70,12 +70,12 @@ const SpotDetails = () => {
             {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
-                    {/* <div className='images-box'>
-                        <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
-                        {imageManipulator(spotsInfo?.SpotImages)}</div> */}
+                    <div className='images-box'>
+                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
+                        {imageManipulator(spotsInfo.SpotImages)}</div>
                     <div className='bottom-spot'>
                         <div className='spot-host description-box'>
-                            <div className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</div>
+                            <div className='spot-host'>Hosted by {spotsInfo.Owner.firstName} {spotsInfo.Owner.lastName}</div>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
                         <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div> <i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating} </div>
@@ -92,9 +92,8 @@ const SpotDetails = () => {
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
                                     </button></div> : null}
-                                <button><OpenModalMenuItem itemText='Post Your Review'
-                                    onItemClick={closeMenu} modalComponent={<CreateReviewForm closeMenu={closeMenu} spotId={review?.id} />} /></button>
                             </span>
+
                         })}
                     </div>
                 </div>

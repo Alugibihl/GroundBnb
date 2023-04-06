@@ -105,8 +105,7 @@ export const editSpot = (spotToUpdate) => async (dispatch) => {
         },
         body: JSON.stringify(spotAspects)
     })
-    const data = await req.json()
-    const spot = data
+    const spot = await req.json()
     dispatch(edit(spot))
     return spot
 }
@@ -124,22 +123,19 @@ const spotsReducer = (state = initialState, action) => {
             console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
-            console.log('add case running in spot reducer', action)
-            if (!state[action.spot.id]) {
-                const newState = {
-                    ...state,
-                    [action.spot.id]: action.spot
-                }
-                return newState
-            }
-            const newState = {
-                ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot
-                }
-            }
+            // if (!state[action.spot.id])
+            // {
+            const newState = { ...state, [action.spot.id]: action.spot }
             return newState
+        // }
+        // const newState = {
+        //     ...state,
+        //     [action.spot.id]: {
+        //         ...state[action.spot.id],
+        //         ...action.spot
+        //     }
+        // }
+        // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
             return {

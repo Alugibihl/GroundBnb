@@ -15,9 +15,8 @@ const CreateReviewForm = () => {
     const spotsId = Object.values(spots)
     const history = useHistory()
     const ulRef = useRef();
-    let { id } = useParams()
     let spotId = spotsId[0].id
-    console.log('spotsId', spotsId, 'spotId', spotId, 'other', user, spots)
+    console.log('spotsId', spotsId, 'spotId', spotId, 'user', user, spotsId[spotId])
     useEffect(() => {
         if (!showMenu) return;
 
@@ -31,18 +30,21 @@ const CreateReviewForm = () => {
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
 
-    useEffect(() => {
-        const err = {}
-        if (!review.length) { err.review = 'Review cannot be empty.' }
-        if (stars < 1 || stars > 5) { err.stars = 'Review must be a number 1 through 5' }
-
-        setErrors(err)
-    }, [review, stars])
+    // useEffect(() => {
+    //     const err = {}
+    //     if (!review.length) { err.review = 'Review cannot be empty.' }
+    //     if (stars < 1 || stars > 5) { err.stars = 'Review must be a number 1 through 5' }
+    //     if (user.user.id === spotsId[spotId].ownerId) { err.review = 'You cannot review your own property' }
+    //     setErrors(err)
+    // }, [review, stars, spotId, spotsId, user.user.id])
 
 
     const handleSubmit = async (e) => {
         console.log('handle submit running')
         e.preventDefault();
+        if (!review.length) { errors.review = 'Review cannot be empty.' }
+        if (stars < 1 || stars > 5) { errors.stars = 'Review must be a number 1 through 5' }
+        if (user.user.id === spotsId[spotId].ownerId) { errors.review = 'You cannot review your own property' }
         const reviewDetails = { spotId, review, stars }
         console.log(reviewDetails)
         const createdReview = await dispatch(createReview(reviewDetails))
@@ -59,8 +61,9 @@ const CreateReviewForm = () => {
         <div className="review-form">
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
-                {errors.review ? <p className="errors">{ }</p> : null}
-                {errors.stars ? <p className="errors">{ }</p> : null}
+                {errors.review ? <p className="errors">{errors.review}</p> : null}
+                {errors.stars ? <p className="errors">{errors.star}</p> : null}
+
                 <label>
                     <input
                         type="textarea"
