@@ -58,19 +58,21 @@ const SpotDetails = () => {
                 <div>Be the first to post a review!</div></div>)
         }
     }
+    if (spotsInfo === undefined) { return null }
+
     let imageManipulator = (imageArr) => {
         if (!imageArr.length) { return null }
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
             return idx !== 0 && idx <= 4 ? <img key={image.id} className='support-pics' src={image.url} alt='unavailable' /> : null
         })}
-        </div>)// commenting out lines 73-75 lets the page load, and then bringing them back after render gives me my images
+        </div>)
     }
     return (
         <>
+            { }
             {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
-                    {console.log('this is spotsInfo inside the return', spotsInfo)}
                     {spotsInfo.SpotImages?.length > 0 ?
                         <div className='images-box'>
                             <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
@@ -91,12 +93,11 @@ const SpotDetails = () => {
                             return <span key={review.id} > <div>{review.User ? review.User.username : user.user.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                 <div>{review.review}</div>
-                                {review.User.id === user.user.id ?
+                                {review.User.id === user.user?.id && user.user?.id !== null ?
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
                                     </button></div> : null}
                             </span>
-
                         })}
                     </div>
                 </div>

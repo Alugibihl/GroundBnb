@@ -3,9 +3,10 @@ import { csrfFetch } from "./csrf";
 const LOAD = "spots/LOAD";
 const ADD = 'spots/ADD';
 const EDIT = 'spots/EDIT'
-const ADD_IMAGE = '/spots/ADD_IMAGE'
-const PART_LOAD = '/spots/PART_LOAD'
-const REMOVE_SPOT = '/spots/REMOVE_SPOT'
+const ADD_IMAGE = 'spots/ADD_IMAGE'
+const PART_LOAD = 'spots/PART_LOAD'
+const REMOVE_SPOT = 'spots/REMOVE_SPOT'
+const CLEANER = 'spots/CLEANUP'
 
 const partLoad = (spots) => ({
     type: PART_LOAD,
@@ -30,6 +31,9 @@ const addToSpot = (spotImages) => ({
 const edit = (spot) => ({
     type: EDIT,
     spot: spot
+})
+export const spotCleanUp = () => ({
+    type: CLEANER
 })
 
 export const getSpots = () => async (dispatch) => {
@@ -117,25 +121,26 @@ const spotsReducer = (state = initialState, action) => {
         case LOAD:
             const allSpots = { ...state }
             action.list.Spots.forEach(spot => allSpots[spot.id] = spot);
-            return { ...allSpots, ...state }
+            return { ...state, ...allSpots }
         case PART_LOAD:
             const allUserSpots = {}
             action.spots.spots.forEach(spot => allUserSpots[spot.id] = spot);
             console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
-            if (!state[action.spot.id]) {
-                const newState = { ...state, [action.spot.id]: action.spot }
-                return newState
-            }
-            const newState = {
-                ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot
-                }
-            }
+            // if (!state[action.spot.id]) {
+            const newState = { ...state, [action.spot.id]: action.spot }
             return newState
+        // }
+        // const newState = {
+        //     ...state,
+        //     [action.spot.id]: {
+        //         ...state[action.spot.id],
+        //         ...action.spot
+        //     }
+        // }
+        // console.log('HEY !! ITS RUNNING !!! ITS ACTUALLY RUNNIONG!!!!!!!!!!S')
+        // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
             return {
@@ -154,6 +159,8 @@ const spotsReducer = (state = initialState, action) => {
             delete removedState[action.spotId]
             return removedState
         }
+        case CLEANER:
+            return { ...initialState }
         default:
             return state
     }

@@ -4,14 +4,14 @@ import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
 function SpotForm({ formType, spotsId, initialValues }) {
-    const [country, setCountry] = useState(initialValues.country !== null ? initialValues.country : "");
-    const [address, setAddress] = useState(initialValues.address !== null ? initialValues.address : "");
-    const [city, setCity] = useState(initialValues.city !== null ? initialValues.city : "");
-    const [state, setState] = useState(initialValues.state !== null ? initialValues.state : "");
-    const [description, setDescription] = useState(initialValues.description !== null ? initialValues.description : "");
-    const [name, setName] = useState(initialValues.name !== null ? initialValues.name : "");
-    const [price, setPrice] = useState(initialValues.price !== null ? initialValues.price : "");
-    const [image, setImage] = useState(initialValues.image !== null ? initialValues.image : "");
+    const [country, setCountry] = useState(initialValues?.country !== null ? initialValues?.country : "");
+    const [address, setAddress] = useState(initialValues?.address !== null ? initialValues?.address : "");
+    const [city, setCity] = useState(initialValues?.city !== null ? initialValues?.city : "");
+    const [state, setState] = useState(initialValues?.state !== null ? initialValues?.state : "");
+    const [description, setDescription] = useState(initialValues?.description !== null ? initialValues?.description : "");
+    const [name, setName] = useState(initialValues?.name !== null ? initialValues?.name : "");
+    const [price, setPrice] = useState(initialValues?.price !== null ? initialValues?.price : "");
+    const [image, setImage] = useState(initialValues?.image !== null ? initialValues?.image : "");
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
@@ -166,7 +166,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <label className="longer-description">
                     Competitive pricing can help your listing stand out and rank higher
                     in search results.
-                    <div>$
+                    <div className="price-align">$
                         <input
                             placeholder="Price per night (USD)"
                             type="number"
@@ -187,7 +187,6 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                     placeholder="Preview Image URL"
                                     value={pic.url}
                                     onChange={(e) => setImage(e.target.value)}
-                                    required
                                 />
                             </div>
                         }) :

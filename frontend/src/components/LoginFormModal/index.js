@@ -35,6 +35,7 @@ function LoginFormModal() {
         <>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
+                {Object.values(errors).length > 0 ? <p className="errors">{errors.password}</p> : null}
                 <label>
                     Username or Email
                     <input
@@ -53,7 +54,6 @@ function LoginFormModal() {
                         required
                     />
                 </label>
-                <p className="errors">{errors.password}</p>
                 <button disabled={Object.values(errors).length > 0} type="submit">Log In</button>
             </form>
         </>
