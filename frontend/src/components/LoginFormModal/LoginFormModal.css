@@ -5,6 +5,7 @@ form {
     margin: 10px
 }
 
-form>h1 {
-    text-align: center;
+.login-setup {
+    display: flex;
+    justify-content: center;
 }
