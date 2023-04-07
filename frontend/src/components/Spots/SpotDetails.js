@@ -67,11 +67,11 @@ const SpotDetails = () => {
     }
     return (
         <>
-            {Object.values(spotsInfo).length > 0
+            {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
                     {console.log('this is spotsInfo inside the return', spotsInfo)}
-                    {spotsInfo?.SpotImages.length > 0 ?
+                    {spotsInfo.SpotImages?.length > 0 ?
                         <div className='images-box'>
                             <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
                             {imageManipulator(spotsInfo?.SpotImages)}
