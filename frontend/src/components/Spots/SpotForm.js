@@ -166,7 +166,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <label className="longer-description">
                     Competitive pricing can help your listing stand out and rank higher
                     in search results.
-                    <div>$
+                    <div className="price-align">$
                         <input
                             placeholder="Price per night (USD)"
                             type="number"
@@ -187,7 +187,6 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                     placeholder="Preview Image URL"
                                     value={pic.url}
                                     onChange={(e) => setImage(e.target.value)}
-                                    required
                                 />
                             </div>
                         }) :

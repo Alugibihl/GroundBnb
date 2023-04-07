@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import UsersReviews from './UsersReviews'
 import { getReviewsbyUser } from '../../store/reviewReducer'
 import './Reviews.css'
-import { NavLink } from 'react-router-dom'
 
 const ManageReviews = () => {
     const userReviews = useSelector((state) => state.reviews)

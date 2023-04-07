@@ -20,7 +20,9 @@ const EditSpotForm = () => {
     }
     console.log('this is the current spot', currentSpot, spotId)
     useEffect(() => {
+        console.log('does this see use');
         dispatch(getSpotsDetail(spotId))
+        console.log('does this see use');
     }, [dispatch, spotId])
 
     return (

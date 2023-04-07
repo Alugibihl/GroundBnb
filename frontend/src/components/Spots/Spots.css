@@ -118,3 +118,7 @@
 .spot-host {
     font-size: 12pt;
 }
+
+.price-align {
+    display: flex;
+}

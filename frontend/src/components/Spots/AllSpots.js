@@ -8,10 +8,13 @@ const AllSpots = () => {
     const spotsInfo = useSelector((state) => state.spots)
     const dispatch = useDispatch()
     useEffect(() => {
+        console.log('in get spots use effect')
         dispatch(getSpots())
+        console.log('in get spots use effect2')
     }, [dispatch])
     let spots = Object.values(spotsInfo)
     if (!spots.length) { return null }
+    console.log('***********************', spots, spotsInfo);
     return (
         <div>
             <ul className='spots-board'>
