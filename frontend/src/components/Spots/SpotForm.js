@@ -4,14 +4,14 @@ import { addImage, createSpot, editSpot } from "../../store/spotsReducer";
 import { useHistory } from 'react-router-dom'
 
 function SpotForm({ formType, spotsId, initialValues }) {
-    const [country, setCountry] = useState(initialValues?.country !== null ? initialValues?.country : "");
-    const [address, setAddress] = useState(initialValues?.address !== null ? initialValues?.address : "");
-    const [city, setCity] = useState(initialValues?.city !== null ? initialValues?.city : "");
-    const [state, setState] = useState(initialValues?.state !== null ? initialValues?.state : "");
-    const [description, setDescription] = useState(initialValues?.description !== null ? initialValues?.description : "");
-    const [name, setName] = useState(initialValues?.name !== null ? initialValues?.name : "");
-    const [price, setPrice] = useState(initialValues?.price !== null ? initialValues?.price : "");
-    const [image, setImage] = useState(initialValues?.image !== null ? initialValues?.image : "");
+    const [country, setCountry] = useState(initialValues.country !== null ? initialValues.country : "");
+    const [address, setAddress] = useState(initialValues.address !== null ? initialValues.address : "");
+    const [city, setCity] = useState(initialValues.city !== null ? initialValues.city : "");
+    const [state, setState] = useState(initialValues.state !== null ? initialValues.state : "");
+    const [description, setDescription] = useState(initialValues.description !== null ? initialValues.description : "");
+    const [name, setName] = useState(initialValues.name !== null ? initialValues.name : "");
+    const [price, setPrice] = useState(initialValues.price !== null ? initialValues.price : "");
+    const [image, setImage] = useState(initialValues.image !== null ? initialValues.image : "");
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();

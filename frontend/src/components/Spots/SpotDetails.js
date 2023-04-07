@@ -59,23 +59,26 @@ const SpotDetails = () => {
         }
     }
     let imageManipulator = (imageArr) => {
+        if (!imageArr.length) { return null }
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
             return idx !== 0 && idx <= 4 ? <img key={image.id} className='support-pics' src={image.url} alt='unavailable' /> : null
         })}
-        </div>)
+        </div>)// commenting out lines 73-75 lets the page load, and then bringing them back after render gives me my images
     }
-
     return (
         <>
-            {Object.values(spotsInfo)?.length > 0
+            {Object.values(spotsInfo).length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
-                    <div className='images-box'>
-                        <img className='main-pic' src={spotsInfo.SpotImages[0].url} alt='unavailable' />
-                        {imageManipulator(spotsInfo.SpotImages)}</div>
+                    {console.log('this is spotsInfo inside the return', spotsInfo)}
+                    {spotsInfo?.SpotImages.length > 0 ?
+                        <div className='images-box'>
+                            <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
+                            {imageManipulator(spotsInfo?.SpotImages)}
+                        </div> : null}
                     <div className='bottom-spot'>
                         <div className='spot-host description-box'>
-                            <div className='spot-host'>Hosted by {spotsInfo.Owner.firstName} {spotsInfo.Owner.lastName}</div>
+                            <h3 className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</h3>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
                         <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div> <i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating} </div>
