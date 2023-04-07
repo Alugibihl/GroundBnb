@@ -52,6 +52,7 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
     if (response.ok) {
         const spot = await response.json();
+        console.log('spot in get spots thunk', spot);
         dispatch(add(spot));
     }
 };
@@ -123,19 +124,18 @@ const spotsReducer = (state = initialState, action) => {
             console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
-            // if (!state[action.spot.id])
-            // {
-            const newState = { ...state, [action.spot.id]: action.spot }
+            if (!state[action.spot.id]) {
+                const newState = { ...state, [action.spot.id]: action.spot }
+                return newState
+            }
+            const newState = {
+                ...state,
+                [action.spot.id]: {
+                    ...state[action.spot.id],
+                    ...action.spot
+                }
+            }
             return newState
-        // }
-        // const newState = {
-        //     ...state,
-        //     [action.spot.id]: {
-        //         ...state[action.spot.id],
-        //         ...action.spot
-        //     }
-        // }
-        // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
             return {
