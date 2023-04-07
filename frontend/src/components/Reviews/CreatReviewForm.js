@@ -30,15 +30,6 @@ const CreateReviewForm = () => {
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
 
-    // useEffect(() => {
-    //     const err = {}
-    //     if (!review.length) { err.review = 'Review cannot be empty.' }
-    //     if (stars < 1 || stars > 5) { err.stars = 'Review must be a number 1 through 5' }
-    //     if (user.user.id === spotsId[spotId].ownerId) { err.review = 'You cannot review your own property' }
-    //     setErrors(err)
-    // }, [review, stars, spotId, spotsId, user.user.id])
-
-
     const handleSubmit = async (e) => {
         console.log('handle submit running')
         e.preventDefault();
