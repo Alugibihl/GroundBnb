@@ -93,10 +93,10 @@ const SpotDetails = () => {
                             return <span key={review.id} > <div>{review.User ? review.User.username : user.user.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                 <div>{review.review}</div>
-                                {review.User.id === user.user?.id && user.user?.id !== null ?
+                                {review.User.id === user.user?.id &&
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
-                                    </button></div> : null}
+                                    </button></div>}
                             </span>
                         })}
                     </div>
