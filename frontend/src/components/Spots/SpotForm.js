@@ -185,7 +185,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                 <input
                                     type="url"
                                     placeholder="Preview Image URL"
-                                    value={pic.url}
+                                    value={image}
                                     onChange={(e) => setImage(e.target.value)}
                                 />
                             </div>
