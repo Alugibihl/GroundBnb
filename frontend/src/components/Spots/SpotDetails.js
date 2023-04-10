@@ -89,6 +89,8 @@ const SpotDetails = () => {
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}{reviewMadness(spotsInfo.numReviews)}</div>
+                        {spotsInfo.numReviews > 0 ? <button><OpenModalMenuItem itemText='Post Your Review'
+                            onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}
                         {reviewData.map((review) => {
                             return <span key={review.id} > <div className='reviews-name'>{review.User ? review.User.firstName : user.user.firstName}</div>
                                 <div className='reviews'> <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
@@ -99,8 +101,7 @@ const SpotDetails = () => {
                                     </button></div>}
                             </span>
                         })}
-                        {spotsInfo.numReviews > 0 ? <button><OpenModalMenuItem itemText='Post Your Review'
-                            onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}
+
                     </div>
                 </div>
                 : (<div>Loading</div>)

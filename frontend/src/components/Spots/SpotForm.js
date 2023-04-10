@@ -15,7 +15,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
-    // const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
+    const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
 
     useEffect(() => {
         setCountry(initialValues?.country ? initialValues?.country : "");
@@ -182,7 +182,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <label className="longer-description">
                     Submit a link to a photo to publish a spot
                     {formType === "Edit Spot" ?
-                        image?.map((pic) => {
+                        images?.map((pic) => {
                             return <div key={pic.id} className="edit-images" ><img src={pic.url} alt='unavailable' />
                                 <input
                                     type="url"

@@ -61,7 +61,7 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     }
 };
 export const createSpot = (data) => async (dispatch) => {
-    console.log('create spot thunk running')
+    console.log('create spot thunk running', data)
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
@@ -86,7 +86,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 }
 export const addImage = (data) => async (dispatch) => {
     let { spotId, image } = data
-    console.log('add image thunk running', 'spotId', data);
+    console.log('add image thunk running', 'spotId', data, image);
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
         headers: {
