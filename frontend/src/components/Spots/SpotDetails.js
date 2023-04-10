@@ -82,13 +82,13 @@ const SpotDetails = () => {
                         <div className='spot-host description-box'>
                             <h3 className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</h3>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
-                        <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div> <i className="fa-solid fa-star">
-                        </i>{spotsInfo.avgStarRating} </div>
+                        <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div>
+                            <i className="fa-solid fa-star"></i>{spotsInfo.avgStarRating?.toFixed(1)} </div>
                             <div> {spotsInfo.numReviews === 1 ? "1 Review" : spotsInfo.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
                             <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
                     <div className='reviews-container'>
                         <div><i className="fa-solid fa-star">
-                        </i>{spotsInfo.avgStarRating}{reviewMadness(spotsInfo.numReviews)}</div>
+                        </i>{spotsInfo.avgStarRating?.toFixed(1)}{reviewMadness(spotsInfo.numReviews)}</div>
                         {reviewData.map((review) => {
                             return <span key={review.id} > <div>{review.User ? review.User.username : user.user.username}</div>
                                 <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>

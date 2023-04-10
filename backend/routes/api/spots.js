@@ -64,9 +64,6 @@ const validateReview = [
     handleValidationErrors
 ]
 
-
-// to make a route, add the files above and at the bottom
-// add to index at the top and as middleware
 router.get('/', async (req, res) => {
     let { page, size, maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query
     maxLat = parseInt(maxLat)
@@ -205,7 +202,8 @@ router.get('/', async (req, res) => {
         })
         let spotAvgReviews = reviewsBySpot.toJSON().avgRating
         if (spotAvgReviews) {
-            let spotAvgReview = spotAvgReviews.toFixed(1)
+            console.log('here i am, once again', typeof spotAvgReviews, spotAvgReviews)
+            let spotAvgReview = spotAvgReviews
             spot.avgRating = spotAvgReview
         } else {
             spot.avgRating = "New"
@@ -228,10 +226,7 @@ router.get('/', async (req, res) => {
 
 
 router.post("/", requireAuth, validateSpot, async (req, res) => {
-
-    // const { id } = req.params.id
     const ownerId = req.user.id
-
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
 
@@ -262,7 +257,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
         let spotAvgReviews = reviewsBySpot.toJSON().avgRating
         if (spotAvgReviews) {
-            let spotAvgReview = spotAvgReviews.toFixed(1)
+            let spotAvgReview = spotAvgReviews
             spot.avgRating = spotAvgReview
         } else {
             spot.avgRating = "New"
@@ -324,7 +319,7 @@ router.get('/:spotId', async (req, res) => {
         spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
         let spotAvgReviews = reviewsBySpot.toJSON().avgRating
         if (spotAvgReviews) {
-            let spotAvgReview = spotAvgReviews.toFixed(1)
+            let spotAvgReview = spotAvgReviews
             spot.avgStarRating = spotAvgReview
         } else {
             spot.avgStarRating = "New"
