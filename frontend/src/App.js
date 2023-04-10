@@ -28,9 +28,6 @@ function App() {
           <Route exact path="/signup">
             <SignupFormModal />
           </Route>
-          <Route path={'/'} exact>
-            <AllSpots />
-          </Route>
           <Route exact path={'/reviews/current'}>
             <ManageReviews />
           </Route>
@@ -49,7 +46,9 @@ function App() {
           <Route exact path={'/spots/:spotId'}>
             <SpotDetails />
           </Route>
-
+          <Route exact path={'/'} >
+            <AllSpots />
+          </Route>
         </Switch>
       )
       }

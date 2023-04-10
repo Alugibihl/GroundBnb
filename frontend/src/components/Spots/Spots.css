@@ -57,6 +57,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    width: inherit;
 }
 
 .reserve-box {
@@ -107,18 +108,47 @@
 }
 
 .description-box {
-    font-size: 12pt;
+    font-size: 14pt;
+    box-sizing: border-box;
 }
 
 .spot-host .description-box {
     width: 95%;
-    margin-left: 10pt;
+    margin-left: 12pt;
 }
 
 .spot-host {
-    font-size: 12pt;
+    font-size: 14pt;
 }
 
 .price-align {
     display: flex;
+}
+
+.reviews {
+    font-size: 12pt;
+    margin-left: 5pt;
+}
+
+.reviews-name {
+    font-weight: 600;
+}
+
+.form-change {
+    display: flex;
+    gap: 1%;
+    width: inherit;
+}
+
+.city {
+    width: 70%;
+}
+
+.state {
+    width: fit-content;
+}
+
+.comma {
+    position: relative;
+    top: 25px;
 }

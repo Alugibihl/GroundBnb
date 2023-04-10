@@ -20,7 +20,7 @@ const ManageSpots = () => {
             <button className="title-page-position"><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink></button>
             <ul className='spots-board'>
                 {spots !== null ? spots.map(spot => (
-                    <UsersSpots spot={spot} key={spot.id} />
+                    <UsersSpots key={spot.id} spot={spot} />
                 )) : null
                 }
             </ul>

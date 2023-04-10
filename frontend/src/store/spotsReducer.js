@@ -131,7 +131,7 @@ const spotsReducer = (state = initialState, action) => {
             // if (!state[action.spot.id]) {
             const newState = { ...state, [action.spot.id]: action.spot }
             return newState
-        // }
+        //}
         // const newState = {
         //     ...state,
         //     [action.spot.id]: {
@@ -143,13 +143,12 @@ const spotsReducer = (state = initialState, action) => {
         // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
-            return {
+            const newerState = {
                 ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot.SpotImages
-                }
+                [action.spot.id]: action.spot.spotImages
             }
+            console.log('this is newerState', newerState)
+            return newerState
         case EDIT:
             const editedState = { ...state }
             editedState[action.spot.id] = action.spot

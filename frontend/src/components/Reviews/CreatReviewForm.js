@@ -4,6 +4,8 @@ import { createReview } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
 import './Reviews.css'
 import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+
 const CreateReviewForm = () => {
     const user = useSelector((state) => state.session)
     const spots = useSelector((state) => state.spots)
@@ -14,6 +16,7 @@ const CreateReviewForm = () => {
     const [showMenu, setShowMenu] = useState(false);
     const spotsId = Object.values(spots)
     const history = useHistory()
+    const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spotsId[0].id
     console.log('spotsId', spotsId, 'spotId', spotId, 'user', user, 'this', spotsId[spotId])
@@ -31,18 +34,18 @@ const CreateReviewForm = () => {
     const closeMenu = () => setShowMenu(false);
 
     const handleSubmit = async (e) => {
-        console.log('handle submit running')
         e.preventDefault();
-        if (!review.length) { errors.review = 'Review cannot be empty.' }
-        if (stars < 1 || stars > 5) { errors.stars = 'Review must be a number 1 through 5' }
-        if (user.user.id === spotsId[spotId].ownerId) { errors.review = 'You cannot review your own property' }
+        console.log('handle submit running')
         const reviewDetails = { spotId, review, stars }
-        console.log(reviewDetails)
-        const createdReview = await dispatch(createReview(reviewDetails))
-        if (createdReview)
-            setErrors({})
-        closeMenu()
-        history.push('/reviews/current')
+
+        return dispatch(createReview(reviewDetails))
+        .then(closeModal)
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                setErrors(data.errors);
+            }
+        });
 
     }
     const onChange = (number) => {
