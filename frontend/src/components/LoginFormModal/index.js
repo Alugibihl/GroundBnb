@@ -13,10 +13,6 @@ function LoginFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    useEffect(() => {
-        console.log('errors', errors.credential)
-    }, [errors])
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
@@ -25,7 +21,7 @@ function LoginFormModal() {
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
-                    setErrors(errors.credential = data.errors)
+                    setErrors(data.errors);
                 }
             });
     };
