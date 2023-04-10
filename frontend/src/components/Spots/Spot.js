@@ -9,8 +9,9 @@ const SingleSpot = ({ spot }) => {
                 <NavLink to={`/spots/${spot.id}`}>
                     <img alt={spot.name} src={spot.previewImage}></img>
                     <div className='aligned'><div className='card-location'>{spot.city}, {spot.state}</div>
-                        <div className='average-rating'><i className="fa-solid fa-star"></i>{spot.avgRating}</div><div>
-                        </div>  </div> <div className='price'>${spot.price}.00 night</div>
+                        <div className='average-rating'>
+                            <i className="fa-solid fa-star"></i>{parseInt(spot.avgRating).toFixed(1)}</div>
+                    </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
             </nav>
         </>
