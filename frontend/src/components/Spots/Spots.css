@@ -152,3 +152,7 @@
     position: relative;
     top: 25px;
 }
+
+.line {
+    border-bottom: 2px lightgray solid;
+}

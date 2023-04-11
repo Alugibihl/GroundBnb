@@ -138,6 +138,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     </label></div>
                 {errors.city && <p className="errors">{errors.city}</p>}
                 {errors.state && <p className="errors">{errors.state}</p>}
+                <p className="line"></p>
                 <h2>Describe your place to guests</h2>
                 <label className="longer-description">
                     Mention the best features of your space, any special amentities like
@@ -151,6 +152,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     />
                 </label>
                 {errors.description && <p className="errors">{errors.description}</p>}
+                <p className="line"></p>
                 <h2>Create a title for your spot</h2>
                 <label className="longer-description">
                     Catch guests' attention with a spot title that highlights what makes
@@ -164,6 +166,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     />
                 </label>
                 {errors.name && <p className="errors">{errors.name}</p>}
+                <p className="line"></p>
                 <h2>Set a base price for your spot</h2>
                 <label className="longer-description">
                     Competitive pricing can help your listing stand out and rank higher
@@ -178,6 +181,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         /></div>
                 </label>
                 {errors.price && <p className="errors">{errors.price}</p>}
+                <p className="line"></p>
                 <h2>Liven up your spot with photos</h2>
                 <label className="longer-description">
                     Submit a link to a photo to publish a spot
@@ -206,6 +210,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={image}
                         onChange={(e) => setImage(e.target.value)} />}
                 </label>
+                <p className="line"></p>
                 {errors.image && <p className="errors">{errors.image}</p>}
                 <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0} type="submit">Create Spot</button>
                 <button className={formType !== "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0} type="submit">Update Spot</button>

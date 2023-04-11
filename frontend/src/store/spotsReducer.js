@@ -61,7 +61,7 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     }
 };
 export const createSpot = (data) => async (dispatch) => {
-    console.log('create spot thunk running', data)
+    console.log('create spot thunk running')
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
@@ -86,7 +86,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 }
 export const addImage = (data) => async (dispatch) => {
     let { spotId, image } = data
-    console.log('add image thunk running', 'spotId', data, image);
+    console.log('add image thunk running', 'spotId', data);
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
         headers: {
@@ -131,8 +131,7 @@ const spotsReducer = (state = initialState, action) => {
             // if (!state[action.spot.id]) {
             const newState = { ...state, [action.spot.id]: action.spot }
             return newState
-        //}
-        // const newState = {
+        //} const newState = {
         //     ...state,
         //     [action.spot.id]: {
         //         ...state[action.spot.id],
@@ -143,12 +142,13 @@ const spotsReducer = (state = initialState, action) => {
         // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
-            const newerState = {
+            return {
                 ...state,
-                [action.spot.id]: action.spot.spotImages
+                [action.spot.id]: {
+                    ...state[action.spot.id],
+                    ...action.spot.SpotImages
+                }
             }
-            console.log('this is newerState', newerState)
-            return newerState
         case EDIT:
             const editedState = { ...state }
             editedState[action.spot.id] = action.spot
