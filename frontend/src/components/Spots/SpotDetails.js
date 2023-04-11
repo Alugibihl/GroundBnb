@@ -12,11 +12,11 @@ const SpotDetails = () => {
     const dispatch = useDispatch()
     const spotsInfo = useSelector((state) => state.spots[spotId])
     const spotReviews = useSelector((state) => state.reviews)
-    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews);
     const user = useSelector((state) => state.session)
     const ulRef = useRef();
     const reviewData = Object.values(spotReviews)
     const [showMenu, setShowMenu] = useState(false);
+    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews, "user", user);
     useEffect(() => {
         console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
@@ -83,22 +83,22 @@ const SpotDetails = () => {
                             <h3 className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</h3>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
                         <div className='reserve-box'> <div className='top-row-box'>${spotsInfo.price}.00 night <div>
-                            <i className="fa-solid fa-star"></i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)} </div>
+                            <i className="fa-solid fa-star"></i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)} </div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>
                             <div> {spotsInfo.numReviews === 1 ? "1 Review" : spotsInfo.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
                             <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
-                    <div className='reviews-container'>
-                        <div><i className="fa-solid fa-star">
-                        </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}{reviewMadness(spotsInfo.numReviews)}</div>
-                        {spotsInfo.numReviews > 0 ? <button><OpenModalMenuItem itemText='Post Your Review'
-                            onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}
+                    <div className='reviews-container'><div className='review-organizer'>
+                        <div className={spotsInfo.numReviews < 1 ? 'review-organizer' : 'review-line'}><div><i className="fa-solid fa-star">
+                        </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}</div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>{reviewMadness(spotsInfo.numReviews)}</div>
+                        {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user?.user?.id ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
+                            onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}</div>
                         {reviewData.map((review) => {
                             return <span key={review.id} > <div className='reviews-name'>{review.User ? review.User.firstName : user.user.firstName}</div>
                                 <div className='reviews'> <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                     <div>{review.review}</div></div>
-                                {review.User.id === user.user?.id && user.user?.id &&
+                                {review.User?.id === user?.user?.id ?
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
-                                    </button></div>}
+                                    </button></div> : null}
                             </span>
                         })}
 

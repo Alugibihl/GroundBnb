@@ -48,6 +48,36 @@ module.exports = {
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fa3%2Fd7%2F3b%2Fa3d73b45c88666298d8b99c011ab42e9.jpg&f=1&nofb=1&ipt=ea1976fb495e74a990ea18abe84e7b57a8b82db1cb74d8bdf2af9e75364cb5b6&ipo=images',
         preview: false
       },
+      {
+        spotId: 5,
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2Fj23ikh09iddz.jpg&f=1&nofb=1&ipt=76650cda2cdc84d8456f60846bd3d87b5199a5785e93ede4928f2e7892acceac&ipo=images',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FdOeTZfOF8K8%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=baa0780b579efa99caf52ae4cc856e3e7ed8da776b4a1084bab2700c99800f66&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4d%2Fc1%2F07%2F4dc1072f958c790d213f77d8d7d86d04.jpg&f=1&nofb=1&ipt=46cd9e7845daa26f6439a2132e0bd1b3c238ed6c368eabef311d31710c9b4b16&ipo=images',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlyinyourstate.com%2Fwp-content%2Fuploads%2F2018%2F01%2FScreen-Shot-2018-01-22-at-4.24.06-PM-700x415.png&f=1&nofb=1&ipt=cec2d9bbdef0a729bcb8e15b14ca99d59420e6e4f4313f7125231b565981e253&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2014%2F08%2F10%2Frealestate%2F10dealcover%2F10dealcover-master675-v2.jpg&f=1&nofb=1&ipt=907ff7d39721f3ef52886fc888bbab4b0f43eeddd37e37c43e5b81f7267cdd01&ipo=images',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.denverpost.com%2Fwp-content%2Fuploads%2F2016%2F05%2Fkentucky-cave.jpg%3Fw%3D660&f=1&nofb=1&ipt=f557c3b85c9b7e0d6da98ba9cc8bbda96d16846546b9af248060d86411f13936&ipo=images',
+        preview: false
+      },
     ], {})
   },
 

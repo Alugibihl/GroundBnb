@@ -196,13 +196,34 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                 />
                             </div>
                         }) :
-                        <input
-                            type="url"
-                            placeholder="Preview Image URL"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
-                            required
-                        />
+                        <> <label>
+                            <input
+                                type="url"
+                                placeholder="Preview Image URL"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                                required
+                            /></label>
+                            <label>
+                                <input
+                                    type="url"
+                                    placeholder="Image URL"
+                                /></label>
+                            <label>
+                                <input
+                                    type="url"
+                                    placeholder="Image URL"
+                                /></label>
+                            <label>
+                                <input
+                                    type="url"
+                                    placeholder="Image URL"
+                                /></label>
+                            <label>
+                                <input
+                                    type="url"
+                                    placeholder="Image URL"
+                                /></label> </>
                     }
                     {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
                         type="url"

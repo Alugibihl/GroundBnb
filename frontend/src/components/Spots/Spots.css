@@ -5,6 +5,7 @@
 .spot-card {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .spot-card img {
@@ -155,4 +156,25 @@
 
 .line {
     border-bottom: 2px lightgray solid;
+}
+
+.review-line {
+    display: flex;
+    gap: 1%;
+}
+
+.dot {
+    font-size: 30pt;
+    position: relative;
+    bottom: 25px;
+}
+
+.review-organizer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.review-organizer button {
+    width: 25%;
 }

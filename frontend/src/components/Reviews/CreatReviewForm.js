@@ -72,7 +72,7 @@ const CreateReviewForm = () => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={review.length > 10 && stars > 0 ? false : true} type="submit">Submit Your Review</button>
+                <button disabled={review.length >= 10 && stars > 0 ? false : true} type="submit">Submit Your Review</button>
             </form>
         </div>
     )
