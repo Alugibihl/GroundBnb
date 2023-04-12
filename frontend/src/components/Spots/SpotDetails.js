@@ -28,7 +28,6 @@ const SpotDetails = () => {
 
     useEffect(() => {
         if (!showMenu) return;
-
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
                 setShowMenu(false);
@@ -38,7 +37,6 @@ const SpotDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
-
     let date = (time) => {
         let updated = new Date(time)
         return updated
@@ -59,7 +57,6 @@ const SpotDetails = () => {
         }
     }
     if (spotsInfo === undefined) { return null }
-
     let imageManipulator = (imageArr) => {
         if (!imageArr.length) { return null }
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
@@ -73,7 +70,8 @@ const SpotDetails = () => {
             {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
-                    {spotsInfo.SpotImages?.length > 0 ?
+                    {console.log('this is spotsInfo inside the return', spotsInfo)}
+                    {spotsInfo?.SpotImages?.length > 0 ?
                         <div className='images-box'>
                             <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
                             {imageManipulator(spotsInfo?.SpotImages)}
@@ -101,13 +99,11 @@ const SpotDetails = () => {
                                     </button></div> : null}
                             </span>
                         })}
-
                     </div>
                 </div>
                 : (<div>Loading</div>)
             }
             {console.log('spot detail end jsx running')}
-
         </>
     )
 }

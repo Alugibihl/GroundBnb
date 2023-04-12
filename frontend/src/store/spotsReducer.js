@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = "spots/LOAD";
 const ADD = 'spots/ADD';
 const EDIT = 'spots/EDIT'
-const ADD_IMAGE = 'spots/ADD_IMAGE'
+//const ADD_IMAGE = 'spots/ADD_IMAGE'
 const PART_LOAD = 'spots/PART_LOAD'
 const REMOVE_SPOT = 'spots/REMOVE_SPOT'
 const CLEANER = 'spots/CLEANUP'
@@ -24,10 +24,11 @@ const removeSpot = (spotId) => ({
     type: REMOVE_SPOT,
     spotId
 })
-const addToSpot = (spotImages) => ({
-    type: ADD_IMAGE,
-    spot: spotImages
-})
+// const addToSpot = (spotImage, spotId) => ({
+//     type: ADD_IMAGE,
+//     spotImage,
+//     spotId
+// })
 const edit = (spot) => ({
     type: EDIT,
     spot: spot
@@ -96,10 +97,12 @@ export const addImage = (data) => async (dispatch) => {
             },
             body: JSON.stringify({ url: image.url, previewImage: image.previewImage })
         })
+        if (!response.ok) return
         const images = await response.json()
         console.log('this is returned image in add image thunk!!!!!', images);
-        dispatch(addToSpot(images))
     }
+    dispatch(getSpotsDetail(spotId))
+    return true
 }
 export const editSpot = (spotToUpdate) => async (dispatch) => {
     let { spotAspects, spotsId } = spotToUpdate
@@ -130,29 +133,23 @@ const spotsReducer = (state = initialState, action) => {
             console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
-            // if (!state[action.spot.id]) {
             const newState = { ...state, [action.spot.id]: action.spot }
             return newState
-        //} const newState = {
-        //     ...state,
-        //     [action.spot.id]: {
-        //         ...state[action.spot.id],
-        //         ...action.spot
-        //     }
+        // case ADD_IMAGE:
+        //     console.log('add image running in spot reducer', action)
+        //     const newerState = { ...state }
+        //     const spot = { ...state[action.spotId] }
+        //     console.log('this is spot in add image', spot);
+        //     const spotImageArr = [...spot.SpotImages]
+        //     spotImageArr.push(action.spotImage)
+        //     spot.SpotImages = spotImageArr
+        //     newerState[spot.id] = spot
+        // newerState[action.spot.id] = {
+        //     ...state[action.spot.id],
+        //     ...action.spot.SpotImages
         // }
-        // console.log('HEY !! ITS RUNNING !!! ITS ACTUALLY RUNNIONG!!!!!!!!!!S')
-        // return newState
-        case ADD_IMAGE:
-            console.log('add image running in spot reducer', action)
-            const newerState = {
-                ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot.SpotImages
-                }
-            }
-            console.log('this is the add image newer state', newerState);
-            return newerState
+        // console.log('this is the add image newer state', newerState);
+        // return newerState
         case EDIT:
             const editedState = { ...state }
             editedState[action.spot.id] = action.spot

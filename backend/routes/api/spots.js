@@ -325,7 +325,6 @@ router.get('/:spotId', async (req, res) => {
         }
         spot.Owner = spot.User
         delete spot.User
-        // delete spot.SpotImages
         delete spot.Reviews
     }
     if (!spotsList.length) {
@@ -363,7 +362,6 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const updated = await Spot.findByPk(req.params.spotId)
-
     if (!updated) {
         return res.status(404).json({
             "message": "Spot couldn't be found",

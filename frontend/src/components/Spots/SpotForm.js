@@ -11,7 +11,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [description, setDescription] = useState(initialValues?.description !== null ? initialValues?.description : "");
     const [name, setName] = useState(initialValues?.name !== null ? initialValues?.name : "");
     const [price, setPrice] = useState(initialValues?.price !== null ? initialValues?.price : "");
-    const [image, setImage] = useState(initialValues?.image !== null ? initialValues?.image : "");
+    // const [image, setImage] = useState(initialValues?.image !== null ? initialValues?.image : "");
     const [image1, setImage1] = useState("");
     const [image2, setImage2] = useState("");
     const [image3, setImage3] = useState("");
@@ -33,7 +33,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
         setDescription(initialValues?.description ? initialValues?.description : "");
         setName(initialValues?.name ? initialValues?.name : "");
         setPrice(initialValues?.price ? initialValues?.price : "");
-        setImage(initialValues?.image ? initialValues?.image : "");
+        // setImage(initialValues?.image ? initialValues?.image : "");
     }, [initialValues]);
 
     // console.log('incoming values', initialValues);
@@ -45,8 +45,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
         setDescription(description)
         setName(name)
         setPrice(price)
-        setImage(image)
-    }, [country, address, city, state, description, name, price, image])
+        //  setImage(image)
+    }, [country, address, city, state, description, name, price])
 
     const handleSubmit = async (e) => {
         console.log('handle submit running')
@@ -89,7 +89,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
             const spotImages = { imagehold, spotId: createdSpot.id }
             console.log('spot images', spotImages);
             if (createdSpot) {
-                return dispatch(addImage(spotImages), history.push(`/spots/${createdSpot.id}`))
+                const newImg = await dispatch(addImage(spotImages))
+                if (newImg) history.push(`/spots/${createdSpot.id}`)
             }
         }
     }
@@ -204,19 +205,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                     type="url"
                                     placeholder="Preview Image URL"
                                     value={pic.url}
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => setImage1(e.target.value)}
                                 />
                             </div>
                         }) :
                         <>
-                            {/* <label>
-                            <input
-                                type="url"
-                                placeholder="Preview Image URL"
-                                value={image}
-                                onChange={(e) => setImage(e.target.value)}
-                                required
-                            /></label> */}
                             <label>
                                 <input
                                     type="url"
@@ -258,9 +251,9 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     }
                     {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
                         type="url"
-                        placeholder="Preview Image URL"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)} />}
+                        placeholder="Image URL"
+                        value={image1}
+                        onChange={(e) => setImage1(e.target.value)} />}
                 </label>
                 <p className="line"></p>
                 {errors.image && <p className="errors">{errors.image}</p>}
