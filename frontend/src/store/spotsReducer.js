@@ -85,19 +85,21 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     return spotId
 }
 export const addImage = (data) => async (dispatch) => {
-    let { spotId, image } = data
-    console.log('add image thunk running', 'spotId', data);
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: image })
-    })
-    const images = await response.json()
-    console.log('this is returned image in add image thunk', images);
-    dispatch(addToSpot(images))
-    return images
+    let { spotId, imagehold } = data
+    for (let i = 0; i < imagehold.length; ++i) {
+        let image = imagehold[i]
+        console.log('add image thunk running', image, image.url, image.previewImage, 'spotId', data);
+        const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ url: image.url, previewImage: image.previewImage })
+        })
+        const images = await response.json()
+        console.log('this is returned image in add image thunk!!!!!', images);
+        dispatch(addToSpot(images))
+    }
 }
 export const editSpot = (spotToUpdate) => async (dispatch) => {
     let { spotAspects, spotsId } = spotToUpdate
@@ -142,13 +144,15 @@ const spotsReducer = (state = initialState, action) => {
         // return newState
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
-            return {
+            const newerState = {
                 ...state,
                 [action.spot.id]: {
                     ...state[action.spot.id],
                     ...action.spot.SpotImages
                 }
             }
+            console.log('this is the add image newer state', newerState);
+            return newerState
         case EDIT:
             const editedState = { ...state }
             editedState[action.spot.id] = action.spot
