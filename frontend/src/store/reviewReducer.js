@@ -82,7 +82,7 @@ const reviewReducer = (state = initialState, action) => {
             return removedState
         }
         case CLEANER:
-            return initialState
+            return { ...initialState }
         default:
             return state
     }

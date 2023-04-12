@@ -4,3 +4,8 @@ form {
     flex-direction: column;
     margin: 10px
 }
+
+.login-setup {
+    display: flex;
+    justify-content: center;
+}

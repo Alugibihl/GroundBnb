@@ -16,7 +16,7 @@ const EditSpotForm = () => {
         state: currentSpot.state,
         description: currentSpot.description,
         name: currentSpot.name,
-        price: currentSpot.price
+        price: currentSpot.price,
     }
     console.log('this is the current spot', currentSpot, spotId)
     useEffect(() => {
