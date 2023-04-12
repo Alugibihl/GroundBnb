@@ -54,7 +54,43 @@ module.exports = {
         lng: -84.105225,
         name: 'Vibe Vacay',
         description: "A coffee lover's dream getaway",
-        price: 950.00
+        price: 450.00
+      },
+      {
+        ownerId: 2,
+        address: '3451 S Malibu Terrace',
+        city: 'San Diego',
+        state: 'California',
+        country: 'United States',
+        lat: null,
+        lng: null,
+        name: 'Califordya',
+        description: "Welcome to what may be the most affordable option here in sunny California, step away from electronics, and cleanse your mind and heart. (No Phone Reception)",
+        price: 150.00
+      },
+      {
+        ownerId: 3,
+        address: '123 2nd st',
+        city: 'New Bremen',
+        state: 'Oregon',
+        country: 'United States',
+        lat: null,
+        lng: null,
+        name: 'Stay Weird New Bremen',
+        description: "We were the orginal Oregon City to take ok the moniker stay weird, now you can be one of the lucky people who get to see why.",
+        price: 350.00
+      },
+      {
+        ownerId: 1,
+        address: '1833 East Merry St',
+        city: 'Richmondish',
+        state: 'Kentucky',
+        country: 'United States',
+        lat: null,
+        lng: null,
+        name: 'Kentucky Derby',
+        description: "Run with the horses, make some moonshine, do backflips with racoons, the possibilities are endless if you don't get caught. (Drive past the no tresspassing signs.)",
+        price: 50.00
       },
     ], {})
   },

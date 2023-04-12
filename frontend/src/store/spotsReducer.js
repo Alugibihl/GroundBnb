@@ -131,8 +131,7 @@ const spotsReducer = (state = initialState, action) => {
             // if (!state[action.spot.id]) {
             const newState = { ...state, [action.spot.id]: action.spot }
             return newState
-        // }
-        // const newState = {
+        //} const newState = {
         //     ...state,
         //     [action.spot.id]: {
         //         ...state[action.spot.id],

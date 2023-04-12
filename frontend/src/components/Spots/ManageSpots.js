@@ -13,15 +13,13 @@ const ManageSpots = () => {
         dispatch(getUserSpots())
     }, [dispatch])
     let spots = Object.values(userSpots)
-    if (!spots.length) { return null }
     return (
         <div>
-            <h4 className="title-page-position">Manage Your Rentals</h4>
-            <button className="title-page-position"><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink></button>
+            <h4 className="title-page-position">Manage Spots</h4>
             <ul className='spots-board'>
-                {spots !== null ? spots.map(spot => (
-                    <UsersSpots spot={spot} key={spot.id} />
-                )) : null
+                {spots?.length > 0 ? spots.map(spot => (
+                    <UsersSpots key={spot.id} spot={spot} />
+                )) : <button className="title-page-position"><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink></button>
                 }
             </ul>
         </div>

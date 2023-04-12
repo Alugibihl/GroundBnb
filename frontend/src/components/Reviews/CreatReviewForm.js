@@ -4,6 +4,8 @@ import { createReview } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
 import './Reviews.css'
 import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+
 const CreateReviewForm = () => {
     const user = useSelector((state) => state.session)
     const spots = useSelector((state) => state.spots)
@@ -14,9 +16,11 @@ const CreateReviewForm = () => {
     const [showMenu, setShowMenu] = useState(false);
     const spotsId = Object.values(spots)
     const history = useHistory()
+    const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spotsId[0].id
     console.log('spotsId', spotsId, 'spotId', spotId, 'user', user, 'this', spotsId[spotId])
+
     useEffect(() => {
         if (!showMenu) return;
 
@@ -31,19 +35,18 @@ const CreateReviewForm = () => {
     const closeMenu = () => setShowMenu(false);
 
     const handleSubmit = async (e) => {
-        console.log('handle submit running')
         e.preventDefault();
-        if (!review.length) { errors.review = 'Review cannot be empty.' }
-        if (stars < 1 || stars > 5) { errors.stars = 'Review must be a number 1 through 5' }
-        if (user.user.id === spotsId[spotId].ownerId) { errors.review = 'You cannot review your own property' }
+        console.log('handle submit running')
         const reviewDetails = { spotId, review, stars }
-        console.log(reviewDetails)
-        const createdReview = await dispatch(createReview(reviewDetails))
-        if (createdReview)
-            setErrors({})
-        closeMenu()
-        history.push('/reviews/current')
 
+        return dispatch(createReview(reviewDetails))
+            .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    setErrors(data.errors);
+                }
+            });
     }
     const onChange = (number) => {
         setStars(parseInt(number));
@@ -54,7 +57,7 @@ const CreateReviewForm = () => {
             <form onSubmit={handleSubmit}>
                 {errors.review && <p className="errors">{errors.review}</p>}
                 {errors.stars && <p className="errors">{errors.star}</p>}
-
+                {errors.user && <p className="errors">{errors.user}</p>}
                 <label>
                     <input
                         type="textarea"
@@ -69,7 +72,7 @@ const CreateReviewForm = () => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={Object.values(errors).length > 0} type="submit">Submit Your Review</button>
+                <button disabled={review.length >= 10 && stars > 0 ? false : true} type="submit">Submit Your Review</button>
             </form>
         </div>
     )

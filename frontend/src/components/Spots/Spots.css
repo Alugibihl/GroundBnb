@@ -5,6 +5,7 @@
 .spot-card {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .spot-card img {
@@ -57,6 +58,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    width: inherit;
 }
 
 .reserve-box {
@@ -107,18 +109,72 @@
 }
 
 .description-box {
-    font-size: 12pt;
+    font-size: 14pt;
+    box-sizing: border-box;
 }
 
 .spot-host .description-box {
     width: 95%;
-    margin-left: 10pt;
+    margin-left: 12pt;
 }
 
 .spot-host {
-    font-size: 12pt;
+    font-size: 14pt;
 }
 
 .price-align {
     display: flex;
+}
+
+.reviews {
+    font-size: 12pt;
+    margin-left: 5pt;
+}
+
+.reviews-name {
+    font-weight: 600;
+}
+
+.form-change {
+    display: flex;
+    gap: 1%;
+    width: inherit;
+}
+
+.city {
+    width: 70%;
+}
+
+.state {
+    width: fit-content;
+}
+
+.comma {
+    position: relative;
+    top: 25px;
+}
+
+.line {
+    border-bottom: 2px lightgray solid;
+}
+
+.review-line {
+    display: flex;
+    gap: 1%;
+}
+
+.dot {
+    font-size: 30pt;
+    position: relative;
+    bottom: 25px;
+}
+
+.review-organizer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.review-organizer button {
+    width: 25%;
 }

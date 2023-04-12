@@ -41,6 +41,7 @@ const validateSpot = [
     check('description')
         .exists({ checkFalsy: true })
         .notEmpty()
+        .isLength({ min: 30 })
         .withMessage("Description is required"),
     check('price')
         .exists({ checkFalsy: true })
@@ -202,9 +203,7 @@ router.get('/', async (req, res) => {
         })
         let spotAvgReviews = reviewsBySpot.toJSON().avgRating
         if (spotAvgReviews) {
-            console.log('here i am, once again', typeof spotAvgReviews, spotAvgReviews)
-            let spotAvgReview = spotAvgReviews
-            spot.avgRating = spotAvgReview
+            spot.avgRating = spotAvgReviews
         } else {
             spot.avgRating = "New"
         }
@@ -274,11 +273,11 @@ router.get('/current', requireAuth, async (req, res) => {
         delete spot.SpotImages
         delete spot.Reviews
     }
-    if (!spotsList.length) {
-        return res.status(404).json({
-            message: "Spot couldn't be found",
-        })
-    }
+    // if (!spotsList.length) {
+    //     return res.status(404).json({
+    //         message: "Spot couldn't be found",
+    //     })
+    // }
     res.json({ "spots": spotsList })
 })
 
