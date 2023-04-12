@@ -38,7 +38,6 @@ const CreateReviewForm = () => {
         e.preventDefault();
         console.log('handle submit running')
         const reviewDetails = { spotId, review, stars }
-
         return dispatch(createReview(reviewDetails))
             .then(closeModal)
             .catch(async (res) => {
