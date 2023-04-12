@@ -45,8 +45,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
         let err = {}
         if (country !== 'United States' && country !== 'united states') { err.country = "We are only able to provide our services to the United States at this time" }
         if (address.length < 4) { err.address = "Please provide a valid Address." }
-        if (city.length < 2) { err.city = "Please enter a valid City." }
-        if (state.length < 2) { err.state = "Please Enter a valid State." }
+        if (city.length < 2 || city.length > 15) { err.city = "Please enter a valid City." }
+        if (state.length < 2 || state.length > 14) { err.state = "Please Enter a valid State." }
         if (description.length < 30) { err.description = 'Please write a description atleast 30 characters long.' }
         if (!name.length) { err.name = 'Title is Required' }
         if (price < 1 || price > 10000) { err.price = 'Price must be between $1 and $10000 nightly' }
