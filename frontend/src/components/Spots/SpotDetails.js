@@ -16,7 +16,7 @@ const SpotDetails = () => {
     const ulRef = useRef();
     const reviewData = Object.values(spotReviews)
     const [showMenu, setShowMenu] = useState(false);
-    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews, "user", user);
+    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews, 'here is review data', reviewData, "user", user);
     useEffect(() => {
         console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
@@ -67,6 +67,7 @@ const SpotDetails = () => {
         })}
         </div>)
     }
+
     return (
         <>
             { }
@@ -89,13 +90,13 @@ const SpotDetails = () => {
                     <div className='reviews-container'><div className='review-organizer'>
                         <div className={spotsInfo.numReviews < 1 ? 'review-organizer' : 'review-line'}><div><i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}</div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>{reviewMadness(spotsInfo.numReviews)}</div>
-                        {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user?.user?.id ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
+                        {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user.user?.id || reviewData.find((review) => review.userId === user.user?.id) ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
                             onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}</div>
                         {reviewData.map((review) => {
                             return <span key={review.id} > <div className='reviews-name'>{review.User ? review.User.firstName : user.user.firstName}</div>
                                 <div className='reviews'> <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                     <div>{review.review}</div></div>
-                                {review.User?.id === user?.user?.id ?
+                                {review.User?.id === user.user?.id ?
                                     <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
                                     </button></div> : null}
