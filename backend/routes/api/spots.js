@@ -273,11 +273,11 @@ router.get('/current', requireAuth, async (req, res) => {
         delete spot.SpotImages
         delete spot.Reviews
     }
-    if (!spotsList.length) {
-        return res.status(404).json({
-            message: "Spot couldn't be found",
-        })
-    }
+    // if (!spotsList.length) {
+    //     return res.status(404).json({
+    //         message: "Spot couldn't be found",
+    //     })
+    // }
     res.json({ "spots": spotsList })
 })
 

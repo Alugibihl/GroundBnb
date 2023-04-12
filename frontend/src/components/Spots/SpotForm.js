@@ -16,6 +16,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
+    const user = useSelector(state => state.session)
+    console.log('this is user', user.user);
 
     useEffect(() => {
         setCountry(initialValues?.country ? initialValues?.country : "");
@@ -233,8 +235,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 </label>
                 <p className="line"></p>
                 {errors.image && <p className="errors">{errors.image}</p>}
-                <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0} type="submit">Create Spot</button>
-                <button className={formType !== "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0} type="submit">Update Spot</button>
+                <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0 || user.user === null} type="submit">Create Spot</button>
+                <button className={formType !== "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0 || user.user === null} type="submit">Update Spot</button>
             </form>
         </div>
     );

@@ -8,21 +8,18 @@ import './Spots.css'
 const ManageSpots = () => {
     const userSpots = useSelector((state) => state.spots)
     const dispatch = useDispatch()
-    let spotContainer = Object.values(userSpots)
     console.log("in manage spot", userSpots)
     useEffect(() => {
         dispatch(getUserSpots())
     }, [dispatch])
     let spots = Object.values(userSpots)
-    if (!spots.length) { return null }
     return (
         <div>
             <h4 className="title-page-position">Manage Spots</h4>
-            {!spotContainer?.length ? <button className="title-page-position"><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink></button> : null}
             <ul className='spots-board'>
-                {spots !== null ? spots.map(spot => (
+                {spots?.length > 0 ? spots.map(spot => (
                     <UsersSpots key={spot.id} spot={spot} />
-                )) : null
+                )) : <button className="title-page-position"><NavLink className="new-spot-link" to={'/spots/new'}>Create a new Spot</NavLink></button>
                 }
             </ul>
         </div>
