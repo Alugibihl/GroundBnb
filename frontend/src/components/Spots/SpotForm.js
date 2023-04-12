@@ -89,7 +89,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
             const spotImages = { imagehold, spotId: createdSpot.id }
             console.log('spot images', spotImages);
             if (createdSpot) {
-                return dispatch(addImage(spotImages), history.push(`/spots/${createdSpot.id}`))
+                const newImg = await dispatch(addImage(spotImages))
+                if (newImg) history.push(`/spots/${createdSpot.id}`)
             }
         }
     }

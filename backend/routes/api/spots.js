@@ -325,7 +325,6 @@ router.get('/:spotId', async (req, res) => {
         }
         spot.Owner = spot.User
         delete spot.User
-        // delete spot.SpotImages
         delete spot.Reviews
     }
     if (!spotsList.length) {
