@@ -70,7 +70,6 @@ const SpotDetails = () => {
 
     return (
         <>
-            { }
             {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
