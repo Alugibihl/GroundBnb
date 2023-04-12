@@ -107,5 +107,4 @@ const SpotDetails = () => {
         </>
     )
 }
-
 export default SpotDetails
