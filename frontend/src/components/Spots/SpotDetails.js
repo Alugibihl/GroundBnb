@@ -63,7 +63,7 @@ const SpotDetails = () => {
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
             return idx !== 0 && idx <= 4 ? <img key={image.id} className='support-pics' src={image.url} alt='unavailable' /> : null
         })}
-        </div>)// commenting out lines 73-75 lets the page load, and then bringing them back after render gives me my images
+        </div>)
     }
     return (
         <>
@@ -96,7 +96,6 @@ const SpotDetails = () => {
                                         onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
                                     </button></div> : null}
                             </span>
-
                         })}
                     </div>
                 </div>

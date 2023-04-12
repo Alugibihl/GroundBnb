@@ -3,9 +3,10 @@ import { csrfFetch } from "./csrf";
 const LOAD = "spots/LOAD";
 const ADD = 'spots/ADD';
 const EDIT = 'spots/EDIT'
-const ADD_IMAGE = '/spots/ADD_IMAGE'
-const PART_LOAD = '/spots/PART_LOAD'
-const REMOVE_SPOT = '/spots/REMOVE_SPOT'
+const ADD_IMAGE = 'spots/ADD_IMAGE'
+const PART_LOAD = 'spots/PART_LOAD'
+const REMOVE_SPOT = 'spots/REMOVE_SPOT'
+const CLEANER = 'spots/CLEANUP'
 
 const partLoad = (spots) => ({
     type: PART_LOAD,
@@ -30,6 +31,9 @@ const addToSpot = (spotImages) => ({
 const edit = (spot) => ({
     type: EDIT,
     spot: spot
+})
+export const spotCleanUp = () => ({
+    type: CLEANER
 })
 
 export const getSpots = () => async (dispatch) => {
@@ -81,19 +85,21 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     return spotId
 }
 export const addImage = (data) => async (dispatch) => {
-    let { spotId, image } = data
-    console.log('add image thunk running', 'spotId', data);
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: image })
-    })
-    const images = await response.json()
-    console.log('this is returned image in add image thunk', images);
-    dispatch(addToSpot(images))
-    return images
+    let { spotId, imagehold } = data
+    for (let i = 0; i < imagehold.length; ++i) {
+        let image = imagehold[i]
+        console.log('add image thunk running', image, image.url, image.previewImage, 'spotId', data);
+        const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ url: image.url, previewImage: image.previewImage })
+        })
+        const images = await response.json()
+        console.log('this is returned image in add image thunk!!!!!', images);
+        dispatch(addToSpot(images))
+    }
 }
 export const editSpot = (spotToUpdate) => async (dispatch) => {
     let { spotAspects, spotsId } = spotToUpdate
@@ -117,34 +123,27 @@ const spotsReducer = (state = initialState, action) => {
         case LOAD:
             const allSpots = { ...state }
             action.list.Spots.forEach(spot => allSpots[spot.id] = spot);
-            return { ...allSpots, ...state }
+            return { ...state, ...allSpots }
         case PART_LOAD:
             const allUserSpots = {}
             action.spots.spots.forEach(spot => allUserSpots[spot.id] = spot);
             console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
-            if (!state[action.spot.id]) {
-                const newState = { ...state, [action.spot.id]: action.spot }
-                return newState
-            }
-            const newState = {
-                ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot
-                }
-            }
+            const newState = { ...state, [action.spot.id]: action.spot }
             return newState
+
         case ADD_IMAGE:
             console.log('add image running in spot reducer', action)
-            return {
+            const newerState = {
                 ...state,
                 [action.spot.id]: {
                     ...state[action.spot.id],
                     ...action.spot.SpotImages
                 }
             }
+            console.log('this is the add image newer state', newerState);
+            return newerState
         case EDIT:
             const editedState = { ...state }
             editedState[action.spot.id] = action.spot
@@ -154,6 +153,8 @@ const spotsReducer = (state = initialState, action) => {
             delete removedState[action.spotId]
             return removedState
         }
+        case CLEANER:
+            return { ...initialState }
         default:
             return state
     }
