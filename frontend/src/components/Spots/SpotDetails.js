@@ -20,6 +20,9 @@ const SpotDetails = () => {
     useEffect(() => {
         console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
+    }, [dispatch, spotId, spotReviews])
+
+    useEffect(() => {
         console.log('in spot detail getSpotsDetail dispatch')
         dispatch(getReviewsBySpot(spotId))
         console.log('in spot detail getReviewsbySpot dispatch')

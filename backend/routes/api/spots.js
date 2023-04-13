@@ -502,8 +502,19 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         }
     }
     const reviews = await Review.create({ userId, spotId, review, stars })
-
-    res.json(reviews)
+    const reviewIt = await Review.findByPk(reviews.id, {
+        include: [
+            {
+                model: User,
+                attributes: { exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+            },
+            {
+                model: ReviewImage,
+                attributes: { exclude: ['createdAt', 'updatedAt', 'reviewId'] }
+            },
+        ]
+    })
+    res.json(reviewIt)
 })
 
 //should return all bookings of a spot with information based on user status

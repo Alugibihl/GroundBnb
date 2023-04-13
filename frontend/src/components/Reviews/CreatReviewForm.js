@@ -5,6 +5,7 @@ import StarsRatingInput from "./StarsRatingInput";
 import './Reviews.css'
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import { getSpotsDetail } from "../../store/spotsReducer";
 
 const CreateReviewForm = ({ spot }) => {
     const user = useSelector((state) => state.session)
@@ -36,6 +37,7 @@ const CreateReviewForm = ({ spot }) => {
         console.log('handle submit running')
         const reviewDetails = { spotId, review, stars }
         return dispatch(createReview(reviewDetails))
+            .then(dispatch(getSpotsDetail(spotId)))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
