@@ -47,7 +47,7 @@ const UsersReviews = ({ review }) => {
                     </NavLink>
                     <div ><button>Update</button>
                         <button><OpenModalMenuItem itemText='Delete'
-                            onItemClick={closeMenu} modalComponent={<UsersReviewsModal spot={userSpot} review={review} />} /> </button></div>
+                            onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} /> </button></div>
                 </nav>
             }
         </>
