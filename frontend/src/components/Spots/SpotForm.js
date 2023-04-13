@@ -198,17 +198,18 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 <h2>Liven up your spot with photos</h2>
                 <label className="longer-description">
                     Submit a link to a photo to publish a spot
-                    {formType === "Edit Spot" ?
-                        images?.map((pic) => {
-                            return <div key={pic.id} className="edit-images" ><img src={pic.url} alt='unavailable' />
-                                <input
-                                    type="url"
-                                    placeholder="Preview Image URL"
-                                    value={pic.url}
-                                    onChange={(e) => setImage1(e.target.value)}
-                                />
-                            </div>
-                        }) :
+                    {formType === "Edit Spot" ? <div>Feature coming soon!!</div>
+                        // images?.map((pic) => {
+                        //     return <div key={pic.id} className="edit-images" ><img src={pic.url} alt='unavailable' />
+                        //         <input
+                        //             type="url"
+                        //             placeholder="Preview Image URL"
+                        //             value={pic.url}
+                        //             onChange={(e) => setImage1(e.target.value)}
+                        //         />
+                        //     </div>
+                        // })
+                        :
                         <>
                             <label>
                                 <input
@@ -249,11 +250,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
                                 /></label>
                         </>
                     }
-                    {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
+                    {/* {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
                         type="url"
-                        placeholder="Image URL"
+                        placeholder="Feature coming soon!!"
                         value={image1}
-                        onChange={(e) => setImage1(e.target.value)} />}
+                        onChange={(e) => setImage1(e.target.value)} />} */}
                 </label>
                 <p className="line"></p>
                 {errors.image && <p className="errors">{errors.image}</p>}

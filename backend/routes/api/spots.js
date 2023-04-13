@@ -14,6 +14,7 @@ const validateSpot = [
     check('city')
         .exists({ checkFalsy: true })
         .notEmpty()
+        .isLength({ min: 2, max: 14 })
         .withMessage("City is required"),
     check('state')
         .exists({ checkFalsy: true })
@@ -22,6 +23,7 @@ const validateSpot = [
     check('country')
         .exists({ checkFalsy: true })
         .notEmpty()
+        .isLength({ min: 2, max: 14 })
         .withMessage("Country is required"),
     check('lat')
         .exists({ checkFalsy: true })
@@ -500,8 +502,19 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         }
     }
     const reviews = await Review.create({ userId, spotId, review, stars })
-
-    res.json(reviews)
+    const reviewIt = await Review.findByPk(reviews.id, {
+        include: [
+            {
+                model: User,
+                attributes: { exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt'] }
+            },
+            {
+                model: ReviewImage,
+                attributes: { exclude: ['createdAt', 'updatedAt', 'reviewId'] }
+            },
+        ]
+    })
+    res.json(reviewIt)
 })
 
 //should return all bookings of a spot with information based on user status

@@ -19,6 +19,21 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 1,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2016%2F01%2F209172-landscape-mountain-cave.jpg&f=1&nofb=1&ipt=e3eea53e15f505945a08a8008c80769e53710b75bb89b4500c3bdfb594ad758a&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.travelawaits.com%2Fta%2Fuploads%2F2021%2F04%2Ff746c08b92dbef4cc3642e8675e7ef746c0-2048x2048.jpg&f=1&nofb=1&ipt=9a693d40e4aeb7a536be03b50a27677595a8013728c1353757455c0406b83982&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.fxbfJk8KoabGEJaimQQ4BAHaE8%26pid%3DApi&f=1&ipt=9d012fa4cbabef0d56a13adaf293e00f50ad8ea664f3b5a19a453ebc262761cf&ipo=images",
+        preview: false
+      },
+      {
         spotId: 2,
         url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Facidcow.com%2Fpics%2F20110708%2Funderwater_caves_11.jpg&f=1&nofb=1&ipt=ec8a1883d21818f4415f30acf7b78b2c25efa7edbe25c8e930ad71d113d7fa07&ipo=images',
         preview: true
@@ -26,6 +41,21 @@ module.exports = {
       {
         spotId: 2,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.gannett-cdn.com%2F-mm-%2F2e56892f6a349ad47192b530425d443fb365e5e9%2Fr%3Dx1803%26c%3D3200x1800%2Fhttps%2Fmedia.gannett-cdn.com%2F29906170001%2F29906170001_5716851009001_5716851192001-vs.jpg%3FpubId%3D29906170001&f=1&nofb=1&ipt=46957868c1192011df24bcb3623b2867e33242a146bf56a87e8444625f735448&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F65%2F54%2FfDkmOH.jpg&f=1&nofb=1&ipt=228fe1a03a09a86723a0d2610958d4b9846739246246bef66a58e538ae3c7e11&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4039976.jpg&f=1&nofb=1&ipt=0bf3761083bf364bd965ffb35b317a4e8fd233035a5c39eb838776e743242eee&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyesofcorsa.com%2Fwp-content%2Fuploads%2F2017%2F04%2FUnderwater-Caves-Wallpaper-1080p.jpg&f=1&nofb=1&ipt=d05e696d8af0db32900e22bc5d8b8b63542d90b4e53775146e4ffab2c0eea531&ipo=images",
         preview: false
       },
       {

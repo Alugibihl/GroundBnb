@@ -8,7 +8,7 @@ const UsersReviewsModal = ({ review }) => {
     console.log('this is review in modal', review)
 
     let deleter = async () => {
-        await dispatch(deleteReview(review.id))
+        return dispatch(deleteReview(review.id))
     };
 
     return (
