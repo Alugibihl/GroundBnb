@@ -14,6 +14,7 @@ const validateSpot = [
     check('city')
         .exists({ checkFalsy: true })
         .notEmpty()
+        .isLength({ min: 2, max: 14 })
         .withMessage("City is required"),
     check('state')
         .exists({ checkFalsy: true })
@@ -22,6 +23,7 @@ const validateSpot = [
     check('country')
         .exists({ checkFalsy: true })
         .notEmpty()
+        .isLength({ min: 2, max: 14 })
         .withMessage("Country is required"),
     check('lat')
         .exists({ checkFalsy: true })

@@ -6,24 +6,21 @@ import './Reviews.css'
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
-const CreateReviewForm = () => {
+const CreateReviewForm = ({ spot }) => {
     const user = useSelector((state) => state.session)
-    const spots = useSelector((state) => state.spots)
     const dispatch = useDispatch()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
     const [errors, setErrors] = useState("")
     const [showMenu, setShowMenu] = useState(false);
-    const spotsId = Object.values(spots)
     const history = useHistory()
     const { closeModal } = useModal();
     const ulRef = useRef();
-    let spotId = spotsId[0].id
-    console.log('spotsId', spotsId, 'spotId', spotId, 'user', user, 'this', spotsId[spotId])
+    let spotId = spot.id
+    console.log('spotId', spotId, 'user', user)
 
     useEffect(() => {
         if (!showMenu) return;
-
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
                 setShowMenu(false);
@@ -56,7 +53,6 @@ const CreateReviewForm = () => {
             <form onSubmit={handleSubmit}>
                 {errors.review && <p className="errors">{errors.review}</p>}
                 {errors.stars && <p className="errors">{errors.star}</p>}
-                {errors.user && <p className="errors">{errors.user}</p>}
                 <label>
                     <input
                         type="textarea"

@@ -52,7 +52,7 @@ const SpotDetails = () => {
             console.log('this is reviewcount', reviewCount)
             return (<div>
                 <button><OpenModalMenuItem itemText='Post Your Review'
-                    onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button>
+                    onItemClick={closeMenu} modalComponent={<CreateReviewForm spot={spotsInfo} />} /></button>
                 <div>Be the first to post a review!</div></div>)
         }
     }
@@ -88,7 +88,7 @@ const SpotDetails = () => {
                         <div className={spotsInfo.numReviews < 1 ? 'review-organizer' : 'review-line'}><div><i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}</div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>{reviewMadness(spotsInfo.numReviews)}</div>
                         {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user.user?.id || reviewData.find((review) => review.userId === user.user?.id) ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
-                            onItemClick={closeMenu} modalComponent={<CreateReviewForm />} /></button> : null}</div>
+                            onItemClick={closeMenu} modalComponent={<CreateReviewForm spot={spotsInfo} />} /></button> : null}</div>
                         {reviewData.map((review) => {
                             return <span key={review.id} > <div className='reviews-name'>{review.User ? review.User.firstName : user.user.firstName}</div>
                                 <div className='reviews'> <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
