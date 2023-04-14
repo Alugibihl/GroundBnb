@@ -45,11 +45,11 @@ const SpotDetails = () => {
         return updated
     }
     let reviewMadness = (reviewCount) => {
-        if (reviewCount > 1) {
+        if (parseInt(reviewCount) > 1) {
             console.log('this is reviewcount', reviewCount)
             return (<div>{reviewCount} Reviews</div>)
-        } else if (reviewCount === 1) {
-            console.log('this is reviewcount', reviewCount)
+        } else if (parseInt(reviewCount) === 1) {
+            console.log('this is reviewcount', typeof reviewCount, reviewCount)
             return (<div>{reviewCount} Review</div>)
         } else {
             console.log('this is reviewcount', reviewCount)
@@ -79,7 +79,7 @@ const SpotDetails = () => {
                             <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
                             {imageManipulator(spotsInfo?.SpotImages)}
                         </div> : null}
-                    <div className='bottom-spot'>
+                     <div className='bottom-spot'>
                         <div className='spot-host description-box'>
                             <h3 className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</h3>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
@@ -87,7 +87,7 @@ const SpotDetails = () => {
                             <i className="fa-solid fa-star"></i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)} </div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>
                             <div> {spotsInfo.numReviews === 1 ? "1 Review" : spotsInfo.numReviews > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
                             <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
-                    <div className='reviews-container'><div className='review-organizer'>
+                        <div className='reviews-container'><div className='review-organizer'>
                         <div className={spotsInfo.numReviews < 1 ? 'review-organizer' : 'review-line'}><div><i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}</div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>{reviewMadness(spotsInfo.numReviews)}</div>
                         {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user.user?.id || reviewData.find((review) => review.userId === user.user?.id) ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
@@ -102,7 +102,7 @@ const SpotDetails = () => {
                                     </button></div> : null}
                             </span>
                         })}
-                    </div>
+                        </div>
                 </div>
                 : (<div>Loading</div>)
             }
