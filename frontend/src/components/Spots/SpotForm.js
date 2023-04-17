@@ -17,11 +17,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [image3, setImage3] = useState("");
     const [image4, setImage4] = useState("");
     const [image5, setImage5] = useState("");
-    const [imagehold, setImagehold] = useState([]);
+    const [imagehold] = useState([]);
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
-    const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
+    //const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
     const user = useSelector(state => state.session)
     // console.log('this is user', user.user);
 
