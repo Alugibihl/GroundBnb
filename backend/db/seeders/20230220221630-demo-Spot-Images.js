@@ -69,6 +69,16 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 3,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.landtrust-hsv.org%2Fwp-content%2Fuploads%2F2019%2F09%2FHuntsville.jpg&f=1&nofb=1&ipt=34a61dee882d0b3c5bdecf1fedd3c12eb3f218f428d3b9a37fc89211311c48ae&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2Fbhamnow.com%2Fwp-content%2Fuploads%2F2020%2F10%2Fstephens-gap-cave.jpg%3Fresize%3D750%252C393%26ssl%3D1&f=1&nofb=1&ipt=fe2e05434493aaf9e7d88577b600495483908b275264049cc3f2b030924fdc15&ipo=images",
+        preview: false
+      },
+      {
         spotId: 4,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fdisp%2F143d2442672887.56072876a1a11.jpg&f=1&nofb=1&ipt=b794b8aa4d7eaf6bcd3d8e7ccaeabafb037575f1b3a11580640849120163ff38&ipo=images',
         preview: true
@@ -76,6 +86,16 @@ module.exports = {
       {
         spotId: 4,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fa3%2Fd7%2F3b%2Fa3d73b45c88666298d8b99c011ab42e9.jpg&f=1&nofb=1&ipt=ea1976fb495e74a990ea18abe84e7b57a8b82db1cb74d8bdf2af9e75364cb5b6&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fprojects%2F404%2F5408821.546718a7501ef.jpg&f=1&nofb=1&ipt=72b1da4e2f6534378fcb997bea9e99670281dbb0c0110e78df1a432bb6941bc2&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F3.bp.blogspot.com%2F_Ce6cvRGOe8E%2FTRmqgMiuUqI%2FAAAAAAAAAJU%2FozQGKpGTZI8%2Fs1600%2FThe-Cave-Restaurant-by-Koichi-Takada-Architects.jpg&f=1&nofb=1&ipt=a7c017add0baa3a82ffd623a632b479f201d8842ebc29da1b13eb8c5f6ccc99f&ipo=images",
         preview: false
       },
       {
