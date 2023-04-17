@@ -52,11 +52,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
         console.log('handle submit running')
         e.preventDefault();
         setErrors({})
-        if (image1 !== "") imagehold.push({ url: image1, previewImage: true })
-        if (image2 !== "") imagehold.push({ url: image2, previewImage: false })
-        if (image3 !== "") imagehold.push({ url: image3, previewImage: false })
-        if (image4 !== "") imagehold.push({ url: image4, previewImage: false })
-        if (image5 !== "") imagehold.push({ url: image5, previewImage: false })
+        if (image1 !== "") imagehold.push({ url: image1, preview: true })
+        if (image2 !== "") imagehold.push({ url: image2, preview: false })
+        if (image3 !== "") imagehold.push({ url: image3, preview: false })
+        if (image4 !== "") imagehold.push({ url: image4, preview: false })
+        if (image5 !== "") imagehold.push({ url: image5, preview: false })
         const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
         let createdSpot;
         let updatedSpot;
