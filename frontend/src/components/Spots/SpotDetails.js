@@ -16,16 +16,14 @@ const SpotDetails = () => {
     const ulRef = useRef();
     const reviewData = Object.values(spotReviews)
     const [showMenu, setShowMenu] = useState(false);
-    console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews, 'here is review data', reviewData, "user", user);
+    // console.log('this is the spot being lookedat', spotsInfo, 'these are the reviews', spotReviews, 'here is review data', reviewData, "user", user);
     useEffect(() => {
-        console.log('in spot details use effect')
+        // console.log('in spot details use effect')
         dispatch(getSpotsDetail(spotId))
     }, [dispatch, spotId, spotReviews])
 
     useEffect(() => {
-        console.log('in spot detail getSpotsDetail dispatch')
         dispatch(getReviewsBySpot(spotId))
-        console.log('in spot detail getReviewsbySpot dispatch')
         return () => dispatch(cleanUp())
     }, [dispatch, spotId])
 
@@ -46,20 +44,21 @@ const SpotDetails = () => {
     }
     let reviewMadness = (reviewCount, spotsInfo) => {
         if (parseInt(reviewCount) > 1) {
-            console.log('this is reviewcount', reviewCount)
+            // console.log('this is reviewcount', reviewCount)
             return (<div>{reviewCount} Reviews</div>)
         } else if (parseInt(reviewCount) === 1) {
-            console.log('this is reviewcount', typeof reviewCount, reviewCount)
+            // console.log('this is reviewcount', typeof reviewCount, reviewCount)
             return (<div>{reviewCount} Review</div>)
         } else {
-            console.log('this is reviewcount', reviewCount)
-            return (<div className={user.user === null || spotsInfo.Owner?.id === user.user?.id  ? 'hidden' : 'new-review-area'}>
+            // console.log('this is reviewcount', reviewCount)
+            return (<div className={user.user === null || spotsInfo.Owner?.id === user.user?.id ? 'hidden' : 'new-review-area'}>
                 <button><OpenModalMenuItem itemText='Post Your Review'
                     onItemClick={closeMenu} modalComponent={<CreateReviewForm spot={spotsInfo} />} /></button>
                 <div>Be the first to post a review!</div></div>)
         }
     }
     if (spotsInfo === undefined) { return null }
+
     let imageManipulator = (imageArr) => {
         if (!imageArr.length) { return null }
         return (<div className='images-box-internal'>{imageArr.map((image, idx) => {
@@ -73,13 +72,13 @@ const SpotDetails = () => {
             {Object.values(spotsInfo)?.length > 0
                 ? <div className='format-me'> < h3 className='spotName' >{spotsInfo.name}</h3>
                     <div className='subtitle'>{spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}</div>
-                    {console.log('this is spotsInfo inside the return', spotsInfo)}
+                    {/* {console.log('this is spotsInfo inside the return', spotsInfo)} */}
                     {spotsInfo?.SpotImages?.length > 0 ?
                         <div className='images-box'>
                             <img className='main-pic' src={spotsInfo?.SpotImages[0].url} alt='unavailable' />
                             {imageManipulator(spotsInfo?.SpotImages)}
                         </div> : null}
-                     <div className='bottom-spot'>
+                    <div className='bottom-spot'>
                         <div className='spot-host description-box'>
                             <h3 className='spot-host'>Hosted by {spotsInfo.Owner?.firstName} {spotsInfo.Owner?.lastName}</h3>
                             <div className='description-box'>{spotsInfo.description}</div> </div>
@@ -87,7 +86,7 @@ const SpotDetails = () => {
                             <i className="fa-solid fa-star"></i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)} </div><div className={parseInt(spotsInfo.numReviews) < 1 ? 'hidden' : 'dot'}>.</div>
                             <div> {parseInt(spotsInfo.numReviews) === 1 ? "1 Review" : parseInt(spotsInfo.numReviews) > 1 ? `${spotsInfo?.numReviews} Reviews` : null}</div></div>
                             <button className='reserve-a-spot' onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button></div></div>
-                        <div className='reviews-container'><div className='review-organizer'>
+                    <div className='reviews-container'><div className='review-organizer'>
                         <div className={spotsInfo.numReviews < 1 ? 'review-organizer' : 'review-line'}><div><i className="fa-solid fa-star">
                         </i>{spotsInfo.avgStarRating === 'New' ? 'New' : parseInt(spotsInfo.avgStarRating)?.toFixed(1)}</div><div className={spotsInfo.numReviews < 1 ? 'hidden' : 'dot'}>.</div>{reviewMadness(spotsInfo.numReviews, spotsInfo)}</div>
                         {spotsInfo.numReviews > 0 ? <button className={user.user === null || spotsInfo.ownerId === user.user?.id || reviewData.find((review) => review.userId === user.user?.id) ? 'hidden' : null} ><OpenModalMenuItem itemText='Post Your Review'
@@ -102,7 +101,7 @@ const SpotDetails = () => {
                                     </button></div> : null}
                             </span>
                         })}
-                        </div>
+                    </div>
                 </div>
                 : (<div>Loading</div>)
             }
