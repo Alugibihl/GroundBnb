@@ -66,25 +66,34 @@ input {
 img {
     border-radius: 5%;
 }
-.cancel-button button{
+
+.cancel-button button {
     background-color: lightgrey;
     width: 95%;
 }
-.delete-buttons button{
+
+.delete-buttons button {
     width: 95%;
 
 }
+
 .modal-content {
     text-align: center;
 }
-.modal-backround{
+
+.modal-backround {
     margin: 5px;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: px;
 }
+
 .i {
-display: flex;
-flex-direction: row;
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    cursor: pointer;
 }
