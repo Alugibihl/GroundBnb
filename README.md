@@ -9,42 +9,52 @@ This is an Airbnb clone designed to allow similar options to the original. It cu
 
 ![image](https://user-images.githubusercontent.com/111261195/232141810-3d3b3a86-0615-4304-98fa-1aa71bc0a8c9.png)
 
-# On this application you can:
+# Navigating The New Fork Dines
 
--Sign up and sign in a user,
+Groundbnb is currently in development and does not have is does not include all the functionality the contributors intend to add. The functions that Groundbnb currently has:
 
--Create a property,
+1. `LogIn` using any of the included demo user accounts
 
--Create a review for other users properties.
+2. `SignUp` from the signup modal and create your own account
 
--Update your property,
+3. Create a `Spot` that you would like to post to Groundbnb for other users to see and leave a `Review` on
 
--Delete your property or review
+4. Navigate to any `Spot` posted to Groundbnb to see that spot's details
 
--See all existing properties and reviews.
+5. Edit any `Spot` the logged in user has created 
+
+6. Delete any `Spot` the logged in user created
+
+7. See all `Spots` created by the current user
+
+8. See all `Reviews` created by the current user
+
+9. Create an `Review` for a `Spot` created by another user
+
+10. Delete any `Review` posted by the logged in user
+
 
 
 # Built With:
 
-Sequelize https://sequelize.org/,
+### :hammer_and_wrench: Languages and Tools :
 
-SQL,
-
-JAVASCRIPT,
-
-React https://react.dev/,
-
-Redux https://redux.js.org/,
-
-CSS,
-
-HTML,
-
-Express,
-
-SQLIITE3,
-
-POSTGRES
+<div align="center">
+  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg" title="Redux" alt="Redux " width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/sqlite/sqlite-original-wordmark.svg" title="SQLite3"  alt="SQLite3" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original-wordmark.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" title="AWS" alt="AWS" width="40" height="40"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original-wordmark.svg" title="postgresql" alt="postgresql" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/sequelize/sequelize-original.svg" title="Sequelize" alt="sequelize" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original-wordmark.svg" title="Express" alt="express" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original.svg" title="Python" alt="python" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/sqlalchemy/sqlalchemy-original.svg" title="SQLA" alt="sqla" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/git/git-original-wordmark.svg" title="Git" **alt="Git" width="40" height="40"/>
+</div>
 
 #Set Up:
 
@@ -64,7 +74,7 @@ npm install to install related dependencies.
 
 cd into the backend file and create a .env file with a port.
 
-PORT=<your port>
+PORT=(your port)
   
 DB_FILE=(db file) we recommend db/dev.db
   
