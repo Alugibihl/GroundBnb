@@ -23,6 +23,8 @@ This is an Airbnb clone designed to allow similar options to the original. It cu
 
 -See all existing properties and reviews.
 
+![spot 1](https://github.com/Alugibihl/GroundBnb/assets/111261195/43d4a0dc-5dcc-49f6-8a85-16cdc9d22816)
+
 
 # Built With:
 
@@ -90,6 +92,8 @@ and then NPM start.
   
 If you see something similar to the image at the top, you are ready to go.
 
+![Screenshot 2023-06-02 130236](https://github.com/Alugibihl/GroundBnb/assets/111261195/2ce3525d-4645-4c35-9fa6-1a9a1228a4fb)
+
   
 ## Contact
 
@@ -98,8 +102,10 @@ I want to grow along with this project, if you have any suggestions, or want to 
 Reach out to me at:
 
 alexandermlugibihl@gmail.com
-  <a href="https://github.com/Alugibihl">Github</a>
-  <a href="https://www.linkedin.com/in/alexander-lugibihl/">LinkedIn</a>
+  
+GitHub: https://github.com/Alugibihl
+
+LinkedIn: https://www.linkedin.com/in/alexander-lugibihl-2abb70169
 
 ## Aknowledgements:
 
