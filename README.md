@@ -7,7 +7,21 @@ Welcome to GroundBnb, The Airbnb clone all about saving you money with undergrou
 
 This is an Airbnb clone designed to allow similar options to the original. It currently feature 2 major crud for rental Spots and Reviews for those spots.
 
+## Home Page
+
 ![image](https://user-images.githubusercontent.com/111261195/232141810-3d3b3a86-0615-4304-98fa-1aa71bc0a8c9.png)
+
+## Single Spot Reviews
+
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/fca2e83e-63a3-4191-a243-f893fd3bfb51)
+
+## Single Spot
+
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/bb516d92-0290-481b-9a46-aedf8690b66e)
+
+## All User Spots
+
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/1a192b89-b460-4264-8b9f-783ed16fbd33)
 
 # Navigating The New Fork Dines
 
@@ -32,9 +46,6 @@ Groundbnb is currently in development and does not have is does not include all 
 9. Create an `Review` for a `Spot` created by another user
 
 10. Delete any `Review` posted by the logged in user
-
-
-![spot 1](https://github.com/Alugibihl/GroundBnb/assets/111261195/43d4a0dc-5dcc-49f6-8a85-16cdc9d22816)
 
 
 # Built With:
@@ -102,8 +113,31 @@ and then NPM start.
   
 If you see something similar to the image at the top, you are ready to go.
 
-![Screenshot 2023-06-02 130236](https://github.com/Alugibihl/GroundBnb/assets/111261195/2ce3525d-4645-4c35-9fa6-1a9a1228a4fb)
-
+### API Endpoints
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| POST | /api/user/signup | To sign up a new user account |
+| POST | /api/user/login | To login an existing user account |
+| POST | /api/spots | To create a new spot |
+| POST | /api/spots/:spotId/images | To create a new spot image |
+| POST | /api/spots/:spotId/reviews | To create a new review for a spot |
+| POST | /api/spots/:spotId/bookings | To create a new booking for a spot |
+| POST | /api/reviews/:reviewId/images| To create a neww image for a review |
+| GET | /api/spots/:spotId | To retrieve spots by id |
+| GET | /api/user/session | Gets the current User |
+| GET | /api/spots | To retrieve all spots |
+| GET | /api/spots/current | To retrieve all spots of current user |
+| GET | /api/reviews/current | To retrieve all spots of current user |
+| GET | /api/bookings/current | To retrieve all bookings of current user |
+| GET | /api/spots/:spotId/reviews | To retrieve all reviews of a spot |
+| GET | /api//:spotId/bookings | To retrieve all bookings of a spot |
+| PUT | /api/spots/:spotId | To edit the details of a single spot |
+| PUT | /api/reviews/:reviewId | To edit the details of a single review |
+| PUT | /api/bookings/:bookingId | To edit the details of a single booking |
+| DELETE | /api/spots/:spotId  | To delete a single spot |
+| DELETE | /api/spot-images/:imageId | To delete a single spot image |
+| DELETE | /api/reviews/:reviewId | To delete a single review |
+| DELETE | /api/review-images/:imageId | To delete a single review's image |
   
 ## Contact
 
