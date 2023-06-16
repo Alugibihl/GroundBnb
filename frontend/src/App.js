@@ -13,6 +13,7 @@ import ManageSpots from "./components/Spots/ManageSpots";
 import ManageReviews from "./components/Reviews/ManageReviews";
 import CreateReviewForm from "./components/Reviews/CreatReviewForm";
 import Footer from "./footer";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route exact path={'/'} >
             <AllSpots />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       )}
