@@ -15,7 +15,7 @@ const validateSpot = [
         .exists({ checkFalsy: true })
         .notEmpty()
         .isLength({ min: 2, max: 14 })
-        .withMessage("City is required"),
+        .withMessage("City must be between 2 and 14 characters"),
     check('state')
         .exists({ checkFalsy: true })
         .notEmpty()
@@ -24,7 +24,7 @@ const validateSpot = [
         .exists({ checkFalsy: true })
         .notEmpty()
         .isLength({ min: 2, max: 14 })
-        .withMessage("Country is required"),
+        .withMessage("Country must be between 2 and 14 characters"),
     check('lat')
         .exists({ checkFalsy: true })
         .notEmpty()
