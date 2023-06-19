@@ -111,6 +111,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         required
+                        minLength={2}
+                        maxLength={14}
                     />
                 </label>
                 {errors.country && <p className="errors">{errors.country}</p>}
@@ -122,6 +124,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
+                        minLength={1}
                     />
                 </label>
                 {errors.address && <p className="errors">{errors.address}</p>}
@@ -134,6 +137,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={20}
                         />
                     </label>
                     <label className="comma">
@@ -147,6 +152,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={15}
                         />
                     </label></div>
                 {errors.city && <p className="errors">{errors.city}</p>}
@@ -162,6 +169,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        minLength={30}
                     />
                 </label>
                 {errors.description && <p className="errors">{errors.description}</p>}
@@ -176,6 +184,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
+                        maxLength={49}
+                        minLength={3}
                     />
                 </label>
                 {errors.name && <p className="errors">{errors.name}</p>}
@@ -191,6 +201,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             required
+                            min={1}
+                            step={1}
+
+
+
                         /></div>
                 </label>
                 {errors.price && <p className="errors">{errors.price}</p>}

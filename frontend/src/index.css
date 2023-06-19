@@ -97,3 +97,7 @@ img {
 button {
     cursor: pointer;
 }
+
+.wrap-break {
+    word-wrap: break-word;
+}

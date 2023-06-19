@@ -14,7 +14,7 @@ const validateSpot = [
     check('city')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .isLength({ min: 2, max: 14 })
+        .isLength({ min: 2, max: 20 })
         .withMessage("City must be between 2 and 14 characters"),
     check('state')
         .exists({ checkFalsy: true })
@@ -38,17 +38,17 @@ const validateSpot = [
     check('name')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .isLength({ max: 49 })
-        .withMessage("Name must be less than 50 characters"),
+        .isLength({ min: 3, max: 49 })
+        .withMessage("Name must be between 3 and 50 characters"),
     check('description')
         .exists({ checkFalsy: true })
         .notEmpty()
         .isLength({ min: 30 })
-        .withMessage("Description is required"),
+        .withMessage("Description must be atleast 30 characters"),
     check('price')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .isNumeric()
+        .isNumeric({ no_symbols: true, min: 1 })
         .withMessage("Price per day is required"),
     handleValidationErrors
 ]
