@@ -33,29 +33,36 @@
 
 .spots-board {
     box-sizing: border-box;
+    /* border: 3px solid green; */
     display: flex;
     justify-content: flex-start;
-    gap: 2%;
+    gap: 1vw;
     flex-wrap: wrap;
-    margin: 20px 1%;
+    width: 90vw;
+}
+
+.border-holder {
+    display: flex;
+    justify-content: center;
+    /* border: 2px red solid; */
 }
 
 .images-box {
-    width: 94%;
+    width: 90vw;
     height: 30vw;
     display: flex;
-    margin: 10px 3%;
     box-sizing: border-box;
+    gap: 10px;
 }
 
 .main-pic {
     height: 100%;
-    width: 50%;
+    width: 44vw;
 }
 
 .support-pics {
-    height: 50%;
-    width: 50%;
+    height: 48%;
+    width: 22vw;
 }
 
 .images-box-internal {
@@ -63,6 +70,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: inherit;
+    gap: 10px;
 }
 
 .reserve-box {
@@ -74,7 +82,7 @@
     flex-direction: column;
     position: relative;
     box-sizing: border-box;
-    border-radius: 3%;
+    border-radius: 10px;
     font-size: auto;
 }
 
@@ -106,7 +114,6 @@
     color: rgb(58, 20, 20);
     background-color: #9ae17b;
     width: 85%;
-    box-shadow: 2px 2px rgb(58, 20, 20);
 }
 
 .longer-description {

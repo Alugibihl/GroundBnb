@@ -4,8 +4,7 @@ const StarsRatingInput = ({ stars, disabled, onChange }) => {
     const [activeRating, setActiveRating] = useState(stars);
     const filled = "fa-solid fa-star"
     const empty = "fa-regular fa-star"
-    // empty star <i class="fa-regular fa-star"></i>
-    // filled star <i class="fa-solid fa-star"></i>
+    
     return (
         <div className="rating-input">
             <div

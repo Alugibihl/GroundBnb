@@ -14,6 +14,7 @@ import ManageReviews from "./components/Reviews/ManageReviews";
 import CreateReviewForm from "./components/Reviews/CreatReviewForm";
 import Footer from "./footer";
 import NotFound from "./components/NotFound";
+import EditReviewForm from "./components/Reviews/EditReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path={'/spots/:spotId/reviews/new'}>
             <CreateReviewForm />
+          </Route>
+          <Route exact path={'/spots/:spotId/reviews/edit'}>
+            <EditReviewForm />
           </Route>
           <Route exact path={'/spots/new'}>
             <CreateSpotForm />

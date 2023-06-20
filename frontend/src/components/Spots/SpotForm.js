@@ -49,7 +49,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
     }, [country, address, city, state, description, name, price])
 
     const handleSubmit = async (e) => {
-        console.log('handle submit running')
+        // console.log('handle submit running')
         e.preventDefault();
         setErrors({})
         if (image1 !== "") imagehold.push({ url: image1, preview: true })
@@ -64,12 +64,12 @@ function SpotForm({ formType, spotsId, initialValues }) {
             updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
             const spotImages = { imagehold, spotsId }
             if (updatedSpot) {
-                console.log('we are in edit spot', spotImages)
+                // console.log('we are in edit spot', spotImages)
                 return dispatch(addImage(spotImages))
                     .then(history.push(`/spots/${spotsId}`))
                     .catch(async (res) => {
                         const data = await res.json();
-                        console.log('this is data', data)
+                        // console.log('this is data', data)
                         if (data && data.errors) {
                             setErrors(data.errors);
                             history.push(`/spots/${spotsId}`)
@@ -77,7 +77,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     });
             }
         } else {
-            console.log('we are in create spot', spotAspects)
+            // console.log('we are in create spot', spotAspects)
             createdSpot = await dispatch(createSpot(spotAspects))
                 .catch(async (res) => {
                     const data = await res.json();
@@ -87,7 +87,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     }
                 })
             const spotImages = { imagehold, spotId: createdSpot.id }
-            console.log('spot images', spotImages);
+            // console.log('spot images', spotImages);
             if (createdSpot) {
                 const newImg = await dispatch(addImage(spotImages))
                 if (newImg) history.push(`/spots/${createdSpot.id}`)
@@ -111,6 +111,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         required
+                        minLength={2}
+                        maxLength={14}
                     />
                 </label>
                 {errors.country && <p className="errors">{errors.country}</p>}
@@ -122,6 +124,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
+                        minLength={1}
                     />
                 </label>
                 {errors.address && <p className="errors">{errors.address}</p>}
@@ -134,6 +137,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={20}
                         />
                     </label>
                     <label className="comma">
@@ -147,6 +152,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={15}
                         />
                     </label></div>
                 {errors.city && <p className="errors">{errors.city}</p>}
@@ -162,6 +169,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        minLength={30}
                     />
                 </label>
                 {errors.description && <p className="errors">{errors.description}</p>}
@@ -176,6 +184,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
+                        maxLength={49}
+                        minLength={3}
                     />
                 </label>
                 {errors.name && <p className="errors">{errors.name}</p>}
@@ -191,6 +201,11 @@ function SpotForm({ formType, spotsId, initialValues }) {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             required
+                            min={1}
+                            step={1}
+
+
+
                         /></div>
                 </label>
                 {errors.price && <p className="errors">{errors.price}</p>}
