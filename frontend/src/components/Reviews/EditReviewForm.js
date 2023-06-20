@@ -35,7 +35,8 @@ const EditReviewForm = ({ review, spot }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('handle submit running')
-        const reviewInfo = { spotId, reviewDetails, stars }
+        const data = { spotId: spotId, review: reviewDetails, stars: stars }
+        const reviewInfo = { reviewId: review.id, data }
         return dispatch(editReviewThunk(reviewInfo))
             .then(dispatch(getSpotsDetail(spotId)))
             .then(closeModal)

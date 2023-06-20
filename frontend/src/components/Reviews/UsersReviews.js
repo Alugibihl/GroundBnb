@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserSpots } from '../../store/spotsReducer'
 import UsersReviewsModal from './UsersReviewsModal';
 import './Reviews.css'
 import OpenModalButton from '../OpenModalButton';
 import EditReviewForm from './EditReviewForm';
+import { getReviewsbyUser } from '../../store/reviewReducer';
+import { getSpots } from '../../store/spotsReducer';
 
 const UsersReviews = ({ review }) => {
     const dispatch = useDispatch()
@@ -15,12 +15,12 @@ const UsersReviews = ({ review }) => {
     const ulRef = useRef();
 
     useEffect(() => {
-        dispatch(getUserSpots())
+        dispatch(getReviewsbyUser())
+        dispatch(getSpots())
     }, [dispatch])
-
     let spots = Object.values(userSpots)
-    let userSpot = spots.find((spot) => spot.id === review.spotId)
-    console.log('spots', spots, userSpot)
+    let userSpot = spots?.find((spot) => spot.id === review.spotId)
+    console.log('spots', spots, userSpot, review)
     useEffect(() => {
         if (!showMenu) return;
 
@@ -37,6 +37,8 @@ const UsersReviews = ({ review }) => {
         let updated = new Date(time)
         return updated
     }
+
+    if (!userSpots) return null
 
     return (
         <>
