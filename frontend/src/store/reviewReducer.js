@@ -1,17 +1,21 @@
 import { csrfFetch } from "./csrf";
 
-const ADD = 'reviews/ADD';
-const SPOT_LOAD = 'reviews/SPOT_LOAD'
-const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
-const CLEANER = 'reviews/CLEANER'
+const ADD = "reviews/ADD"
+const SPOT_LOAD = "reviews/SPOT_LOAD"
+const DELETE_REVIEW = "reviews/DELETE_REVIEW"
+const EDIT = "reviews/EDIT"
+const CLEANER = "reviews/CLEANER"
 
 const spotLoad = (reviews) => ({
     type: SPOT_LOAD,
     reviews
 })
-
 const add = (review) => ({
     type: ADD,
+    review
+})
+const editReview = (review) => ({
+    type: EDIT,
     review
 })
 const removeReview = (reviewId) => ({
@@ -50,7 +54,7 @@ export const getReviewsBySpot = (spotId) => async (dispatch) => {
     }
 }
 export const createReview = (data) => async (dispatch) => {
-    console.log('create spot thunk running', data)
+    console.log('create review thunk running', data)
     const response = await csrfFetch(`/api/spots/${data.spotId}/reviews`, {
         method: 'POST',
         headers: {
@@ -59,10 +63,25 @@ export const createReview = (data) => async (dispatch) => {
         body: JSON.stringify(data)
     })
     const review = await response.json()
-    console.log('this is returned spot in create a review thunk', review)
+    console.log('this is returned review in create a review thunk', review)
     dispatch(add(review))
     return review
 }
+export const editReviewThunk = (data) => async (dispatch) => {
+    console.log('edit review thunk running', data)
+    const response = await csrfFetch(`/api/spots/${data.spotId}/reviews`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    const review = await response.json()
+    console.log('this is returned review in edit a review thunk', review)
+    dispatch(editReview(review))
+    return review
+}
+
 const initialState = {}
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {

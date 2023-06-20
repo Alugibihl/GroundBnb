@@ -8,10 +8,15 @@ html {
 button {
     color: rgb(58, 20, 20);
     background-color: #9ae17b;
-    box-shadow: 2px 2px rgb(58, 20, 20);
     font-size: 14pt;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    box-shadow: 2px 2px rgb(58, 20, 20);
 }
 
 Link {
@@ -92,10 +97,6 @@ img {
 .i {
     display: flex;
     flex-direction: row;
-}
-
-button {
-    cursor: pointer;
 }
 
 .wrap-break {

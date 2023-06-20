@@ -6,6 +6,8 @@ import { cleanUp, getReviewsBySpot } from '../../store/reviewReducer'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import UsersReviewsModal from '../Reviews/UsersReviewsModal'
 import CreateReviewForm from '../Reviews/CreatReviewForm'
+import EditReviewForm from '../Reviews/EditReviewForm'
+import OpenModalButton from '../OpenModalButton'
 
 const SpotDetails = () => {
     const { spotId } = useParams()
@@ -97,9 +99,14 @@ const SpotDetails = () => {
                                 <div className='reviews'> <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                                     <div>{review.review}</div></div>
                                 {review.User?.id === user.user?.id ?
-                                    <div><button>Update</button> <button><OpenModalMenuItem itemText='Delete'
-                                        onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} />
-                                    </button></div> : null}
+                                    <div><OpenModalButton buttonText={"Update"}
+                                        onButtonClick={closeMenu}
+                                        modalComponent={<EditReviewForm review={review} spot={spotsInfo} />} />
+                                        <OpenModalButton
+                                            buttonText='Delete'
+                                            onButtonClick={closeMenu}
+                                            modalComponent={<UsersReviewsModal review={review} />} />
+                                    </div> : null}
                             </span>
                         })}
                     </div>

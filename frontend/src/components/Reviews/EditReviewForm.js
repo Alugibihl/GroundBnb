@@ -1,24 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview } from "../../store/reviewReducer";
+import { editReviewThunk } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
 import './Reviews.css'
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { getSpotsDetail } from "../../store/spotsReducer";
 
-const CreateReviewForm = ({ spot }) => {
+const EditReviewForm = ({ review, spot }) => {
     const user = useSelector((state) => state.session)
     const dispatch = useDispatch()
-    const [reviewDetails, setReviewDetails] = useState('')
-    const [stars, setStars] = useState(0)
+    const [reviewDetails, setReviewDetails] = useState(review.review ? review.review : "")
+    const [stars, setStars] = useState(review.stars ? review.stars : 0)
     const [errors, setErrors] = useState("")
     const [showMenu, setShowMenu] = useState(false);
     const history = useHistory()
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
-    console.log('spotId', spotId, 'user', user)
+    console.log('spotId', spotId, 'user', user, "review", review)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -35,8 +35,8 @@ const CreateReviewForm = ({ spot }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('handle submit running')
-        const reviewDetails = { spotId, reviewDetails, stars }
-        return dispatch(createReview(reviewDetails))
+        const reviewInfo = { spotId, reviewDetails, stars }
+        return dispatch(editReviewThunk(reviewInfo))
             .then(dispatch(getSpotsDetail(spotId)))
             .then(closeModal)
             .catch(async (res) => {
@@ -76,4 +76,4 @@ const CreateReviewForm = ({ spot }) => {
         </div>
     )
 }
-export default CreateReviewForm;
+export default EditReviewForm;

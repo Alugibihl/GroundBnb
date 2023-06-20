@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserSpots } from '../../store/spotsReducer'
 import UsersReviewsModal from './UsersReviewsModal';
 import './Reviews.css'
+import OpenModalButton from '../OpenModalButton';
+import EditReviewForm from './EditReviewForm';
 
 const UsersReviews = ({ review }) => {
     const dispatch = useDispatch()
@@ -45,9 +47,11 @@ const UsersReviews = ({ review }) => {
                         <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                         <div className="review-description">{review.review}</div>
                     </NavLink>
-                    <div ><button>Update</button>
-                        <button><OpenModalMenuItem itemText='Delete'
-                            onItemClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} /> </button></div>
+                    <div >
+                        <OpenModalButton buttonText="Update"
+                            onButtonClick={closeMenu} modalComponent={<EditReviewForm review={review} spot={userSpot} />} />
+                        <OpenModalButton buttonText="Delete"
+                            onButtonClick={closeMenu} modalComponent={<UsersReviewsModal review={review} />} /> </div>
                 </nav>
             }
         </>
