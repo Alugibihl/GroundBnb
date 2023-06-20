@@ -18,25 +18,14 @@ const SpotDetails = () => {
     const ulRef = useRef();
     const reviewData = Object.values(spotReviews);
     const [showMenu, setShowMenu] = useState(false);
-    console.log(
-        "this is the spot being lookedat",
-        spotsInfo,
-        "these are the reviews",
-        spotReviews,
-        "here is review data",
-        reviewData,
-        "user",
-        user
-    );
+
+
     useEffect(() => {
-        console.log("in spot details use effect");
         dispatch(getSpotsDetail(spotId));
     }, [dispatch, spotId, spotReviews]);
 
     useEffect(() => {
-        console.log("in spot detail getSpotsDetail dispatch");
         dispatch(getReviewsBySpot(spotId));
-        console.log("in spot detail getReviewsbySpot dispatch");
         return () => dispatch(cleanUp());
     }, [dispatch, spotId]);
 
@@ -57,13 +46,10 @@ const SpotDetails = () => {
     };
     let reviewMadness = (reviewCount, spotsInfo) => {
         if (parseInt(reviewCount) > 1) {
-            console.log("this is reviewcount", reviewCount);
             return <div>{reviewCount} Reviews</div>;
         } else if (parseInt(reviewCount) === 1) {
-            console.log("this is reviewcount", typeof reviewCount, reviewCount);
             return <div>{reviewCount} Review</div>;
         } else {
-            console.log("this is reviewcount", reviewCount);
             return (
                 <div
                     className={
@@ -164,10 +150,10 @@ const SpotDetails = () => {
                                 </div>
                             </div>
                             <button
-                                className={user.user.id === spotsInfo.id ? "oval-button-gray" : "reserve-a-spot"}
+                                className={user.user.id === spotsInfo.ownerId ? "oval-button-gray" : "reserve-a-spot"}
                                 onClick={() => window.alert("Feature Coming Soon...")}
                             >
-                                Reserve
+                                {user.user.id === spotsInfo.ownerId ? "Unavailable" : "Reserve"}
                             </button>
                         </div>
                     </div>
@@ -250,7 +236,6 @@ const SpotDetails = () => {
             ) : (
                 <div>Loading</div>
             )}
-            {console.log("spot detail end jsx running")}
         </>
     );
 };

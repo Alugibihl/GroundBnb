@@ -16,7 +16,7 @@ const AllSpots = () => {
     if (!spots.length) { return null }
     // console.log('***********************', spots, spotsInfo);
     return (
-        <div>
+        <div className="border-holder">
             <ul className='spots-board'>
                 {spots !== null ? spots.map(spot => (
                     <SingleSpot spot={spot} key={spot.id} />

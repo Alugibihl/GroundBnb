@@ -3,6 +3,15 @@ html {
     color: rgb(58, 20, 20);
     font-size: 14pt;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    /* background-color: #A9876F; */
+    /* background-color: #8B6B61; */
+    /* background-color: #D2B48C; */
+    /* background-color: #519872; */
+    /* background-color: #669966; */
+    /* background-color: #93C572; */
+    /* background-color: #D8D8D8; */
+    /* background-color: #EAEAEA; */
+    background-color: #F5F5F5;
 }
 
 button {
@@ -91,7 +100,7 @@ img {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: px;
+    /* gap: px; */
 }
 
 .i {
@@ -106,6 +115,7 @@ img {
 .review-holder {
     /* border: 2px solid red; */
     margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 .review-description {
@@ -122,10 +132,13 @@ img {
 .oval-button-gray {
     color: gray;
     background-color: white;
-    cursor: not-allowed;
     pointer-events: none;
     opacity: 0.6;
     margin-top: auto;
     margin-bottom: 5px;
     width: 85%;
+}
+
+.oval-button-gray:hover {
+    cursor: not-allowed;
 }
