@@ -102,3 +102,30 @@ img {
 .wrap-break {
     word-wrap: break-word;
 }
+
+.review-holder {
+    /* border: 2px solid red; */
+    margin-left: 20px;
+}
+
+.review-description {
+    max-width: 70vw;
+}
+
+.button-holder {
+    margin-top: 5px;
+    margin-left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.oval-button-gray {
+    color: gray;
+    background-color: white;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+    margin-top: auto;
+    margin-bottom: 5px;
+    width: 85%;
+}
