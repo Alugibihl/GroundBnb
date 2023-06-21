@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import UsersReviews from './UsersReviews'
 import { getReviewsbyUser } from '../../store/reviewReducer'
 import './Reviews.css'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 
 const ManageReviews = () => {
     const userReviews = useSelector((state) => state.reviews)
@@ -14,14 +15,14 @@ const ManageReviews = () => {
     }, [dispatch])
     console.log("fish", userReviews);
     let reviews = Object.values(userReviews)
-    if (!reviews.length) { return null }
+    if (!reviews) { return null }
     return (
-        <div>
+        <div className='all-base'>
             <h4>Manage Reviews</h4>
             <ul className='spots-board'>
-                {reviews !== null ? reviews.map(review => (
+                {reviews.length ? reviews.map(review => (
                     <UsersReviews review={review} key={review.id} />
-                )) : null
+                )) : <button className="title-page-position"><NavLink className="new-spot-link" to={'/'}>Return Home</NavLink></button>
                 }
             </ul>
         </div>
