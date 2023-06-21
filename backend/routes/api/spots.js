@@ -56,8 +56,9 @@ const validateSpot = [
 const validateReview = [
     check('review')
         .exists({ checkFalsy: true })
+        .isLength({ min: 2, max: 240 })
         .notEmpty()
-        .withMessage("Review text is required"),
+        .withMessage("Review must be between 2 and 240 characters"),
     check('stars')
         .exists({ checkFalsy: true })
         .notEmpty()
@@ -275,11 +276,7 @@ router.get('/current', requireAuth, async (req, res) => {
         delete spot.SpotImages
         delete spot.Reviews
     }
-    // if (!spotsList.length) {
-    //     return res.status(404).json({
-    //         message: "Spot couldn't be found",
-    //     })
-    // }
+
     res.json({ "spots": spotsList })
 })
 
@@ -316,7 +313,8 @@ router.get('/:spotId', async (req, res) => {
                 spotId: spot.id
             },
             attributes: [[sequelize.fn('COUNT', sequelize.col("review")), "numReviews"]]
-        }) //find the object you want at index, then the container, then the value
+        })
+        //find the object you want at index, then the container, then the value
         spot.numReviews = reviewsBySpotCount[0].dataValues.numReviews
         let spotAvgReviews = reviewsBySpot.toJSON().avgRating
         if (spotAvgReviews) {
@@ -453,7 +451,6 @@ router.get('/:spotId/reviews', async (req, res) => {
 
             }
         }
-
         for (let image of images) {
             if (image.dataValues.preview === true) {
 
@@ -463,9 +460,7 @@ router.get('/:spotId/reviews', async (req, res) => {
                 thing.previewImage = 'No preview image found'
             }
             if (!spotsList.includes(thing)) {
-
                 spotsList.push(thing)
-
             }
         }
     }
@@ -575,7 +570,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         let bookedStartTime = bookedstart.getTime()
         let bookedend = new Date(books.endDate)
         let bookedendTime = bookedend.getTime()
-
         let startingDate = new Date(startDate)
         let startingDateTime = startingDate.getTime()
         let endingDate = new Date(endDate)
@@ -583,14 +577,16 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         let today = new Date()
 
         if (startingDateTime >= endingDateTime) {
-            return res.status(400).json({
+            console.log("-----------------------------------hit me");
+            return res.status(418).json({
                 "message": "Validation error",
-                "statusCode": 400,
+                "statusCode": 418,
                 "errors": {
-                    "endDate": "endDate cannot come before startDate"
+                    "endDate": "endDate cannot come before startDate or be the same"
                 }
             })
         }
+        
         if (startingDateTime <= today) {
             return res.status(403).json({
                 "message": "Past bookings can't be created",

@@ -125,20 +125,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId)
     if (!booking) {
@@ -159,11 +145,5 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         "statusCode": 200
     })
 })
-
-
-
-
-
-
 
 module.exports = router;

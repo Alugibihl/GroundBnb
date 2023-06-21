@@ -10,7 +10,7 @@ const validateReviews = [
         .exists({ checkFalsy: true })
         .isLength({ min: 2, max: 240 })
         .notEmpty()
-        .withMessage("Review text is required"),
+        .withMessage("Review must be between 2 and 240 characters"),
     check('stars')
         .exists({ checkFalsy: true })
         .notEmpty()

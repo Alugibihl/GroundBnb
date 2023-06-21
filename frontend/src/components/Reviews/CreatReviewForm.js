@@ -2,10 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
-import './Reviews.css'
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { getSpotsDetail } from "../../store/spotsReducer";
+import './Reviews.css'
 
 const CreateReviewForm = ({ spot }) => {
     const user = useSelector((state) => state.session)
@@ -14,7 +13,6 @@ const CreateReviewForm = ({ spot }) => {
     const [stars, setStars] = useState(0)
     const [errors, setErrors] = useState("")
     const [showMenu, setShowMenu] = useState(false);
-    const history = useHistory()
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
@@ -34,9 +32,9 @@ const CreateReviewForm = ({ spot }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('handle submit running')
-        const reviewDetails = { spotId, reviewDetails, stars }
-        return dispatch(createReview(reviewDetails))
+        console.log('handle submit running', reviewDetails)
+        const reviewInfo = { spotId, reviewDetails, stars }
+        return dispatch(createReview(reviewInfo))
             .then(dispatch(getSpotsDetail(spotId)))
             .then(closeModal)
             .catch(async (res) => {
@@ -50,10 +48,10 @@ const CreateReviewForm = ({ spot }) => {
         setStars(parseInt(number));
     };
     return (
-        <div className="review-form">
+        <div className="booking modal">
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
-                {errors.review && <p className="errors">{errors.review}</p>}
+                {errors.reviewDetails && <p className="errors">{errors.reviewDetails}</p>}
                 {errors.stars && <p className="errors">{errors.star}</p>}
                 <label>
                     <input
@@ -71,7 +69,7 @@ const CreateReviewForm = ({ spot }) => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={reviewDetails.length >= 10 && stars > 0 ? false : true} type="submit">Submit Your Review</button>
+                <button disabled={reviewDetails.length >= 2 && stars >= 1 && stars <= 5 ? false : true} type="submit">Submit Your Review</button>
             </form>
         </div>
     )

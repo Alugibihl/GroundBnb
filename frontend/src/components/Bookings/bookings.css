@@ -4,3 +4,10 @@
     font-size: 14pt;
     width: 100%;
 }
+
+.booking-modal {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: 40vh;
+}

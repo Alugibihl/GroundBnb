@@ -21,7 +21,7 @@ const ManageBookings = () => {
 
     return (
         <div className='all-base'>
-            <h4 className="title-page-position">Your Bookings</h4>
+            {bookings.length > 0 && <h4 className="title-page-position">Your Bookings</h4>}
             <ul className='spots-board'>
                 {bookings.length > 0 ? bookings.map(booking => (
                     <div className='spot-card' key={booking.id}>
@@ -33,7 +33,11 @@ const ManageBookings = () => {
                             </div>
                         </NavLink>
                         <div ></div>
-                    </div>)) : <button className="title-page-position"><NavLink className="new-spot-link" to={'/'}>Create a new Booking!</NavLink></button>
+                    </div>)) :
+                    <div>
+                        <h4>No Bookings Yet</h4>
+                        <button className="title-page-position"><NavLink className="new-spot-link" to={'/'}>Find your next adventure!</NavLink></button>
+                    </div>
                 }
             </ul>
         </div>
