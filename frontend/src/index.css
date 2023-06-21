@@ -12,9 +12,8 @@ html {
     /* background-color: #D8D8D8; */
     /* background-color: #EAEAEA; */
     /* background-color: #F5F5F5; */
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.camelotdesign.net%2Fwp-content%2Fuploads%2F2020%2F05%2FiStock_000006201665_Small-e1590079806191.jpg&f=1&nofb=1&ipt=f77376161b488e59fcf572f31770f16ff3deccb7927d365f706f2cb537181135&ipo=images");
-    background-size: 100vw, 300%;
-    /* background-repeat: no-repeat; */
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.housemanpest.com%2Fwp-content%2Fuploads%2F2017%2F12%2Fgrass-roots.jpeg&f=1&nofb=1&ipt=70a2649de743ea4c25512149d6c46f5ba2b4caf539fb52f35bc3ee71d5ff65be&ipo=images");
+    background-size: 100vw, 240%;
     background-position: center;
     display: flex;
     justify-content: center;
@@ -107,9 +106,6 @@ img {
     text-align: center;
     display: flex;
     flex-direction: column;
-    background-color: #F5F5F5;
-
-    /* gap: px; */
 }
 
 .i {
