@@ -8,6 +8,8 @@ import UsersReviewsModal from "../Reviews/UsersReviewsModal";
 import CreateReviewForm from "../Reviews/CreatReviewForm";
 import EditReviewForm from "../Reviews/EditReviewForm";
 import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import CreateBookingModal from "../Bookings/CreateBooking";
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -102,7 +104,7 @@ const SpotDetails = () => {
                     <div className="subtitle">
                         {spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}
                     </div>
-                    {console.log("this is spotsInfo inside the return", spotsInfo)}
+                    {console.log("this is spotsInfo inside the return", spotsInfo, user)}
                     {spotsInfo?.SpotImages?.length > 0 ? (
                         <div className="images-box">
                             <img
@@ -149,12 +151,17 @@ const SpotDetails = () => {
                                             : null}
                                 </div>
                             </div>
-                            <button
-                                className={user.user.id === spotsInfo.ownerId ? "oval-button-gray" : "reserve-a-spot"}
-                                onClick={() => window.alert("Feature Coming Soon...")}
-                            >
-                                {user.user.id === spotsInfo.ownerId ? "Unavailable" : "Reserve"}
-                            </button>
+                            {user.user === null && <OpenModalButton className="oval-button-gray-variable"
+                                onButtonClick={closeMenu} buttonText={"Sign In to Book"}
+                                modalComponent={<LoginFormModal />} />}
+                            {user.user && user?.user?.id === spotsInfo?.ownerId && <button
+                                className="oval-button-gray"> Unavailable </button>}
+                            {user.user && user?.user?.id !== spotsInfo?.ownerId && <OpenModalButton
+                                className="reserve-a-spot"
+                                buttonText="Reserve"
+                                onButtonClick={closeMenu}
+                                modalComponent={<CreateBookingModal spot={spotsInfo} />}
+                            />}
                         </div>
                     </div>
                     <div className="review-holder">
@@ -232,7 +239,7 @@ const SpotDetails = () => {
                             })}
                         </div>
                     </div>
-                </div>
+                </div >
             ) : (
                 <div>Loading</div>
             )}

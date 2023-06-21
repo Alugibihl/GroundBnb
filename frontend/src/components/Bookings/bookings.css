@@ -1,0 +1,6 @@
+.aligner {
+    display: flex;
+    flex-direction: column;
+    font-size: 14pt;
+    width: 100%;
+}

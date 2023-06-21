@@ -3,6 +3,7 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import { useState, useRef, useEffect } from 'react';
 import UsersSpotsModal from './UsersSpotsModal'
 import './Spots.css'
+import OpenModalButton from '../OpenModalButton';
 
 const UsersSpots = ({ spot }) => {
     const history = useHistory()
@@ -34,8 +35,8 @@ const UsersSpots = ({ spot }) => {
                         </div>  </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
                 <div ><button onClick={updater}>Update</button>
-                    <button><OpenModalMenuItem itemText='Delete'
-                        onItemClick={closeMenu} modalComponent={<UsersSpotsModal spot={spot} />} /> </button></div>
+                    <OpenModalButton buttonText='Delete'
+                        onButtonClick={closeMenu} modalComponent={<UsersSpotsModal spot={spot} />} /></div>
             </nav>
         </>
     );

@@ -12,7 +12,7 @@ html {
     /* background-color: #D8D8D8; */
     /* background-color: #EAEAEA; */
     /* background-color: #F5F5F5; */
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.housemanpest.com%2Fwp-content%2Fuploads%2F2017%2F12%2Fgrass-roots.jpeg&f=1&nofb=1&ipt=70a2649de743ea4c25512149d6c46f5ba2b4caf539fb52f35bc3ee71d5ff65be&ipo=images");
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../public/assets/grass-ground.jpg");
     background-size: 100vw, 240%;
     background-position: center;
     display: flex;
@@ -135,16 +135,24 @@ img {
 }
 
 .oval-button-gray {
-    color: gray;
+    color: rgb(58, 20, 20);
     background-color: white;
     pointer-events: none;
     opacity: 0.6;
     margin-top: auto;
     margin-bottom: 5px;
     width: 85%;
+    cursor: not-allowed;
 }
 
-.oval-button-gray:hover {
+.oval-button-gray-variable {
+    color: rgb(58, 20, 20);
+    background-color: white;
+    /* pointer-events: none; */
+    opacity: 0.6;
+    margin-top: auto;
+    margin-bottom: 5px;
+    width: 85%;
     cursor: not-allowed;
 }
 

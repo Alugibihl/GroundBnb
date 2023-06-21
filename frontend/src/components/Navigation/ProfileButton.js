@@ -54,10 +54,14 @@ function ProfileButton({ user }) {
                     <>
                         <p>Hello, {user.firstName}<br />
                             {user.email}</p>
-                        <p className="current-links"><NavLink className={"current-user-spots"}
-                            to={'/spots/current'}>Manage Spots</NavLink>
+                        <p className="current-links">
+                            <NavLink className={"current-user-spots"}
+                                to={'/spots/current'}>Manage Spots</NavLink>
                             <NavLink className={"current-user-reviews"}
-                                to={'/reviews/current'}>Manage Reviews</NavLink></p>
+                                to={'/reviews/current'}>Manage Reviews</NavLink>
+                            <NavLink className={"current-user-reviews"}
+                                to={'/bookings/current'}>Manage Bookings</NavLink></p>
+
                         <button onClick={logout}>Log Out</button>
 
                     </>
@@ -75,8 +79,9 @@ function ProfileButton({ user }) {
                         />
 
                     </>
-                )}
-            </div>
+                )
+                }
+            </div >
         </>
     );
 }
