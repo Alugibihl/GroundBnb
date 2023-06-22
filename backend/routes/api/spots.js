@@ -5,6 +5,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize');
+const { singleMulterUpload, singlePublicFileUpload, multiplePublicFileUpload, multipleMulterUpload } = require('../../awsS3');
 
 const validateSpot = [
     check('address')
@@ -336,7 +337,7 @@ router.get('/:spotId', async (req, res) => {
     res.json(spotsList[0])
 })
 //adds an image to a spot based on id
-router.post('/:spotId/images', requireAuth, async (req, res) => {
+router.post('/:spotId/images', multipleMulterUpload, requireAuth, async (req, res) => {
     const spotId = req.params.spotId
     const owner = await Spot.findByPk(spotId)
     if (!owner) {
@@ -351,7 +352,8 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
             "statusCode": 403
         })
     }
-    const { url, preview } = req.body
+    const { preview } = req.body
+    const url = await multiplePublicFileUpload(req.file)
     const image = await SpotImage.create({ spotId, url, preview })
     const pic = image.toJSON()
     delete pic.spotId

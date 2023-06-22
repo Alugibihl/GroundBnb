@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { editBookingThunk, getUserBookingsThunk } from "../../store/bookings";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const EditBookingModal = ({ booking, spot }) => {
@@ -16,7 +15,6 @@ const EditBookingModal = ({ booking, spot }) => {
     const { closeModal } = useModal();
     const [startDate, setStartDate] = useState(booking.startDate ? new Date(booking.startDate) : new Date());
     const [endDate, setEndDate] = useState(booking.endDate ? new Date(booking.endDate) : new Date());
-    const history = useHistory()
     const [errors, setErrors] = useState({})
     // console.log("booking", booking, "spot", spot);
 

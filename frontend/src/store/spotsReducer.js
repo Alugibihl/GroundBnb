@@ -64,6 +64,22 @@ export const createSpot = (data) => async (dispatch) => {
     dispatch(add(spot))
     return spot
 }
+export const addImage = (data) => async (dispatch) => {
+    const { spotId, images } = data;
+    const formData = new FormData();
+
+    for (let i = 0; i < images.length; ++i) {
+        let image = images[i];
+        formData.append("images", image.file);
+    }
+    const res = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        body: formData,
+    });
+    const imaged = await res.json();
+    dispatch(getSpotsDetail(spotId));
+    return true;
+};
 export const deleteSpot = (spotId) => async (dispatch) => {
     await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE',
@@ -73,24 +89,6 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     })
     dispatch(removeSpot(spotId))
     return spotId
-}
-export const addImage = (data) => async (dispatch) => {
-    let { spotId, imagehold } = data
-    for (let i = 0; i < imagehold.length; ++i) {
-        let image = imagehold[i]
-        const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ url: image.url, preview: image.preview })
-        })
-        if (!response.ok) return
-        const images = await response.json()
-        // console.log('this is returned image in add image thunk!!!!!', images);
-    }
-    dispatch(getSpotsDetail(spotId))
-    return true
 }
 export const editSpot = (spotToUpdate) => async (dispatch) => {
     let { spotAspects, spotsId } = spotToUpdate
