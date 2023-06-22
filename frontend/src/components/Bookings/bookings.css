@@ -11,3 +11,22 @@
     width: 50vw;
     height: 40vh;
 }
+
+.date-holder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    border: green 2px solid;
+}
+
+.date-holder input {
+    width: 100%;
+    border: red solid 2px;
+}
+
+.bookings-buttons {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}

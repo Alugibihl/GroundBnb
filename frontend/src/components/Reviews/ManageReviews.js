@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import UsersReviews from './UsersReviews'
 import { getReviewsbyUser } from '../../store/reviewReducer'
-import './Reviews.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
+import UsersReviews from './UserReviews'
+import './Reviews.css'
 
 const ManageReviews = () => {
     const userReviews = useSelector((state) => state.reviews)
@@ -13,7 +13,6 @@ const ManageReviews = () => {
         dispatch(getReviewsbyUser())
 
     }, [dispatch])
-    console.log("fish", userReviews);
     let reviews = Object.values(userReviews)
     if (!reviews) { return null }
     return (

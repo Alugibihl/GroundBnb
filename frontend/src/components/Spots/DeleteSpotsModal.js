@@ -3,7 +3,7 @@ import { deleteSpot } from '../../store/spotsReducer';
 import OpenModalButton from "../OpenModalButton";
 
 
-const UsersSpotsModal = ({ spot }) => {
+const DeleteSpotsModal = ({ spot }) => {
     const dispatch = useDispatch()
     console.log('this is spot in modal', spot)
 
@@ -27,4 +27,4 @@ const UsersSpotsModal = ({ spot }) => {
 }
 
 
-export default UsersSpotsModal
+export default DeleteSpotsModal

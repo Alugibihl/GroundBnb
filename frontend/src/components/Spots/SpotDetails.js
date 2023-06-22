@@ -4,12 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { getSpotsDetail } from "../../store/spotsReducer";
 import { cleanUp, getReviewsBySpot } from "../../store/reviewReducer";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import UsersReviewsModal from "../Reviews/UsersReviewsModal";
 import CreateReviewForm from "../Reviews/CreatReviewForm";
 import EditReviewForm from "../Reviews/EditReviewForm";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import CreateBookingModal from "../Bookings/CreateBooking";
+import ReviewDeleteModal from "../Reviews/DeleteReview";
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -42,6 +42,7 @@ const SpotDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
+
     let date = (time) => {
         let updated = new Date(time);
         return updated;
@@ -60,13 +61,11 @@ const SpotDetails = () => {
                             : "new-review-area"
                     }
                 >
-                    <button>
-                        <OpenModalMenuItem
-                            itemText="Post Your Review"
-                            onItemClick={closeMenu}
-                            modalComponent={<CreateReviewForm spot={spotsInfo} />}
-                        />
-                    </button>
+                    <OpenModalButton
+                        buttonText="Post Your Review"
+                        onButtonClick={closeMenu}
+                        modalComponent={<CreateReviewForm spot={spotsInfo} />}
+                    />
                     <div>Be the first to post a review!</div>
                 </div>
             );
@@ -230,7 +229,7 @@ const SpotDetails = () => {
                                                 <OpenModalButton
                                                     buttonText="Delete"
                                                     onButtonClick={closeMenu}
-                                                    modalComponent={<UsersReviewsModal review={review} />}
+                                                    modalComponent={<ReviewDeleteModal review={review} />}
                                                 />
                                             </div>
                                         ) : null}

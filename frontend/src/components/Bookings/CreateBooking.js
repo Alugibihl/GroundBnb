@@ -34,36 +34,28 @@ const CreateBookingModal = ({ spot }) => {
             history.push("/bookings/current");
         }
     }
-    //     const data = await dispatch(createBookingThunk(bookingData))
-    //     if (data && data.errors) {
-    //         console.log("errors", data, data.errors);
-    //         setErrors(data.errors);
-    //     }
-    //     else if (data) {
-    //         closeModal();
-    //         history.push("/bookings/current")
-    //     }
-    // };
 
     return (
         <div className="booking-form">
             <h2>Create your Booking</h2>
             <form onSubmit={handleSubmit}>
-                <p className="errors">{errors.startDate}</p>
-                <div>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                    />
+                <div className="errors">{errors.startDate}</div>
+                <div className="errors">{errors.endDate}</div>
+                <div className="date-holder">
+                    <div>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                        />
+                    </div>
+                    <div>
+                        <DatePicker
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
+                        />
+                    </div>
                 </div>
-                <p className="errors">{errors.endDate}</p>
-                <div>
-                    <DatePicker
-                        selected={endDate}
-                        onChange={(date) => setEndDate(date)}
-                    />
-                </div>
-                <div>
+                <div className="bookings-buttons">
                     <button onClick={closeModal}>Cancel</button>
                     <button type="submit">Create Booking</button>
                 </div>

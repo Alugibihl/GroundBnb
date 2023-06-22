@@ -577,7 +577,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         let today = new Date()
 
         if (startingDateTime > endingDateTime) {
-            console.log("-----------------------------------hit me");
             return res.status(400).json({
                 "message": "Departure cannot be before arrival",
                 "statusCode": 400,
@@ -587,7 +586,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             })
         }
         if (startingDateTime === endingDateTime) {
-            console.log("-----------------------------------hit me");
             return res.status(400).json({
                 "message": "Bookings must be atleast 1 day.",
                 "statusCode": 400,
