@@ -17,12 +17,12 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 20px;
-    border: green 2px solid;
+    /* border: green 2px solid; */
 }
 
 .date-holder input {
     width: 100%;
-    border: red solid 2px;
+    /* border: red solid 2px; */
 }
 
 .bookings-buttons {

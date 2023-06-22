@@ -97,7 +97,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         let bookedStartTime = bookedstart.getTime()
         let bookedend = new Date(books.endDate)
         let bookedendTime = bookedend.getTime()
-
         let startingDate = new Date(startDate)
         let startingDateTime = startingDate.getTime()
         let endingDate = new Date(endDate)
@@ -122,7 +121,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                 }
             })
         }
-        if (startingDateTime <= today) {
+        if (startingDateTime < today) {
             return res.status(403).json({
                 "message": "Past bookings can't be created",
                 "statusCode": 403,
@@ -168,8 +167,12 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                 }
             })
         }
-        if (startDate) updatedBooking.startDate = startingDate
-        if (endDate) updatedBooking.endDate = endingDate
+        if (startDate !== undefined) {
+            updatedBooking.startDate = new Date(startDate);
+        }
+        if (endDate !== undefined) {
+            updatedBooking.endDate = new Date(endDate);
+        }
     }
     await updatedBooking.save()
     res.json(updatedBooking)

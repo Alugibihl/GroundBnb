@@ -16,8 +16,6 @@ const EditBookingModal = ({ booking, spot }) => {
     const { closeModal } = useModal();
     const [startDate, setStartDate] = useState(booking.startDate ? new Date(booking.startDate) : new Date());
     const [endDate, setEndDate] = useState(booking.endDate ? new Date(booking.endDate) : new Date());
-    // const [startDate, setStartDate] = useState(booking.startDate ? booking.startDate : new Date());
-    // const [endDate, setEndDate] = useState(booking.endDate ? booking.endDate : new Date());
     const history = useHistory()
     const [errors, setErrors] = useState({})
     console.log("booking", booking, "spot", spot);
@@ -25,20 +23,25 @@ const EditBookingModal = ({ booking, spot }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("before", startDate, endDate);
         const bookingData = {
             spotId: spot.id,
-            startDate,
-            endDate,
+            startDate: startDate.toISOString().split("T")[0],
+            endDate: endDate.toISOString().split("T")[0],
         };
         const info = { bookingId: booking.id, bookingData }
         console.log("bookingData", bookingData, "info", info);
         const data = await dispatch(editBookingThunk(info));
-        if (!data.id && (data.startDate || data.endDate)) {
-            setErrors(data);
-        } else {
-            closeModal();
-            history.push("/bookings/current");
-        }
+        console.log("this is data in edit boooking handle submit", data);
+        // if (data.errors) {
+        //     console.log("data", data);
+        //     setErrors(data);
+        // } else {
+        closeModal();
+        history.push("/bookings/current");
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        // }
     }
 
     const unavailable = bookings?.map(ele => ({ start: new Date(ele.startDate), end: new Date(ele.endDate) }));

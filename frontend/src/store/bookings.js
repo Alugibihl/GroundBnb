@@ -77,6 +77,7 @@ export const editBookingThunk = (data) => async (dispatch) => {
             body: JSON.stringify(info),
         });
         if (response.ok) {
+            console.log("hellooo");
             const booked = await response.json();
             dispatch(editBooking(booked));
             return booked;
