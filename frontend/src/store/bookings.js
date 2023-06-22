@@ -66,27 +66,27 @@ export const createBookingThunk = (data) => async (dispatch) => {
     }
 }
 export const editBookingThunk = (data) => async (dispatch) => {
-    const { bookingId, info } = data;
-    console.log('edit booking thunk running', data, info, bookingId);
+    const { bookingId, bookingData } = data;
+    console.log('edit booking thunk running', bookingData, bookingId);
     try {
         const response = await csrfFetch(`/api/bookings/${bookingId}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(info),
+            body: JSON.stringify(bookingData),
         });
         if (response.ok) {
             console.log("hellooo");
             const booked = await response.json();
+            console.log("this is booked in response", booked);
             dispatch(editBooking(booked));
             return booked;
         }
     } catch (e) {
         let data = await e.json();
-        console.log("look at Eeeeeeeeeeeeeeeeeeeeee", data.message);
         if (data.errors) {
-            return data.errors;
+            return data;
         }
     }
 };

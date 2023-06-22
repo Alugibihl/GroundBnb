@@ -88,6 +88,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         })
     }
     const { startDate, endDate } = req.body
+    console.log("-----------------", startDate, endDate)
     let bookingsList = []
     for (let bookings of spotBookings) {
         bookingsList.push(bookings.toJSON())

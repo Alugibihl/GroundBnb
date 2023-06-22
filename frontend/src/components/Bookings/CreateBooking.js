@@ -53,6 +53,7 @@ const CreateBookingModal = ({ spot }) => {
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             excludeDateIntervals={unavailable}
+                            minDate={new Date()}
                         />
                     </div>
                     <div>
@@ -60,6 +61,7 @@ const CreateBookingModal = ({ spot }) => {
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
                             excludeDateIntervals={unavailable}
+                            minDate={new Date()}
                         />
                     </div>
                 </div>

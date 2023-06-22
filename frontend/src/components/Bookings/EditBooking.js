@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import { editBookingThunk } from "../../store/bookings";
+import { editBookingThunk, getUserBookingsThunk } from "../../store/bookings";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
@@ -30,18 +30,16 @@ const EditBookingModal = ({ booking, spot }) => {
             endDate: endDate.toISOString().split("T")[0],
         };
         const info = { bookingId: booking.id, bookingData }
-        console.log("bookingData", bookingData, "info", info);
+        console.log("bookingData", bookingData, "info------------------------------", info);
         const data = await dispatch(editBookingThunk(info));
         console.log("this is data in edit boooking handle submit", data);
-        // if (data.errors) {
-        //     console.log("data", data);
-        //     setErrors(data);
-        // } else {
-        closeModal();
-        history.push("/bookings/current");
-        setStartDate(new Date(data.startDate));
-        setEndDate(new Date(data.endDate));
-        // }
+        if (data.errors) {
+            console.log("data", data.errors);
+            setErrors(data.errors);
+        } else {
+            closeModal();
+            await dispatch(getUserBookingsThunk())
+        }
     }
 
     const unavailable = bookings?.map(ele => ({ start: new Date(ele.startDate), end: new Date(ele.endDate) }));
@@ -50,14 +48,15 @@ const EditBookingModal = ({ booking, spot }) => {
         <div className="booking-form">
             <h2>Edit your Booking</h2>
             <form onSubmit={handleSubmit}>
-                <div className="errors">{errors.startDate}</div>
-                <div className="errors">{errors.endDate}</div>
+                {errors.startDate && <div className="errors">{errors.startDate}</div>}
+                {errors.endDate && < div className="errors">{errors.endDate}</div>}
                 <div className="date-holder">
                     <div>
                         <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             excludeDateIntervals={unavailable}
+                            minDate={new Date()}
                         />
                     </div>
                     <div>
@@ -65,6 +64,7 @@ const EditBookingModal = ({ booking, spot }) => {
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
                             excludeDateIntervals={unavailable}
+                            minDate={new Date()}
                         />
                     </div>
                 </div>
@@ -72,8 +72,8 @@ const EditBookingModal = ({ booking, spot }) => {
                     <button onClick={closeModal}>Cancel</button>
                     <button type="submit">Edit Booking</button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 };
 

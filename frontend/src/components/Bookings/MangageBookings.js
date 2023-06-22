@@ -33,9 +33,10 @@ const ManageBookings = () => {
 
 
     if (!userbookings) return null
+
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "short", day: "numeric" };
-        return new Date(dateString).toLocaleDateString(undefined, options);
+        return new Date(dateString).toLocaleDateString(navigator.language, options);
     };
 
 
