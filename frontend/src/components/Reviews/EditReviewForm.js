@@ -16,7 +16,7 @@ const EditReviewForm = ({ review, spot }) => {
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
-    console.log('spotId', spotId, 'user', user, "review", review)
+    // console.log('spotId', spotId, 'user', user, "review", review)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -32,7 +32,6 @@ const EditReviewForm = ({ review, spot }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('handle submit running')
         const data = { spotId: spotId, review: reviewDetails, stars: stars }
         const reviewInfo = { reviewId: review.id, data }
         return dispatch(editReviewThunk(reviewInfo))

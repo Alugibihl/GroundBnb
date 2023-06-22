@@ -14,7 +14,7 @@ const ManageBookings = () => {
     const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
 
-    console.log("in manage spot", userbookings, bookings)
+    // console.log("in manage spot", userbookings, bookings)
     useEffect(() => {
         dispatch(getUserBookingsThunk())
     }, [dispatch])

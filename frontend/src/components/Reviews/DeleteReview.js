@@ -6,7 +6,6 @@ import { useModal } from "../../context/Modal";
 const ReviewDeleteModal = ({ review }) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
-    console.log('this is review in modal', review)
 
     let deleter = async () => {
         await dispatch(deleteReview(review.id))

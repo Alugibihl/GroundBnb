@@ -20,7 +20,6 @@ const UsersReviews = ({ review }) => {
     }, [dispatch])
     let spots = Object.values(userSpots)
     let userSpot = spots?.find((spot) => spot.id === review.spotId)
-    console.log('spots', spots, userSpot, review)
     useEffect(() => {
         if (!showMenu) return;
 

@@ -26,7 +26,6 @@ export const cleanUp = () => ({
     type: CLEANER
 })
 export const getReviewsbyUser = () => async (dispatch) => {
-    console.log('in get reviews by user')
     const response = await csrfFetch('/api/reviews/current')
     if (response.ok) {
         const reviews = await response.json()
@@ -45,17 +44,14 @@ export const deleteReview = (reviewId) => async (dispatch) => {
 }
 
 export const getReviewsBySpot = (spotId) => async (dispatch) => {
-    console.log('in get spot reviews thunk', spotId)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const reviews = await response.json()
-        console.log('in getReviews return', reviews)
         dispatch(spotLoad(reviews))
     }
 }
 export const createReview = (data) => async (dispatch) => {
     const { spotId, reviewDetails, stars } = data
-    console.log('create review thunk running', data)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: {
@@ -64,13 +60,11 @@ export const createReview = (data) => async (dispatch) => {
         body: JSON.stringify({ review: reviewDetails, stars: stars })
     })
     const review = await response.json()
-    console.log('this is returned review in create a review thunk', review)
     dispatch(add(review))
     return review
 }
 export const editReviewThunk = (datas) => async (dispatch) => {
     const { reviewId, data } = datas
-    console.log('edit review thunk running', datas, data, reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: {
@@ -79,7 +73,6 @@ export const editReviewThunk = (datas) => async (dispatch) => {
         body: JSON.stringify(data)
     })
     const reviewed = await response.json()
-    console.log('this is returned review in edit a review thunk', reviewed)
     dispatch(editReview(reviewed))
     return reviewed
 }
@@ -92,13 +85,11 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.Reviews.forEach(review => allSpotReviews[review.id] = review)
             return allSpotReviews
         case ADD:
-            console.log('add case running in review reducer', action)
             return {
                 ...state,
                 [action.review.id]: action.review
             }
         case EDIT:
-            console.log('add case running in review reducer', action)
             return {
                 ...state,
                 [action.review.id]: action.review

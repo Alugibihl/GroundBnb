@@ -40,9 +40,7 @@ export const logout = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
         method: 'DELETE',
     });
-    console.log('in logout thunk')
     dispatch(removeUser());
-    console.log('response', response)
     return response;
 };
 export const signup = (user) => async (dispatch) => {

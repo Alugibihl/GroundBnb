@@ -34,7 +34,6 @@ function ProfileButton({ user }) {
     const closeMenu = () => setShowMenu(false);
 
     const logout = (e) => {
-        console.log('on click logout')
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();

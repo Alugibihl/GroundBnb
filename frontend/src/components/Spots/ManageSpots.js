@@ -8,7 +8,6 @@ import './Spots.css'
 const ManageSpots = () => {
     const userSpots = useSelector((state) => state.spots)
     const dispatch = useDispatch()
-    console.log("in manage spot", userSpots)
     useEffect(() => {
         dispatch(getUserSpots())
     }, [dispatch])

@@ -18,23 +18,20 @@ const EditBookingModal = ({ booking, spot }) => {
     const [endDate, setEndDate] = useState(booking.endDate ? new Date(booking.endDate) : new Date());
     const history = useHistory()
     const [errors, setErrors] = useState({})
-    console.log("booking", booking, "spot", spot);
+    // console.log("booking", booking, "spot", spot);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("before", startDate, endDate);
+        // console.log("before", startDate, endDate);
         const bookingData = {
             spotId: spot.id,
             startDate: startDate.toISOString().split("T")[0],
             endDate: endDate.toISOString().split("T")[0],
         };
         const info = { bookingId: booking.id, bookingData }
-        console.log("bookingData", bookingData, "info------------------------------", info);
         const data = await dispatch(editBookingThunk(info));
-        console.log("this is data in edit boooking handle submit", data);
         if (data.errors) {
-            console.log("data", data.errors);
             setErrors(data.errors);
         } else {
             closeModal();

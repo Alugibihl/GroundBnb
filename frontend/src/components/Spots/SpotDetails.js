@@ -103,7 +103,6 @@ const SpotDetails = () => {
                     <div className="subtitle">
                         {spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}
                     </div>
-                    {console.log("this is spotsInfo inside the return", spotsInfo, user)}
                     {spotsInfo?.SpotImages?.length > 0 ? (
                         <div className="images-box">
                             <img

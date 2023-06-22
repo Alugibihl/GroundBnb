@@ -21,9 +21,8 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
-    //const images = useSelector((state) => state.spots[spotsId]?.SpotImages)
     const user = useSelector(state => state.session)
-    // console.log('this is user', user.user);
+
 
     useEffect(() => {
         setCountry(initialValues?.country ? initialValues?.country : "");
@@ -33,10 +32,9 @@ function SpotForm({ formType, spotsId, initialValues }) {
         setDescription(initialValues?.description ? initialValues?.description : "");
         setName(initialValues?.name ? initialValues?.name : "");
         setPrice(initialValues?.price ? initialValues?.price : "");
-        // setImage(initialValues?.image ? initialValues?.image : "");
+
     }, [initialValues]);
 
-    // console.log('incoming values', initialValues);
     useEffect(() => {
         setCountry(country)
         setAddress(address)
@@ -45,11 +43,10 @@ function SpotForm({ formType, spotsId, initialValues }) {
         setDescription(description)
         setName(name)
         setPrice(price)
-        //  setImage(image)
     }, [country, address, city, state, description, name, price])
 
     const handleSubmit = async (e) => {
-        // console.log('handle submit running')
+
         e.preventDefault();
         setErrors({})
         if (image1 !== "") imagehold.push({ url: image1, preview: true })
@@ -64,12 +61,10 @@ function SpotForm({ formType, spotsId, initialValues }) {
             updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
             const spotImages = { imagehold, spotsId }
             if (updatedSpot) {
-                // console.log('we are in edit spot', spotImages)
                 return dispatch(addImage(spotImages))
                     .then(history.push(`/spots/${spotsId}`))
                     .catch(async (res) => {
                         const data = await res.json();
-                        // console.log('this is data', data)
                         if (data && data.errors) {
                             setErrors(data.errors);
                             history.push(`/spots/${spotsId}`)
@@ -77,17 +72,14 @@ function SpotForm({ formType, spotsId, initialValues }) {
                     });
             }
         } else {
-            // console.log('we are in create spot', spotAspects)
             createdSpot = await dispatch(createSpot(spotAspects))
                 .catch(async (res) => {
                     const data = await res.json();
-                    console.log('this is data', data)
                     if (data && data.errors) {
                         setErrors(data.errors);
                     }
                 })
             const spotImages = { imagehold, spotId: createdSpot.id }
-            // console.log('spot images', spotImages);
             if (createdSpot) {
                 const newImg = await dispatch(addImage(spotImages))
                 if (newImg) history.push(`/spots/${createdSpot.id}`)

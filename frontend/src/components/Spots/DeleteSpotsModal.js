@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 const DeleteSpotsModal = ({ spot }) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
-    console.log('this is spot in modal', spot)
+    // console.log('this is spot in modal', spot)
 
     let deleter = async () => {
         await dispatch(deleteSpot(spot.id))
