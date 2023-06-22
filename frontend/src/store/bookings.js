@@ -59,25 +59,12 @@ export const createBookingThunk = (data) => async (dispatch) => {
             return booking
         }
     } catch (e) {
-        console.log("look at Eeeeeeeeeeeeeeeeeeeeee", await e.json())
-        // const data = await response.json();
-        // console.log("look at meeeeeeeeeeeeeeeeeeeee", data)
-        // if (data) {
-        //     return data;
-        // }
+        let data = await e.json();
+        console.log("look at Eeeeeeeeeeeeeeeeeeeeee", data.message)
+        if (data.errors) {
+            return data.errors;
+        }
     }
-    //     (async (response) => {
-    //         const res = await response.json()
-    //         console.log("res", res)
-    //     })
-    //      else {
-    //     console.log("look at meeeeeeeeeeeeeeeeeeeee")
-    //     const data = await response.json();
-    //     console.log("look at meeeeeeeeeeeeeeeeeeeee", data)
-    //     if (data) {
-    //         return data;
-    //     }
-    // }
 }
 
 export const editReviewThunk = (datas) => async (dispatch) => {

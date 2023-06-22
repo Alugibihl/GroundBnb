@@ -26,16 +26,24 @@ const CreateBookingModal = ({ spot }) => {
             endDate,
         };
         console.log("bookingData", bookingData);
-        const data = await dispatch(createBookingThunk(bookingData))
-        if (data && data.errors) {
-            console.log("errors", data, data.errors);
-            setErrors(data.errors);
-        }
-        else if (data) {
+        const data = await dispatch(createBookingThunk(bookingData));
+        if (data) {
+            setErrors(data);
+        } else {
             closeModal();
-            history.push("/bookings/current")
+            history.push("/bookings/current");
         }
-    };
+    }
+    //     const data = await dispatch(createBookingThunk(bookingData))
+    //     if (data && data.errors) {
+    //         console.log("errors", data, data.errors);
+    //         setErrors(data.errors);
+    //     }
+    //     else if (data) {
+    //         closeModal();
+    //         history.push("/bookings/current")
+    //     }
+    // };
 
     return (
         <div className="booking-form">

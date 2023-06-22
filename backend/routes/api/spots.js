@@ -576,32 +576,47 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         let endingDateTime = endingDate.getTime()
         let today = new Date()
 
-        if (startingDateTime >= endingDateTime) {
+        if (startingDateTime > endingDateTime) {
             console.log("-----------------------------------hit me");
-            return res.status(418).json({
-                "message": "Validation error",
-                "statusCode": 418,
+            return res.status(400).json({
+                "message": "Departure cannot be before arrival",
+                "statusCode": 400,
                 "errors": {
-                    "endDate": "endDate cannot come before startDate or be the same"
+                    "startDate": "Checkin date must be before checkout date",
                 }
             })
         }
-        
+        if (startingDateTime === endingDateTime) {
+            console.log("-----------------------------------hit me");
+            return res.status(400).json({
+                "message": "Bookings must be atleast 1 day.",
+                "statusCode": 400,
+                "errors": {
+                    "startDate": "Start date is the same as end date",
+                }
+            })
+        }
         if (startingDateTime <= today) {
             return res.status(403).json({
                 "message": "Past bookings can't be created",
-                "statusCode": 403
+                "statusCode": 403,
+                "errors": {
+                    "startDate": "All bookings must be made atleast 1 day in advance."
+                }
             })
         }
         if (endingDateTime <= today) {
             return res.status(403).json({
                 "message": "Past bookings can't be modified",
-                "statusCode": 403
+                "statusCode": 403,
+                "errors": {
+                    "endDate": "End date is in the past"
+                }
             })
         }
         if (bookedStartTime > startingDateTime && endingDateTime >= bookedendTime) {
             return res.status(403).json({
-                "message": "Sorry, this spot is already booked for the specified dates",
+                "message": `Sorry, this spot is unavailable for the specified dates until ${bookedendTime}`,
                 "statusCode": 403,
                 "errors": {
                     "startDate": "Start date conflicts with an existing booking",
@@ -611,7 +626,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         }
         if (startingDateTime === bookedStartTime || startingDateTime === bookedendTime || startingDateTime > bookedStartTime && startingDateTime < bookedendTime) {
             return res.status(403).json({
-                "message": "Sorry, this spot is already booked for the specified dates",
+                "message": `Sorry, this spot is unavailable for the specified dates until ${bookedendTime}`,
                 "statusCode": 403,
                 "errors": {
                     "startDate": "Start date conflicts with an existing booking",
