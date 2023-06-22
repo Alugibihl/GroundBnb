@@ -20,7 +20,7 @@ const DeleteBookingModal = ({ booking }) => {
                     <div className="modal-title"></div><h2 >Confirm Delete</h2></div>
                 <div className="modal-question">
                     <p>Are you sure you want to delete this Booking?</p></div>
-                <div className="delete-buttons"> <div className="continue-button"><button onClick={deleter} >Yes (Delete Review)' </button></div>
+                <div className="delete-buttons"> <div className="continue-button"><button onClick={deleter} >Yes (Delete Booking)</button></div>
                     <div className="cancel-button">
                         <button onClick={closeModal}>NO (Keep Booking) </button>  </div>
                 </div ></div>

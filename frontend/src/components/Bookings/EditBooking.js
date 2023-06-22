@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditBookingModal = ({ booking, spot }) => {
     const user = useSelector(state => state.session.user)
+    const userbookings = useSelector((state) => state.bookings)
+    const bookings = Object.values(userbookings)
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [startDate, setStartDate] = useState(booking.startDate ? new Date(booking.startDate) : new Date());
@@ -31,13 +33,15 @@ const EditBookingModal = ({ booking, spot }) => {
         const info = { bookingId: booking.id, bookingData }
         console.log("bookingData", bookingData, "info", info);
         const data = await dispatch(editBookingThunk(info));
-        if (data) {
+        if (!data.id && (data.startDate || data.endDate)) {
             setErrors(data);
         } else {
             closeModal();
             history.push("/bookings/current");
         }
     }
+
+    const unavailable = bookings?.map(ele => ({ start: new Date(ele.startDate), end: new Date(ele.endDate) }));
 
     return (
         <div className="booking-form">
@@ -50,12 +54,14 @@ const EditBookingModal = ({ booking, spot }) => {
                         <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
+                            excludeDateIntervals={unavailable}
                         />
                     </div>
                     <div>
                         <DatePicker
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
+                            excludeDateIntervals={unavailable}
                         />
                     </div>
                 </div>

@@ -4,13 +4,15 @@ import { useModal } from "../../context/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import { createBookingThunk } from "../../store/bookings";
+import { createBookingThunk, getUserBookingsThunk } from "../../store/bookings";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 
 const CreateBookingModal = ({ spot }) => {
     const user = useSelector(state => state.session.user)
+    const userbookings = useSelector((state) => state.bookings)
+    const bookings = Object.values(userbookings)
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [startDate, setStartDate] = useState(new Date());
@@ -27,13 +29,17 @@ const CreateBookingModal = ({ spot }) => {
         };
         console.log("bookingData", bookingData);
         const data = await dispatch(createBookingThunk(bookingData));
-        if (data) {
+        if (!data.id && (data.startDate || data.endDate)) {
+            console.log("data", data);
             setErrors(data);
         } else {
             closeModal();
+            await dispatch(getUserBookingsThunk())
             history.push("/bookings/current");
         }
     }
+
+    const unavailable = bookings?.map(ele => ({ start: new Date(ele.startDate), end: new Date(ele.endDate) }));
 
     return (
         <div className="booking-form">
@@ -46,12 +52,14 @@ const CreateBookingModal = ({ spot }) => {
                         <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
+                            excludeDateIntervals={unavailable}
                         />
                     </div>
                     <div>
                         <DatePicker
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
+                            excludeDateIntervals={unavailable}
                         />
                     </div>
                 </div>

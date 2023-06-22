@@ -3,7 +3,6 @@ import { deleteReview } from "../../store/reviewReducer";
 import { useModal } from "../../context/Modal";
 
 
-
 const ReviewDeleteModal = ({ review }) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()

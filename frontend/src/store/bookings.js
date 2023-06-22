@@ -89,21 +89,7 @@ export const editBookingThunk = (data) => async (dispatch) => {
         }
     }
 };
-// export const editReviewThunk = (datas) => async (dispatch) => {
-//     const { bookingId, data } = datas
-//     console.log('edit booking thunk running', datas, data, bookingId)
-//     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
-//         method: 'PUT',
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     const booked = await response.json()
-//     console.log('this is returned booking in edit a booking thunk', booked)
-//     dispatch(editBooking(booked))
-//     return booked
-// }
+
 
 export const deleteBookingThunk = (bookingId) => async (dispatch) => {
     await csrfFetch(`/api/bookings/${bookingId}`, {
@@ -126,8 +112,26 @@ const BookingReducer = (state = initialState, action) => {
             console.log("hello", action.bookings.Bookings);
             action.bookings.Bookings.forEach(booking => newState[booking.id] = booking);
             return { ...newState }
+        case CREATE_BOOKING:
+            return {
+                ...state,
+                [action.booking.id]: action.booking,
+            };
+        case EDIT_BOOKING:
+            return {
+                ...state,
+                [action.booking.id]: {
+                    ...state[action.booking.id],
+                    ...action.booking,
+                },
+            };
+        case DELETE_BOOKING:
+            newState = { ...state };
+            delete newState[action.bookingId];
+            return { ...newState };
         default:
-            return state
+            return state;
+
     }
 }
 

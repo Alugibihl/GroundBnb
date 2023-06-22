@@ -5,6 +5,7 @@ import { getUserBookingsThunk } from "../../store/bookings";
 import "./bookings.css";
 import OpenModalButton from "../OpenModalButton";
 import EditBookingModal from "./EditBooking";
+import DeleteBookingModal from "./DeleteBooking";
 
 const ManageBookings = () => {
     const userbookings = useSelector((state) => state.bookings)
@@ -51,10 +52,15 @@ const ManageBookings = () => {
                                     <div>From: {formatDate(booking.startDate)}</div><div> To: {formatDate(booking.endDate)}</div></div>
                             </div>
                         </NavLink>
-                        <div><OpenModalButton onButtonClick={closeMenu}
-                            buttonText="Edit Booking"
-                            modalComponent={<EditBookingModal booking={booking} spot={booking.Spot} />}
-                        /></div>
+                        <div className="button-orgs">
+                            <div><OpenModalButton onButtonClick={closeMenu}
+                                buttonText="Edit Booking"
+                                modalComponent={<EditBookingModal booking={booking} spot={booking.Spot} />}
+                            /></div>
+                            <div><OpenModalButton onButtonClick={closeMenu}
+                                buttonText="Delete Booking"
+                                modalComponent={<DeleteBookingModal booking={booking} spot={booking.Spot} />} /></div>
+                        </div>
                     </div>)) :
                     <div>
                         <h4>No Bookings Yet</h4>
