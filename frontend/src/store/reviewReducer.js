@@ -54,13 +54,14 @@ export const getReviewsBySpot = (spotId) => async (dispatch) => {
     }
 }
 export const createReview = (data) => async (dispatch) => {
+    const { spotId, reviewDetails, stars } = data
     console.log('create review thunk running', data)
-    const response = await csrfFetch(`/api/spots/${data.spotId}/reviews`, {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ review: reviewDetails, stars: stars })
     })
     const review = await response.json()
     console.log('this is returned review in create a review thunk', review)

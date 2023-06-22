@@ -15,6 +15,7 @@ import CreateReviewForm from "./components/Reviews/CreatReviewForm";
 import Footer from "./footer";
 import NotFound from "./components/NotFound";
 import EditReviewForm from "./components/Reviews/EditReviewForm";
+import ManageBookings from "./components/Bookings/MangageBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route exact path={'/reviews/current'}>
             <ManageReviews />
+          </Route>
+          <Route exact path={"/bookings/current"}>
+            <ManageBookings />
           </Route>
           <Route exact path={'/spots/:spotId/reviews/new'}>
             <CreateReviewForm />

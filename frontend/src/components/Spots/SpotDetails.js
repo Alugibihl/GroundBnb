@@ -4,10 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { getSpotsDetail } from "../../store/spotsReducer";
 import { cleanUp, getReviewsBySpot } from "../../store/reviewReducer";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import UsersReviewsModal from "../Reviews/UsersReviewsModal";
 import CreateReviewForm from "../Reviews/CreatReviewForm";
 import EditReviewForm from "../Reviews/EditReviewForm";
 import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import CreateBookingModal from "../Bookings/CreateBooking";
+import ReviewDeleteModal from "../Reviews/DeleteReview";
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -40,6 +42,7 @@ const SpotDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
+
     let date = (time) => {
         let updated = new Date(time);
         return updated;
@@ -58,13 +61,11 @@ const SpotDetails = () => {
                             : "new-review-area"
                     }
                 >
-                    <button>
-                        <OpenModalMenuItem
-                            itemText="Post Your Review"
-                            onItemClick={closeMenu}
-                            modalComponent={<CreateReviewForm spot={spotsInfo} />}
-                        />
-                    </button>
+                    <OpenModalButton
+                        buttonText="Post Your Review"
+                        onButtonClick={closeMenu}
+                        modalComponent={<CreateReviewForm spot={spotsInfo} />}
+                    />
                     <div>Be the first to post a review!</div>
                 </div>
             );
@@ -102,7 +103,7 @@ const SpotDetails = () => {
                     <div className="subtitle">
                         {spotsInfo.city}, {spotsInfo.state}, {spotsInfo.country}
                     </div>
-                    {console.log("this is spotsInfo inside the return", spotsInfo)}
+                    {console.log("this is spotsInfo inside the return", spotsInfo, user)}
                     {spotsInfo?.SpotImages?.length > 0 ? (
                         <div className="images-box">
                             <img
@@ -149,12 +150,17 @@ const SpotDetails = () => {
                                             : null}
                                 </div>
                             </div>
-                            <button
-                                className={user.user.id === spotsInfo.ownerId ? "oval-button-gray" : "reserve-a-spot"}
-                                onClick={() => window.alert("Feature Coming Soon...")}
-                            >
-                                {user.user.id === spotsInfo.ownerId ? "Unavailable" : "Reserve"}
-                            </button>
+                            {user.user === null && <OpenModalButton className="oval-button-gray-variable"
+                                onButtonClick={closeMenu} buttonText={"Sign In to Book"}
+                                modalComponent={<LoginFormModal />} />}
+                            {user.user && user?.user?.id === spotsInfo?.ownerId && <button
+                                className="oval-button-gray"> Unavailable </button>}
+                            {user.user && user?.user?.id !== spotsInfo?.ownerId && <OpenModalButton
+                                className="reserve-a-spot"
+                                buttonText="Reserve"
+                                onButtonClick={closeMenu}
+                                modalComponent={<CreateBookingModal spot={spotsInfo} />}
+                            />}
                         </div>
                     </div>
                     <div className="review-holder">
@@ -223,7 +229,7 @@ const SpotDetails = () => {
                                                 <OpenModalButton
                                                     buttonText="Delete"
                                                     onButtonClick={closeMenu}
-                                                    modalComponent={<UsersReviewsModal review={review} />}
+                                                    modalComponent={<ReviewDeleteModal review={review} />}
                                                 />
                                             </div>
                                         ) : null}
@@ -232,7 +238,7 @@ const SpotDetails = () => {
                             })}
                         </div>
                     </div>
-                </div>
+                </div >
             ) : (
                 <div>Loading</div>
             )}

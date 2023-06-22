@@ -14,7 +14,7 @@ const ManageSpots = () => {
     }, [dispatch])
     let spots = Object.values(userSpots)
     return (
-        <div>
+        <div className='all-base'>
             <h4 className="title-page-position">Manage Spots</h4>
             <ul className='spots-board'>
                 {spots?.length > 0 ? spots.map(spot => (

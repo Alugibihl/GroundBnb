@@ -1,14 +1,16 @@
 import { useDispatch } from "react-redux";
 import { deleteSpot } from '../../store/spotsReducer';
-import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
 
 
-const UsersSpotsModal = ({ spot }) => {
+const DeleteSpotsModal = ({ spot }) => {
     const dispatch = useDispatch()
+    const { closeModal } = useModal()
     console.log('this is spot in modal', spot)
 
     let deleter = async () => {
         await dispatch(deleteSpot(spot.id))
+        closeModal()
     };
 
     return (
@@ -19,12 +21,12 @@ const UsersSpotsModal = ({ spot }) => {
                 <div className="modal-question">
                     <p>Are you sure you want to remove this <br /> spot
                         from the listings?</p></div>
-                <div className="delete-buttons"> <div className="continue-button"><OpenModalButton onButtonClick={deleter} buttonText='Yes (Delete Spot)' /></div>
-                    <div className="cancel-button"> <OpenModalButton buttonText='NO (Keep Spot)' />  </div></div>
+                <div className="delete-buttons"> <div className="continue-button"><button onClick={deleter} >Yes (Delete Spot)</button></div>
+                    <div className="cancel-button">  <button onClick={closeModal}>NO (Keep Spot) </button>  </div></div>
             </div>
         </>
     )
 }
 
 
-export default UsersSpotsModal
+export default DeleteSpotsModal

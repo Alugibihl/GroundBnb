@@ -124,7 +124,6 @@ const spotsReducer = (state = initialState, action) => {
         case PART_LOAD:
             const allUserSpots = {}
             action.spots.spots.forEach(spot => allUserSpots[spot.id] = spot);
-            console.log('here is each spot of part load', allUserSpots)
             return { ...allUserSpots }
         case ADD:
             const newState = { ...state, [action.spot.id]: action.spot }

@@ -2,10 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editReviewThunk } from "../../store/reviewReducer";
 import StarsRatingInput from "./StarsRatingInput";
-import './Reviews.css'
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { getSpotsDetail } from "../../store/spotsReducer";
+import './Reviews.css'
 
 const EditReviewForm = ({ review, spot }) => {
     const user = useSelector((state) => state.session)
@@ -14,7 +13,6 @@ const EditReviewForm = ({ review, spot }) => {
     const [stars, setStars] = useState(review.stars ? review.stars : 0)
     const [errors, setErrors] = useState("")
     const [showMenu, setShowMenu] = useState(false);
-    const history = useHistory()
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id

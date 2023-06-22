@@ -48,33 +48,33 @@
 }
 
 .images-box {
-    width: 90vw;
+    width: 85vw;
     height: 30vw;
     display: flex;
     box-sizing: border-box;
-    gap: 10px;
+    gap: 1vh;
 }
 
 .main-pic {
     height: 100%;
-    width: 44vw;
+    width: 41vw;
 }
 
 .support-pics {
-    height: 48%;
-    width: 22vw;
+    height: 49%;
+    width: 21vw;
 }
 
 .images-box-internal {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width: inherit;
-    gap: 10px;
+    width: 43vw;
+    gap: 1vh;
 }
 
 .reserve-box {
-    margin: 5px 0% 5px 0px;
+    margin: 5px 5px 5px 0px;
     border: 4px solid rgb(58, 20, 20);
     width: 325pt;
     display: flex;
@@ -105,7 +105,8 @@
 }
 
 .format-me {
-    margin: 0px 5%;
+    margin: 0px, 5vw, 0vw, 5vw;
+    /* border: red 2px solid; */
 }
 
 .reserve-a-spot {

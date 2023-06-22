@@ -1,8 +1,9 @@
 import { NavLink, useHistory } from 'react-router-dom';
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import { useState, useRef, useEffect } from 'react';
-import UsersSpotsModal from './UsersSpotsModal'
+import DeleteSpotsModal from './DeleteSpotsModal';
+import OpenModalButton from '../OpenModalButton';
 import './Spots.css'
+
 
 const UsersSpots = ({ spot }) => {
     const history = useHistory()
@@ -34,8 +35,8 @@ const UsersSpots = ({ spot }) => {
                         </div>  </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
                 <div ><button onClick={updater}>Update</button>
-                    <button><OpenModalMenuItem itemText='Delete'
-                        onItemClick={closeMenu} modalComponent={<UsersSpotsModal spot={spot} />} /> </button></div>
+                    <OpenModalButton buttonText='Delete'
+                        onButtonClick={closeMenu} modalComponent={<DeleteSpotsModal spot={spot} />} /></div>
             </nav>
         </>
     );

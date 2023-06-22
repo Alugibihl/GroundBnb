@@ -11,7 +11,13 @@ html {
     /* background-color: #93C572; */
     /* background-color: #D8D8D8; */
     /* background-color: #EAEAEA; */
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../public/assets/grass-ground.jpg");
+    background-size: 100vw, 240%;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button {
@@ -100,7 +106,6 @@ img {
     text-align: center;
     display: flex;
     flex-direction: column;
-    /* gap: px; */
 }
 
 .i {
@@ -130,15 +135,27 @@ img {
 }
 
 .oval-button-gray {
-    color: gray;
+    color: rgb(58, 20, 20);
     background-color: white;
     pointer-events: none;
     opacity: 0.6;
     margin-top: auto;
     margin-bottom: 5px;
     width: 85%;
+    cursor: not-allowed;
 }
 
-.oval-button-gray:hover {
+.oval-button-gray-variable {
+    color: rgb(58, 20, 20);
+    background-color: white;
+    /* pointer-events: none; */
+    opacity: 0.6;
+    margin-top: auto;
+    margin-bottom: 5px;
+    width: 85%;
     cursor: not-allowed;
+}
+
+.all-base {
+    min-height: 80vh;
 }
