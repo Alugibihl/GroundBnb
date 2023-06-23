@@ -6,7 +6,12 @@ const EDIT = 'spots/EDIT'
 const PART_LOAD = 'spots/PART_LOAD'
 const REMOVE_SPOT = 'spots/REMOVE_SPOT'
 const CLEANER = 'spots/CLEANUP'
+const SEARCH = 'spots/SEARCH';
 
+const search = (query) => ({
+    type: SEARCH,
+    query,
+});
 const partLoad = (spots) => ({
     type: PART_LOAD,
     spots
@@ -129,6 +134,16 @@ const spotsReducer = (state = initialState, action) => {
             const removedState = { ...state };
             delete removedState[action.spotId]
             return removedState
+        }
+        case SEARCH: {
+            const { query } = action;
+            const searchResults = Object.values(state).filter((spot) =>
+                spot.title.toLowerCase().includes(query.toLowerCase())
+            );
+            return {
+                ...state,
+                searchResults,
+            };
         }
         case CLEANER:
             return { ...initialState }
