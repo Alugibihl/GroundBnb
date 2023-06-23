@@ -5,8 +5,9 @@ const NAME_OF_BUCKET = "groundbnb-bucket";
 const multer = require("multer");
 
 //  make sure to set environment variables in production for:
-AWS_ACCESS_KEY_ID = "AKIAR3JHUXTDU4QVXK4F"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = "S3_KEY"
+AWS_SECRET_ACCESS_KEY = "S3_SECRET"
+
 //  and aws will automatically use those environment variables
 
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });

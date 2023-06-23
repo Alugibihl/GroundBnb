@@ -11,48 +11,33 @@ function SpotForm({ formType, spotsId, initialValues }) {
     const [description, setDescription] = useState(initialValues?.description !== null ? initialValues?.description : "");
     const [name, setName] = useState(initialValues?.name !== null ? initialValues?.name : "");
     const [price, setPrice] = useState(initialValues?.price !== null ? initialValues?.price : "");
-    const [images, setImages] = useState([]);
+    const [image1, setImage1] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [image4, setImage4] = useState("");
+    const [image5, setImage5] = useState("");
+    const [imagehold] = useState([]);
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session)
 
-    const updateFiles = (e) => {
-        const files = e.target.files;
-        setImages(files);
-    };
-
-    useEffect(() => {
-        setCountry(initialValues?.country ? initialValues?.country : "");
-        setAddress(initialValues?.address ? initialValues?.address : "");
-        setCity(initialValues?.city ? initialValues?.city : "");
-        setState(initialValues?.state ? initialValues?.state : "");
-        setDescription(initialValues?.description ? initialValues?.description : "");
-        setName(initialValues?.name ? initialValues?.name : "");
-        setPrice(initialValues?.price ? initialValues?.price : "");
-
-    }, [initialValues]);
-
-    useEffect(() => {
-        setCountry(country)
-        setAddress(address)
-        setCity(city)
-        setState(state)
-        setDescription(description)
-        setName(name)
-        setPrice(price)
-    }, [country, address, city, state, description, name, price])
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
         setErrors({})
+        if (image1 !== "") imagehold.push({ url: image1, preview: true })
+        if (image2 !== "") imagehold.push({ url: image2, preview: false })
+        if (image3 !== "") imagehold.push({ url: image3, preview: false })
+        if (image4 !== "") imagehold.push({ url: image4, preview: false })
+        if (image5 !== "") imagehold.push({ url: image5, preview: false })
         const spotAspects = { country, address, city, state, description, name, price, lng: 1, lat: 1 }
         let createdSpot;
         let updatedSpot;
         if (formType === "Edit Spot") {
             updatedSpot = await dispatch(editSpot({ spotAspects, spotsId }))
-            const spotImages = { images, spotsId }
+            const spotImages = { imagehold, spotsId }
             if (updatedSpot) {
                 return dispatch(addImage(spotImages))
                     .then(history.push(`/spots/${spotsId}`))
@@ -72,7 +57,7 @@ function SpotForm({ formType, spotsId, initialValues }) {
                         setErrors(data.errors);
                     }
                 })
-            const spotImages = { images, spotId: createdSpot.id }
+            const spotImages = { imagehold, spotId: createdSpot.id }
             if (createdSpot) {
                 const newImg = await dispatch(addImage(spotImages))
                 if (newImg) history.push(`/spots/${createdSpot.id}`)
@@ -195,78 +180,54 @@ function SpotForm({ formType, spotsId, initialValues }) {
                 </label>
                 {errors.price && <p className="errors">{errors.price}</p>}
                 <p className="line"></p>
-                <h2>Liven up your spot with photos</h2>
                 <label className="longer-description">
-                    Submit a link to a photo to publish a spot
-                    {formType === "Edit Spot" ? <div>Feature coming soon!!</div>
-                        // images?.map((pic) => {
-                        //     return <div key={pic.id} className="edit-images" ><img src={pic.url} alt='unavailable' />
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Preview Image URL"
-                        //             value={pic.url}
-                        //             onChange={(e) => setImage1(e.target.value)}
-                        //         />
-                        //     </div>
-                        // })
-                        :
+                    {formType === "Edit Spot" ? null :
+                        <>             <h2>Liven up your spot with photos</h2>
+                            <div>Submit up to 5 links of photo's to publish a spot</div> </>}
+                    {formType === "Edit Spot" ? null : <>
                         <label>
-                            Multiple Upload
                             <input
-                                type="file"
-                                multiple
-                                onChange={updateFiles} />
-                        </label>
-                        // <>
-                        //     <label>
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Preview Image URL"
-                        //             value={image1}
-                        //             onChange={(e) => setImage1(e.target.value)}
-                        //             required
-                        //         /></label>
+                                type="url"
+                                placeholder="Preview Image URL"
+                                value={image1}
+                                onChange={(e) => setImage1(e.target.value)}
+                                required
+                            /></label>
 
-                        //     <label>
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Image URL"
-                        //             value={image2}
-                        //             onChange={(e) => setImage2(e.target.value)}
-                        //         /></label>
-                        //     <label>
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Image URL"
-                        //             value={image3}
-                        //             onChange={(e) => setImage3(e.target.value)}
-                        //         /></label>
-                        //     <label>
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Image URL"
-                        //             value={image4}
-                        //             onChange={(e) => setImage4(e.target.value)}
-                        //         /></label>
-                        //     <label>
-                        //         <input
-                        //             type="url"
-                        //             placeholder="Image URL"
-                        //             value={image5}
-                        //             onChange={(e) => setImage5(e.target.value)}
-                        //         /></label>
-                        // </>
-                    }
-                    {/* {<input className={formType !== "Edit Spot" ? 'hidden' : ''}
-                        type="url"
-                        placeholder="Feature coming soon!!"
-                        value={image1}
-                        onChange={(e) => setImage1(e.target.value)} />} */}
+                        <label>
+                            <input
+                                type="url"
+                                placeholder="Image URL"
+                                value={image2}
+                                onChange={(e) => setImage2(e.target.value)}
+                            /></label>
+                        <label>
+                            <input
+                                type="url"
+                                placeholder="Image URL"
+                                value={image3}
+                                onChange={(e) => setImage3(e.target.value)}
+                            /></label>
+                        <label>
+                            <input
+                                type="url"
+                                placeholder="Image URL"
+                                value={image4}
+                                onChange={(e) => setImage4(e.target.value)}
+                            /></label>
+                        <label>
+                            <input
+                                type="url"
+                                placeholder="Image URL"
+                                value={image5}
+                                onChange={(e) => setImage5(e.target.value)}
+                            /></label>
+                    </>}
                 </label>
-                <p className="line"></p>
+                {formType === "Edit Spot" ? null : <p className="line"></p>}
                 {errors.image && <p className="errors">{errors.image}</p>}
-                <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0 || user.user === null} type="submit">Create Spot</button>
-                <button className={formType !== "Edit Spot" ? 'hidden' : null} disabled={Object.values(errors).length > 0 || user.user === null || description?.length < 30} type="submit">Update Spot</button>
+                <button className={formType === "Edit Spot" ? 'hidden' : null} disabled={user.user === null} type="submit">Create Spot</button>
+                <button className={formType !== "Edit Spot" ? 'hidden' : null} disabled={user.user === null || description?.length < 30} type="submit">Update Spot</button>
             </form>
         </div>
     );

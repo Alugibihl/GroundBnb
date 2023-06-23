@@ -40,10 +40,6 @@ function SignupFormModal() {
             confirmPassword: "Confirm Password field must be the same as the Password field"
         });
     };
-    // const disabler = () =>
-    //     !email.length || username.length < 4 || !firstName.length
-    //         || !lastName.length || password.length < 6 || confirmPassword.length < 6
-    //         || Object.values(errors).length > 0 ? true : false
 
     return (
         <>
@@ -109,9 +105,7 @@ function SignupFormModal() {
                     />
                 </label>
                 {errors.confirmPassword && <p className='errors'>{errors.confirmPassword}</p>}
-                <button disabled={!email.length || username.length < 4 || !firstName.length
-                    || !lastName.length || password.length < 6 || confirmPassword.length < 6
-                    || Object.values(errors).length > 0 ? true : false} type="submit">Sign Up</button>
+                <button type="submit">Sign Up</button>
             </form >
         </>
     );

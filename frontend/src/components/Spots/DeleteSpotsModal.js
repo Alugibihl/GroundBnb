@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 
 
 const DeleteSpotsModal = ({ spot }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch(deleteSpot(spot.id))
     const { closeModal } = useModal()
     // console.log('this is spot in modal', spot)
 
@@ -22,7 +22,7 @@ const DeleteSpotsModal = ({ spot }) => {
                     <p>Are you sure you want to remove this <br /> spot
                         from the listings?</p></div>
                 <div className="delete-buttons"> <div className="continue-button"><button onClick={deleter} >Yes (Delete Spot)</button></div>
-                    <div className="cancel-button">  <button onClick={closeModal}>NO (Keep Spot) </button>  </div></div>
+                    <div className="cancel-button"> <button onClick={closeModal}>NO (Keep Spot)</button>  </div></div>
             </div>
         </>
     )

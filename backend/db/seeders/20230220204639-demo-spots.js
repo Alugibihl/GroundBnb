@@ -77,7 +77,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Stay Weird New Bremen',
-        description: "We were the orginal Oregon City to take ok the moniker stay weird, now you can be one of the lucky people who get to see why.",
+        description: "We were the orginal Oregon City to take on the moniker stay weird, now you can be one of the lucky people who get to see why.",
         price: 350.00
       },
       {

@@ -9,6 +9,7 @@
     box-sizing: border-box;
     width: 20vw;
     min-width: 200px;
+    max-height: 25vw;
 }
 
 .spot-card img {
@@ -152,6 +153,28 @@
     font-weight: 600;
 }
 
+.reviews-board {
+    min-width: 200px;
+    width: 23%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    /* border: red solid 2px; */
+}
+
+.review-description {
+    /* overflow-wrap: break-word; */
+    overflow-y: scroll;
+    overflow-x: break-word;
+    overflow: auto;
+    height: 15vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .form-change {
     display: flex;
     gap: 1%;
@@ -194,4 +217,24 @@
 
 .review-organizer button {
     width: 25%;
+}
+
+.box-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-orgs {
+    display: flex;
+
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.card-desc {
+    display: flex;
+    justify-content: center;
 }

@@ -52,7 +52,7 @@ const CreateReviewForm = ({ spot }) => {
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
                 {errors.reviewDetails && <p className="errors">{errors.reviewDetails}</p>}
-                {errors.stars && <p className="errors">{errors.star}</p>}
+                {errors.stars && <p className="errors">{errors.stars}</p>}
                 <label>
                     <input
                         type="textarea"
@@ -69,7 +69,7 @@ const CreateReviewForm = ({ spot }) => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={reviewDetails.length >= 2 && stars >= 1 && stars <= 5 ? false : true} type="submit">Submit Your Review</button>
+                <button type="submit">Submit Your Review</button>
             </form>
         </div>
     )

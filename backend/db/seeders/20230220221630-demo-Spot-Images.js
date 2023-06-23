@@ -79,6 +79,11 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 3,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2Fdd79GDREiKA%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=9db57604490deebbca4118b967f9c285b41458b63419f5c9e4171f6f0ea87ae1&ipo=images",
+        preview: false
+      },
+      {
         spotId: 4,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fdisp%2F143d2442672887.56072876a1a11.jpg&f=1&nofb=1&ipt=b794b8aa4d7eaf6bcd3d8e7ccaeabafb037575f1b3a11580640849120163ff38&ipo=images',
         preview: true
@@ -99,6 +104,11 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 4,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fad%2Fb4%2F33%2Fadb4338a7e944b0460d8e30f8fff35fd.jpg&f=1&nofb=1&ipt=08ea6ef0b9a09d715c4737c6a11d460615278afc411f17f8f78d6826ba12794c&ipo=images",
+        preview: false
+      },
+      {
         spotId: 5,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2Fj23ikh09iddz.jpg&f=1&nofb=1&ipt=76650cda2cdc84d8456f60846bd3d87b5199a5785e93ede4928f2e7892acceac&ipo=images',
         preview: true
@@ -106,6 +116,21 @@ module.exports = {
       {
         spotId: 5,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FdOeTZfOF8K8%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=baa0780b579efa99caf52ae4cc856e3e7ed8da776b4a1084bab2700c99800f66&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fuponarriving.com%2Fwp-content%2Fuploads%2F2015%2F03%2Fbenagil-sea-cave.jpg&f=1&nofb=1&ipt=2ecc8883c3704373b8dcbbaf40e1d1b9683c6a80535a8de35fc40b34e069acd6&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages4.alphacoders.com%2F815%2Fthumb-1920-815678.jpg&f=1&nofb=1&ipt=144ced94b57f0edb6433ecfaf3d0b5fcad887f099747eeda0cbc942b232f2910&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.alphacoders.com%2F787%2F787321.jpg&f=1&nofb=1&ipt=585b217a133194c9dbc505731dd0e078ae83e0a035dc82ae0ecce4e334be40f4&ipo=images",
         preview: false
       },
       {
@@ -119,6 +144,21 @@ module.exports = {
         preview: false
       },
       {
+        spotId: 6,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmikeandlauratravel.com%2Fwp-content%2Fuploads%2F2019%2F03%2FIMG_20171108_120828-2-1024x768.jpg&f=1&nofb=1&ipt=ea6e558be0946b4dc07bfcc3245e1c7f0cd1ba84a8347ae2200122a240c820be&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F4.bp.blogspot.com%2F-kXhIcltnHFo%2FTt7La0twokI%2FAAAAAAAADSc%2FmZuBQjnZAnc%2Fs1600%2F1.jpg&f=1&nofb=1&ipt=176621b7c86dd06b14f3198dfd883b443ecaebb17b786506841cfa5cedf288a9&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.carfulofkids.com%2Fwp-content%2Fuploads%2F2017%2F06%2FOregon-Caves.jpg&f=1&nofb=1&ipt=30b04348b3adaef24130ddc26f7dcf22bc21d513f6c41c12fbf169c554cba4a1&ipo=images",
+        preview: false
+      },
+      {
         spotId: 7,
         url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2014%2F08%2F10%2Frealestate%2F10dealcover%2F10dealcover-master675-v2.jpg&f=1&nofb=1&ipt=907ff7d39721f3ef52886fc888bbab4b0f43eeddd37e37c43e5b81f7267cdd01&ipo=images',
         preview: true
@@ -126,6 +166,21 @@ module.exports = {
       {
         spotId: 7,
         url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.denverpost.com%2Fwp-content%2Fuploads%2F2016%2F05%2Fkentucky-cave.jpg%3Fw%3D660&f=1&nofb=1&ipt=f557c3b85c9b7e0d6da98ba9cc8bbda96d16846546b9af248060d86411f13936&ipo=images',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fglobalnews.ca%2Fwp-content%2Fuploads%2F2016%2F05%2Fkentucky-cave-1.jpg%3Fquality%3D85%26strip%3Dall%26w%3D720%26h%3D379%26crop%3D1&f=1&nofb=1&ipt=c8043e544fc8e6cff1725a27c6e4f116a7be99688013cd3d05e04844ea30e41b&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.abcotvs.com%2Fdip%2Fimages%2F1359669_Kentucky%2520hidden%2520cave.jpg%3Fw%3D1280%26r%3D16%3A9&f=1&nofb=1&ipt=f60a79303d83c4701a6e4ae855433efeafec3a9d762026c70eac774e51795f42&ipo=images",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.anywheretraveler.com%2Fwp-content%2Fuploads%2F2013%2F11%2Fmammoth-cave-entrance.jpg&f=1&nofb=1&ipt=ccf7b2c7a350b314cc4a84cafb7980ad0f4a0a07ab72afe5c92dae410e4221b7&ipo=images",
         preview: false
       },
     ], {})

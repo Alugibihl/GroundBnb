@@ -17,6 +17,7 @@ const EditSpotForm = () => {
         description: currentSpot.description,
         name: currentSpot.name,
         price: currentSpot.price,
+        images: currentSpot.images
     }
     useEffect(() => {
         dispatch(getSpotsDetail(spotId))

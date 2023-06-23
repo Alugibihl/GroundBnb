@@ -89,11 +89,16 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 [action.review.id]: action.review
             }
-        case EDIT:
+        case EDIT: {
+            const updatedReview = {
+                ...state[action.review.id],
+                ...action.review,
+            };
             return {
                 ...state,
-                [action.review.id]: action.review
-            }
+                [action.review.id]: updatedReview,
+            };
+        }
         case DELETE_REVIEW: {
             const removedState = { ...state };
             delete removedState[action.reviewId]
