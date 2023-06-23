@@ -13,7 +13,7 @@
 
 .spot-holder {
     box-sizing: border-box;
-    border: 1px solid rgba(58, 20, 20, 0.5);
+    border: 1px solid rgba(58, 20, 20, 0.2);
     border-radius: 10px;
     padding-bottom: 20px;
 }
@@ -162,26 +162,26 @@
 
 .reviews-board {
     min-width: 200px;
-    width: 23%;
-    height: 25vh;
+    max-width: 23%;
+    height: 28vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
     box-sizing: border-box;
     border-radius: 10px;
-    border: 1px solid rgba(58, 20, 20, 0.5);
+    border: 1px solid rgba(58, 20, 20, 0.2);
 }
 
 .review-description {
-    /* overflow-wrap: break-word; */
     overflow-y: scroll;
     overflow-x: break-word;
     overflow: auto;
     height: 15vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+}
+
+.review-descriptions {
+    margin-bottom: 5px;
 }
 
 .form-change {
@@ -235,7 +235,7 @@
 
 .button-orgs {
     display: flex;
-
+    justify-content: space-evenly;
 }
 
 .card-title {

@@ -43,7 +43,7 @@ const UsersReviews = ({ review }) => {
         <>
             {
                 < nav className='reviews-board'>
-                    <NavLink to={`/reviews/${review.id}`}>
+                    <NavLink to={`/spots/${review.spotId}`}>
                         <div className='card-title'>{userSpot?.name}</div>
                         <div className='card-desc'>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                         <div className="review-description wrap-break">{review.review}</div>
