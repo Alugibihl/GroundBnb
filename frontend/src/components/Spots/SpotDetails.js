@@ -214,10 +214,10 @@ const SpotDetails = () => {
                                                 })}{" "}
                                                 {date(review.updatedAt).getFullYear()}
                                             </div>
-                                            <div className="review-description">{review.review}</div>
+                                            <div className="review-descriptions">{review.review}</div>
                                         </div>
                                         {review.User?.id === user.user?.id ? (
-                                            <div className="button-holder">
+                                            <div className="button-holders">
                                                 <OpenModalButton
                                                     buttonText={"Update"}
                                                     onButtonClick={closeMenu}
