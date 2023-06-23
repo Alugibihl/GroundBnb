@@ -4,7 +4,7 @@ import './Spots.css'
 
 const SingleSpot = ({ spot }) => {
     return (
-        <>
+        <div>
             <nav title={spot.name} className='spot-card'>
                 <NavLink to={`/spots/${spot.id}`}>
                     <img alt={spot.name} src={spot.previewImage}></img>
@@ -14,7 +14,7 @@ const SingleSpot = ({ spot }) => {
                     </div> <div className='price'>${spot.price}.00 night</div>
                 </NavLink>
             </nav>
-        </>
+        </div>
     );
 };
 

@@ -201,12 +201,12 @@ const SpotDetails = () => {
                             </div>
                             {reviewData.map((review) => {
                                 return (
-                                    <span key={review.id}>
+                                    <div className="review-sizer" key={review.id}>
                                         {" "}
                                         <div className="reviews-name">
                                             {review.User ? review.User.firstName : user.user.firstName}
                                         </div>
-                                        <div className="reviews">
+                                        <div className="review-listed">
                                             {" "}
                                             <div>
                                                 {date(review.updatedAt).toLocaleString("en-US", {
@@ -232,7 +232,7 @@ const SpotDetails = () => {
                                                 />
                                             </div>
                                         ) : null}
-                                    </span>
+                                    </div>
                                 );
                             })}
                         </div>
