@@ -13,7 +13,7 @@ html {
     /* background-color: #EAEAEA; */
     /* background-color: #F5F5F5; */
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../public/assets/grass-ground.jpg");
-    background-size: 100vw, 240%;
+    background-size: 100vw, 300%;
     background-position: center;
     display: flex;
     justify-content: center;
@@ -123,11 +123,8 @@ img {
     margin-bottom: 10px;
 }
 
-.review-description {
-    max-width: 70vw;
-}
 
-.button-holder {
+.button-holders {
     margin-top: 5px;
     margin-left: 20px;
     display: flex;

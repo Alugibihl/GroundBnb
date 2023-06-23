@@ -20,7 +20,6 @@ const UsersReviews = ({ review }) => {
     }, [dispatch])
     let spots = Object.values(userSpots)
     let userSpot = spots?.find((spot) => spot.id === review.spotId)
-    console.log('spots', spots, userSpot, review)
     useEffect(() => {
         if (!showMenu) return;
 
@@ -44,12 +43,12 @@ const UsersReviews = ({ review }) => {
         <>
             {
                 < nav className='reviews-board'>
-                    <NavLink to={`/reviews/${review.id}`}>
-                        <div>{userSpot?.name}</div>
-                        <div>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
-                        <div className="review-description">{review.review}</div>
+                    <NavLink to={`/spots/${review.spotId}`}>
+                        <div className='card-title'>{userSpot?.name}</div>
+                        <div className='card-desc'>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
+                        <div className="review-description wrap-break">{review.review}</div>
                     </NavLink>
-                    <div >
+                    <div className='box-buttons'>
                         <OpenModalButton buttonText="Update"
                             onButtonClick={closeMenu} modalComponent={<EditReviewForm review={review} spot={userSpot} />} />
                         <OpenModalButton buttonText="Delete"

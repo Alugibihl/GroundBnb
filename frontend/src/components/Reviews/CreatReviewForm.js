@@ -16,7 +16,7 @@ const CreateReviewForm = ({ spot }) => {
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
-    console.log('spotId', spotId, 'user', user)
+    // console.log('spotId', spotId, 'user', user)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -32,7 +32,7 @@ const CreateReviewForm = ({ spot }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('handle submit running', reviewDetails)
+        // console.log('handle submit running', reviewDetails)
         const reviewInfo = { spotId, reviewDetails, stars }
         return dispatch(createReview(reviewInfo))
             .then(dispatch(getSpotsDetail(spotId)))
@@ -52,7 +52,7 @@ const CreateReviewForm = ({ spot }) => {
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
                 {errors.reviewDetails && <p className="errors">{errors.reviewDetails}</p>}
-                {errors.stars && <p className="errors">{errors.star}</p>}
+                {errors.stars && <p className="errors">{errors.stars}</p>}
                 <label>
                     <input
                         type="textarea"
@@ -69,7 +69,7 @@ const CreateReviewForm = ({ spot }) => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={reviewDetails.length >= 2 && stars >= 1 && stars <= 5 ? false : true} type="submit">Submit Your Review</button>
+                <button type="submit">Submit Your Review</button>
             </form>
         </div>
     )
