@@ -5,10 +5,17 @@
 .spot-card {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+    margin-bottom: 40px;
     width: 20vw;
     min-width: 200px;
+    max-height: 25vw;
+}
+
+.spot-holder {
+    box-sizing: border-box;
+    border: 1px solid rgba(58, 20, 20, 0.5);
+    border-radius: 10px;
+    padding-bottom: 20px;
 }
 
 .spot-card img {
@@ -76,7 +83,8 @@
 .reserve-box {
     margin: 5px 5px 5px 0px;
     border: 4px solid rgb(58, 20, 20);
-    width: 325pt;
+    width: 50%;
+    max-height: 100px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -152,6 +160,30 @@
     font-weight: 600;
 }
 
+.reviews-board {
+    min-width: 200px;
+    width: 23%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid rgba(58, 20, 20, 0.5);
+}
+
+.review-description {
+    /* overflow-wrap: break-word; */
+    overflow-y: scroll;
+    overflow-x: break-word;
+    overflow: auto;
+    height: 15vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .form-change {
     display: flex;
     gap: 1%;
@@ -194,4 +226,30 @@
 
 .review-organizer button {
     width: 25%;
+}
+
+.box-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-orgs {
+    display: flex;
+
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.card-desc {
+    display: flex;
+    justify-content: center;
+}
+
+.review-listed {
+    max-height: 100px;
+    max-width: 60vw;
+    border-top: 2px solid rgba(58, 20, 20, 0.5);
 }

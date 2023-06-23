@@ -64,7 +64,7 @@ const validateReview = [
         .notEmpty()
         .isInt()
         .isIn([1, 2, 3, 4, 5])
-        .withMessage("Stars must be an integer from 1 to 5"),
+        .withMessage("Star Rating Required"),
     handleValidationErrors
 ]
 

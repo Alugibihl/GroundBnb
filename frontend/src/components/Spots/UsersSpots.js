@@ -26,7 +26,7 @@ const UsersSpots = ({ spot }) => {
         history.push(update)
     }
     return (
-        <>
+        <div className='spot-holder'>
             <nav className='spot-card'>
                 <NavLink to={`/spots/${spot.id}`}>
                     <img alt={spot.name} src={spot.previewImage}></img>
@@ -38,7 +38,7 @@ const UsersSpots = ({ spot }) => {
                     <OpenModalButton buttonText='Delete'
                         onButtonClick={closeMenu} modalComponent={<DeleteSpotsModal spot={spot} />} /></div>
             </nav>
-        </>
+        </div>
     );
 };
 

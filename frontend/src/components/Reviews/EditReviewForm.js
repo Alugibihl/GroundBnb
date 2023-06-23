@@ -16,7 +16,7 @@ const EditReviewForm = ({ review, spot }) => {
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
-    console.log('spotId', spotId, 'user', user, "review", review)
+    // console.log('spotId', spotId, 'user', user, "review", review)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -30,30 +30,34 @@ const EditReviewForm = ({ review, spot }) => {
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('handle submit running')
         const data = { spotId: spotId, review: reviewDetails, stars: stars }
         const reviewInfo = { reviewId: review.id, data }
-        return dispatch(editReviewThunk(reviewInfo))
-            .then(dispatch(getSpotsDetail(spotId)))
-            .then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors);
-                }
-            });
+        const result = await dispatch(editReviewThunk(reviewInfo))
+        if (result.errors) {
+            const data = await result.json();
+            if (data && data.errors) {
+                setErrors(data.errors);
+            }
+        }
+        else {
+            closeModal()
+            await dispatch(getSpotsDetail(spot.id))
+        }
     }
+
     const onChange = (number) => {
         setStars(parseInt(number));
     };
+
     return (
         <div className="review-form">
             <h2>How was your stay?</h2>
             <form onSubmit={handleSubmit}>
                 {errors.review && <p className="errors">{errors.review}</p>}
-                {errors.stars && <p className="errors">{errors.star}</p>}
+                {errors.stars && <p className="errors">{errors.stars}</p>}
                 <label>
                     <input
                         type="textarea"
@@ -70,7 +74,7 @@ const EditReviewForm = ({ review, spot }) => {
                         onChange={onChange} stars={stars} />
                     Stars
                 </label>
-                <button disabled={reviewDetails.length >= 10 && stars > 0 ? false : true} type="submit">Submit Your Review</button>
+                <button type="submit">Submit Your Review</button>
             </form>
         </div>
     )

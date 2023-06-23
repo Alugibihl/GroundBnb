@@ -35,14 +35,12 @@ export const getUserBookingsThunk = () => async (dispatch) => {
     const response = await csrfFetch("/api/bookings/current")
     if (response.ok) {
         const bookings = await response.json()
-        console.log("user bookings", bookings);
         dispatch(getUserBookings(bookings))
     }
 }
 
 export const createBookingThunk = (data) => async (dispatch) => {
     const { spotId, startDate, endDate } = data
-    console.log('create booking thunk running')
     try {
         const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
             method: 'POST',
@@ -51,7 +49,6 @@ export const createBookingThunk = (data) => async (dispatch) => {
             },
             body: JSON.stringify({ startDate, endDate })
         })
-        console.log("status", response);
         if (response.ok) {
             const booking = await response.json()
             dispatch(addBooking(booking))
@@ -59,7 +56,6 @@ export const createBookingThunk = (data) => async (dispatch) => {
         }
     } catch (e) {
         let data = await e.json();
-        console.log("look at Eeeeeeeeeeeeeeeeeeeeee", data.message)
         if (data.errors) {
             return data.errors;
         }
@@ -67,7 +63,6 @@ export const createBookingThunk = (data) => async (dispatch) => {
 }
 export const editBookingThunk = (data) => async (dispatch) => {
     const { bookingId, bookingData } = data;
-    console.log('edit booking thunk running', bookingData, bookingId);
     try {
         const response = await csrfFetch(`/api/bookings/${bookingId}`, {
             method: 'PUT',
@@ -77,9 +72,7 @@ export const editBookingThunk = (data) => async (dispatch) => {
             body: JSON.stringify(bookingData),
         });
         if (response.ok) {
-            console.log("hellooo");
             const booked = await response.json();
-            console.log("this is booked in response", booked);
             dispatch(editBooking(booked));
             return booked;
         }
@@ -110,7 +103,6 @@ const BookingReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_BOOKINGS:
             newState = { ...state }
-            console.log("hello", action.bookings.Bookings);
             action.bookings.Bookings.forEach(booking => newState[booking.id] = booking);
             return { ...newState }
         case CREATE_BOOKING:

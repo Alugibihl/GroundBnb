@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { editBookingThunk, getUserBookingsThunk } from "../../store/bookings";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const EditBookingModal = ({ booking, spot }) => {
@@ -16,25 +15,21 @@ const EditBookingModal = ({ booking, spot }) => {
     const { closeModal } = useModal();
     const [startDate, setStartDate] = useState(booking.startDate ? new Date(booking.startDate) : new Date());
     const [endDate, setEndDate] = useState(booking.endDate ? new Date(booking.endDate) : new Date());
-    const history = useHistory()
     const [errors, setErrors] = useState({})
-    console.log("booking", booking, "spot", spot);
+    // console.log("booking", booking, "spot", spot);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("before", startDate, endDate);
+        // console.log("before", startDate, endDate);
         const bookingData = {
             spotId: spot.id,
             startDate: startDate.toISOString().split("T")[0],
             endDate: endDate.toISOString().split("T")[0],
         };
         const info = { bookingId: booking.id, bookingData }
-        console.log("bookingData", bookingData, "info------------------------------", info);
         const data = await dispatch(editBookingThunk(info));
-        console.log("this is data in edit boooking handle submit", data);
         if (data.errors) {
-            console.log("data", data.errors);
             setErrors(data.errors);
         } else {
             closeModal();
