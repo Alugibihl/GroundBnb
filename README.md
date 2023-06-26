@@ -9,19 +9,23 @@ This is an Airbnb clone designed to allow similar options to the original. It cu
 
 ## Home Page
 
-![image](https://user-images.githubusercontent.com/111261195/232141810-3d3b3a86-0615-4304-98fa-1aa71bc0a8c9.png)
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/1063d69e-8284-416d-8f8d-13dbd94dc058)
+
 
 ## Single Spot Reviews
 
-![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/fca2e83e-63a3-4191-a243-f893fd3bfb51)
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/a71eefcd-4fe9-407c-9ffb-97a499956b02)
 
-## Single Spot
 
-![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/bb516d92-0290-481b-9a46-aedf8690b66e)
+## Search Bar
+
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/718525fb-8331-46d9-bdb9-0e239c33c1e2)
+
 
 ## All User Spots
 
-![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/1a192b89-b460-4264-8b9f-783ed16fbd33)
+![image](https://github.com/Alugibihl/GroundBnb/assets/111261195/4453ffa2-a7d2-4405-8ffe-ccc9bd385298)
+
 
 # Navigating The New Fork Dines
 
@@ -114,30 +118,30 @@ and then NPM start.
 If you see something similar to the image at the top, you are ready to go.
 
 ### API Endpoints
-| HTTP Verbs | Endpoints | Action |
-| --- | --- | --- |
-| POST | /api/user/signup | To sign up a new user account |
-| POST | /api/user/login | To login an existing user account |
-| POST | /api/spots | To create a new spot |
-| POST | /api/spots/:spotId/images | To create a new spot image |
-| POST | /api/spots/:spotId/reviews | To create a new review for a spot |
-| POST | /api/spots/:spotId/bookings | To create a new booking for a spot |
-| POST | /api/reviews/:reviewId/images| To create a neww image for a review |
-| GET | /api/spots/:spotId | To retrieve spots by id |
-| GET | /api/user/session | Gets the current User |
-| GET | /api/spots | To retrieve all spots |
-| GET | /api/spots/current | To retrieve all spots of current user |
-| GET | /api/reviews/current | To retrieve all spots of current user |
-| GET | /api/bookings/current | To retrieve all bookings of current user |
-| GET | /api/spots/:spotId/reviews | To retrieve all reviews of a spot |
-| GET | /api//:spotId/bookings | To retrieve all bookings of a spot |
-| PUT | /api/spots/:spotId | To edit the details of a single spot |
-| PUT | /api/reviews/:reviewId | To edit the details of a single review |
-| PUT | /api/bookings/:bookingId | To edit the details of a single booking |
-| DELETE | /api/spots/:spotId  | To delete a single spot |
-| DELETE | /api/spot-images/:imageId | To delete a single spot image |
-| DELETE | /api/reviews/:reviewId | To delete a single review |
-| DELETE | /api/review-images/:imageId | To delete a single review's image |
+| HTTP Verbs | Endpoints | Action | Return Value |
+| --- | --- | --- | --- |
+| POST | /api/user/signup | To sign up a new user account | { id: #, username: '...', email: '...', password: '...' } as JSON |
+| POST | /api/user/login | To login an existing user account | { id: #, username: '...', email: '...', password: '...' } as JSON |
+| POST | /api/spots | To create a new spot | { Spots: [ {id: #, ownerId: #, address: "...", city: "...", state: "...",  country: "...", lat: "...", lng: "...", name: "...", description: "...", price: #, createdAt: "...", updatedAt: "...", avgRating: "...", previewImage: "..."}, {}] } as JSON |
+| POST | /api/spots/:spotId/images | To create a new spot image | id: #, url: "...", preview: bool} |
+| POST | /api/spots/:spotId/reviews | To create a new review for a spot |  { id: #, spotId: #, userId: #, review: "...", stars: #, "createdAt": "...", "updatedAt": "...", User: { id: #, firstName: "...", lastName: "..." } as JSON |
+| POST | /api/spots/:spotId/bookings | To create a new booking for a spot |  { id: #, spotId: #, userId: #, startDate: "...", endDate: "...", "createdAt": "...", "updatedAt": "..." } as JSON |
+| POST | /api/reviews/:reviewId/images| To create a new image for a review | {"id": #, "url": "..."} as JSON |
+| GET | /api/spots/:spotId | To retrieve spots by id | {id: #, ownerId: #, address: "...", city: "...", state: "...",  country: "...", lat: "...", lng: "...", name: "...", description: "...", price: #, createdAt: "...", updatedAt: "...", numReviews: #, Owner: {}, avgStarRating: "...", spotImages:[] } as JSON |
+| GET | /api/user/session | Gets the current User |{ id: #, username: '...', email: '...', password: '...' } as JSON |
+| GET | /api/spots | To retrieve all spots |  { Spots: [ {id: #, ownerId: #, address: "...", city: "...", state: "...",  country: "...", lat: "...", lng: "...", name: "...", description: "...", price: #, createdAt: "...", updatedAt: "...", avgRating: "...", previewImage: "..."}, {}] } as JSON |
+| GET | /api/spots/current | To retrieve all spots of current user |  { Spots: [ {id: #, ownerId: #, address: "...", city: "...", state: "...",  country: "...", lat: "...", lng: "...", name: "...", description: "...", price: #, createdAt: "...", updatedAt: "...", avgRating: "...", previewImage: "..."}, {}] } as JSON |
+| GET | /api/reviews/current | To retrieve all reviews of current user | Reviews: [ { id: #, spotId: #, userId: #, review: "...", stars: #, "createdAt": "...", "updatedAt": "...", User: { id: #, firstName: "...", lastName: "..." }, Spot: id: #, ownerId: #, address: "...", city: "...", state: "...", country: "...", lat: "...", lng "...", name: "...", price: #, previewImage: "..."}, ReviewImages: [] }, {}] }, as JSON|
+| GET | /api/bookings/current | To retrieve all bookings of current user | Bookings: [ { id: #, spotId: #, userId: #, startDate: "...", endDate: "...", "createdAt": "...", "updatedAt": "...", Spot: id: #, ownerId: #, address: "...", city: "...", state: "...", country: "...", lat: "...", lng "...", name: "...", price: #, previewImage: "..."} }, {}] }, as JSON|
+| GET | /api/spots/:spotId/reviews | To retrieve all reviews of a spot | Reviews: [ { id: #, spotId: #, userId: #, review: "...", stars: #, "createdAt": "...", "updatedAt": "...", User: { id: #, firstName: "...", lastName: "..." }, Spot: id: #, ownerId: #, address: "...", city: "...", state: "...", country: "...", lat: "...", lng "...", name: "...", price: #, previewImage: "..."}, ReviewImages: [] }, {}] }, as JSON|
+| GET | /api//:spotId/bookings | To retrieve all bookings of a spot |  Bookings: [ { id: #, spotId: #, userId: #, startDate: "...", endDate: "...", "createdAt": "...", "updatedAt": "...", Spot: id: #, ownerId: #, address: "...", city: "...", state: "...", country: "...", lat: "...", lng "...", name: "...", price: #, previewImage: "..."} }, {}] }, as JSON|
+| PUT | /api/spots/:spotId | To edit the details of a single spot | {id: #, ownerId: #, address: "...", city: "...", state: "...",  country: "...", lat: "...", lng: "...", name: "...", description: "...", price: #, createdAt: "...", updatedAt: "...", numReviews: #, Owner: {}, avgStarRating: "...", spotImages:[] } as JSON |
+| PUT | /api/reviews/:reviewId | To edit the details of a single review |  { id: #, spotId: #, userId: #, review: "...", stars: #, "createdAt": "...", "updatedAt": "...", User: { id: #, firstName: "...", lastName: "..." } as JSON |
+| PUT | /api/bookings/:bookingId | To edit the details of a single booking |  { id: #, spotId: #, userId: #, startDate: "...", endDate: "...", "createdAt": "...", "updatedAt": "..." } as JSON |
+| DELETE | /api/spots/:spotId  | To delete a single spot | None |
+| DELETE | /api/spot-images/:imageId | To delete a single spot image | None |
+| DELETE | /api/reviews/:reviewId | To delete a single review | None |
+| DELETE | /api/review-images/:imageId | To delete a single review's image | None |
   
 ## Contact
 
