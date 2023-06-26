@@ -167,6 +167,8 @@ img {
 .big-searcher input {
     width: 60vw;
     height: 30px;
+    border-radius: 10px;
+    margin-top: 15px;
 }
 
 .holder {
@@ -182,7 +184,7 @@ img {
 .magnifier {
     position: relative;
     right: 30px;
-    top: 5px;
+    top: 20px;
 }
 
 .result-tree {
@@ -197,4 +199,10 @@ img {
     display: flex;
     flex-direction: row;
     position: relative;
+}
+
+.search-button {
+    height: 30px;
+    position: relative;
+    top: 15px;
 }

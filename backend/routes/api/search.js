@@ -5,9 +5,7 @@ const { Op } = require('sequelize');
 
 
 router.post('/', async (req, res) => {
-    console.log("req.body");
     const { query } = req.body;
-    console.log("--------------------------", query);
     try {
         const results = await Spot.findAll({
             where: {
@@ -18,10 +16,8 @@ router.post('/', async (req, res) => {
             },
         });
         if (results.length > 0) {
-            console.log("--------------results", results);
             res.json(results);
         } else {
-            console.log("--------------results bad", results);
             res.json({ message: 'No results found.' });
         }
     } catch (error) {

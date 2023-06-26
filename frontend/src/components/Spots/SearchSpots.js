@@ -16,8 +16,11 @@ const SearchComponent = ({ spots }) => {
     const handleSearch = () => {
         setVisible(true)
         dispatch(performSearch(query));
-        console.log("query", query, searchResults);
     };
+    const handleClear = () => {
+        setVisible(false)
+        setQuery("")
+    }
 
     return (
         <div className='holder'>
@@ -34,7 +37,8 @@ const SearchComponent = ({ spots }) => {
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
-                    <button onClick={handleSearch}>Search</button>
+                    <button className='search-button' onClick={handleSearch}>Search</button>
+                    <button className='search-button' onClick={handleClear}>Clear</button>
                 </div>
                 {searchResults?.length > 0 ? (
                     <ul className='result-tree'>

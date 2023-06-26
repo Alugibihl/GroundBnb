@@ -59,7 +59,6 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     }
 };
 export const performSearch = (query) => async (dispatch) => {
-    console.log("in search thunk", query);
     const response = await csrfFetch(`/api/search`, {
         method: 'POST',
         headers: {
@@ -68,10 +67,8 @@ export const performSearch = (query) => async (dispatch) => {
         body: JSON.stringify({ query }
         )
     });
-    console.log("this is response", response);
     if (response.ok) {
         const results = await response.json();
-        console.log("hello", results);
         dispatch(search(results));
         return results
     }
