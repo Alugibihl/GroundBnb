@@ -1,10 +1,6 @@
 const express = require('express');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Booking, Spot, SpotImage, Review, ReviewImage, Sequelize, sequelize } = require('../../db/models');
+const { User, Spot, Sequelize, sequelize } = require('../../db/models');
 const router = express.Router();
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-const { json, DATE } = require('sequelize');
 const { Op } = require('sequelize');
 
 
@@ -15,11 +11,12 @@ router.post('/', async (req, res) => {
     try {
         const results = await Spot.findAll({
             where: {
-                name: { [Op.like]: `%${query.toLowerCase()}%` },
-                description: { [Op.like]: `%${query.toLowerCase()}%` },
+                [Op.or]: [
+                    { description: { [Op.like]: "%" + query.toLowerCase() + "%" } },
+                    { name: { [Op.like]: "%" + query.toLowerCase() + "%" } }
+                ]
             },
         });
-
         if (results.length > 0) {
             console.log("--------------results", results);
             res.json(results);

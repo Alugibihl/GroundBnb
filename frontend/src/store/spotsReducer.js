@@ -8,9 +8,9 @@ const REMOVE_SPOT = 'spots/REMOVE_SPOT'
 const CLEANER = 'spots/CLEANUP'
 const SEARCH = 'spots/SEARCH';
 
-const search = (query) => ({
+const search = (results) => ({
     type: SEARCH,
-    query,
+    results,
 });
 const partLoad = (spots) => ({
     type: PART_LOAD,
@@ -36,6 +36,7 @@ export const spotCleanUp = () => ({
     type: CLEANER
 })
 
+
 export const getSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
@@ -55,6 +56,24 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     if (response.ok) {
         const spot = await response.json();
         dispatch(add(spot));
+    }
+};
+export const performSearch = (query) => async (dispatch) => {
+    console.log("in search thunk", query);
+    const response = await csrfFetch(`/api/search`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }
+        )
+    });
+    console.log("this is response", response);
+    if (response.ok) {
+        const results = await response.json();
+        console.log("hello", results);
+        dispatch(search(results));
+        return results
     }
 };
 export const createSpot = (data) => async (dispatch) => {
@@ -135,16 +154,11 @@ const spotsReducer = (state = initialState, action) => {
             delete removedState[action.spotId]
             return removedState
         }
-        case SEARCH: {
-            const { query } = action;
-            const searchResults = Object.values(state).filter((spot) =>
-                spot.title.toLowerCase().includes(query.toLowerCase())
-            );
+        case SEARCH:
             return {
                 ...state,
-                searchResults,
+                searchResults: action.results
             };
-        }
         case CLEANER:
             return { ...initialState }
         default:
