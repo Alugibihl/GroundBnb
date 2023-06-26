@@ -6,7 +6,12 @@ const EDIT = 'spots/EDIT'
 const PART_LOAD = 'spots/PART_LOAD'
 const REMOVE_SPOT = 'spots/REMOVE_SPOT'
 const CLEANER = 'spots/CLEANUP'
+const SEARCH = 'spots/SEARCH';
 
+const search = (results) => ({
+    type: SEARCH,
+    results,
+});
 const partLoad = (spots) => ({
     type: PART_LOAD,
     spots
@@ -31,6 +36,7 @@ export const spotCleanUp = () => ({
     type: CLEANER
 })
 
+
 export const getSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
@@ -50,6 +56,21 @@ export const getSpotsDetail = (id) => async (dispatch) => {
     if (response.ok) {
         const spot = await response.json();
         dispatch(add(spot));
+    }
+};
+export const performSearch = (query) => async (dispatch) => {
+    const response = await csrfFetch(`/api/search`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }
+        )
+    });
+    if (response.ok) {
+        const results = await response.json();
+        dispatch(search(results));
+        return results
     }
 };
 export const createSpot = (data) => async (dispatch) => {
@@ -130,6 +151,11 @@ const spotsReducer = (state = initialState, action) => {
             delete removedState[action.spotId]
             return removedState
         }
+        case SEARCH:
+            return {
+                ...state,
+                searchResults: action.results
+            };
         case CLEANER:
             return { ...initialState }
         default:

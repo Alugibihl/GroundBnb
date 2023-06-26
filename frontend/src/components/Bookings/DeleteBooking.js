@@ -6,7 +6,6 @@ import { useModal } from "../../context/Modal";
 const DeleteBookingModal = ({ booking }) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
-    console.log('this is booking in modal', booking)
 
     let deleter = async () => {
         await dispatch(deleteBookingThunk(booking.id))
