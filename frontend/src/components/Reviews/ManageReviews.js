@@ -11,14 +11,14 @@ const ManageReviews = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getReviewsbyUser())
-
     }, [dispatch])
+    
     let reviews = Object.values(userReviews)
     if (!reviews) { return null }
     return (
         <div className='all-base'>
             <h4>Manage Reviews</h4>
-            <ul className='spots-board'>
+            <ul className='spots-boards'>
                 {reviews.length ? reviews.map(review => (
                     <UsersReviews review={review} key={review.id} />
                 )) : <button className="title-page-position"><NavLink className="new-spot-link" to={'/'}>Return Home</NavLink></button>

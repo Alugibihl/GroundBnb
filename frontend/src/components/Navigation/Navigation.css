@@ -2,10 +2,6 @@
     display: none;
 }
 
-.top {
-    z-index: 50;
-}
-
 .nameLogo img {
     height: 50px;
     border-radius: 20%;
@@ -52,12 +48,12 @@
     background-color: white;
     font-size: 18pt;
     padding: 0px 3px;
-    right: 5%;
+    right: -20px;
     top: 85%;
     border: 2px solid rgb(58, 20, 20);
     text-align: center;
     border-radius: 10px;
-    z-index: 2;
+    z-index: 2000;
 }
 
 .profile-dropdown button {

@@ -6,12 +6,14 @@ import UsersSpots from "./UsersSpots";
 import './Spots.css'
 
 const ManageSpots = () => {
+    const user = useSelector((state) => state)
     const userSpots = useSelector((state) => state.spots)
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
         dispatch(getUserSpots())
     }, [dispatch])
+
     let spots = Object.values(userSpots)
 
     const newSpot = () => {
@@ -24,7 +26,7 @@ const ManageSpots = () => {
             <h4 className="title-page-position">Manage Spots</h4>
             <ul className='spots-board'>
                 {spots?.length > 0 ? spots.map(spot => (
-                    <UsersSpots key={spot.id} spot={spot} />
+                    < UsersSpots key={spot.id} spot={spot} />
                 )) : <button onClick={newSpot} className="title-page-position">Create a new Spot</button>
                 }
             </ul>

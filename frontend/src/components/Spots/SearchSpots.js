@@ -37,13 +37,15 @@ const SearchComponent = ({ spots }) => {
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
-                    <button className='search-button' onClick={handleSearch}>Search</button>
-                    <button className='search-button' onClick={handleClear}>Clear</button>
+                    <div className='search-buttons'>
+                        <button className='search-button' onClick={handleSearch}>Search for a Rental</button>
+                        <button className='search-button' onClick={handleClear}>Clear Search Results</button>
+                    </div>
                 </div>
                 {searchResults?.length > 0 ? (
-                    <ul className='result-tree'>
+                    <ul className={visible ? 'result-tree' : "hidden"}>
                         {searchResults?.map((spot) => (
-                            <SearchResults spot={spot} />
+                            <SearchResults key={spot.id} spot={spot} />
                         ))}
                     </ul>
                 ) : (
