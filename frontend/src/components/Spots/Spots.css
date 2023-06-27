@@ -13,7 +13,7 @@
 
 .spot-holder {
     box-sizing: border-box;
-    border: 1px solid rgba(58, 20, 20, 0.2);
+    /* border: 1px solid rgba(58, 20, 20, 0.2); */
     border-radius: 10px;
     padding-bottom: 20px;
 }
@@ -46,6 +46,16 @@
     gap: 1vw;
     flex-wrap: wrap;
     width: 90vw;
+}
+
+.spots-boards {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    /* border: 3px solid green; */
+    gap: 1vw;
+    flex-wrap: wrap;
+    width: 80vw;
 }
 
 .border-holder {
@@ -161,23 +171,25 @@
 }
 
 .reviews-board {
-    min-width: 200px;
-    max-width: 23%;
+    min-width: 150px;
+    max-width: 20%;
     height: 28vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
     box-sizing: border-box;
+    background-color: lightgray;
     border-radius: 10px;
     border: 1px solid rgba(58, 20, 20, 0.2);
 }
 
 .review-description {
+    text-align: center;
     overflow-y: scroll;
     overflow-x: break-word;
     overflow: auto;
-    height: 15vh;
+    height: 14vh;
 }
 
 .review-descriptions {
@@ -241,6 +253,7 @@
 .card-title {
     font-weight: bold;
     margin-bottom: 3px;
+    text-align: center;
 }
 
 .card-desc {
