@@ -10,7 +10,7 @@ const EditReviewForm = ({ review, spot }) => {
     const user = useSelector((state) => state.session)
     const dispatch = useDispatch()
     const [reviewDetails, setReviewDetails] = useState(review.review ? review.review : "")
-    const [stars, setStars] = useState(review?.stars ? review?.stars : 0)
+    const [stars, setStars] = useState(review?.stars ? parseInt(review?.stars) : 0)
     const [errors, setErrors] = useState("")
     const [showMenu, setShowMenu] = useState(false);
     const { closeModal } = useModal();
