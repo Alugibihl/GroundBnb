@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const StarsRatingInput = ({ stars, disabled, onChange }) => {
-    const [activeRating, setActiveRating] = useState(stars);
+    const [activeRating, setActiveRating] = useState(parseFloat(stars));
     const filled = "fa-solid fa-star"
     const empty = "fa-regular fa-star"
-    
+
     return (
         <div className="rating-input">
             <div
