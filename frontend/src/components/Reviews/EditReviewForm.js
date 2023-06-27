@@ -33,7 +33,7 @@ const EditReviewForm = ({ review, spot }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("star rating", stars);
-        const data = { spotId: spotId, review: reviewDetails, stars: stars }
+        const data = { spotId: spotId, review: reviewDetails, stars: Number(stars) }
         console.log("data", data);
         const reviewInfo = { reviewId: review.id, data }
         const result = await dispatch(editReviewThunk(reviewInfo))
