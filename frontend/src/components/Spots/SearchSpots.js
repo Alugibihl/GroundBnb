@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSpots, performSearch, spotCleanUp } from '../../store/spotsReducer';
+import { performSearch, } from '../../store/spotsReducer';
 import SearchResults from './SearchResults';
 
 

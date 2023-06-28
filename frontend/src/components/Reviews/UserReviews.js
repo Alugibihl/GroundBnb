@@ -42,18 +42,18 @@ const UsersReviews = ({ review }) => {
     return (
         <>
             {
-                < nav className='reviews-board'>
-                    <NavLink to={`/spots/${review.spotId}`}>
+                <div className='reviews-board'>
+                    <div>
                         <div className='card-title'>{userSpot?.name}</div>
                         <div className='card-desc'>{date(review.updatedAt).toLocaleString("en-US", { month: "long" })} {date(review.updatedAt).getFullYear()}</div>
                         <div className="review-description wrap-break">{review.review}</div>
-                    </NavLink>
+                    </div>
                     <div className='box-buttons'>
                         <OpenModalButton buttonText="Update"
                             onButtonClick={closeMenu} modalComponent={<EditReviewForm review={review} spot={userSpot} />} />
                         <OpenModalButton buttonText="Delete"
                             onButtonClick={closeMenu} modalComponent={<ReviewDeleteModal review={review} />} /> </div>
-                </nav>
+                </div>
             }
         </>
     );
