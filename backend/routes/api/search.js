@@ -9,10 +9,7 @@ router.post('/', async (req, res) => {
     try {
         const results = await Spot.findAll({
             where: {
-                [Op.or]: [
-                    { description: { [Op.like]: "%" + query.toLowerCase() + "%" } },
-                    { name: { [Op.like]: "%" + query.toLowerCase() + "%" } }
-                ]
+                description: { [Op.like]: "%" + query.toLowerCase() + "%" }
             },
         });
         if (results.length > 0) {

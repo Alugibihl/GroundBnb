@@ -167,7 +167,8 @@ img {
 
 .big-searcher input {
     width: 60vw;
-    height: 30px;
+    height: 5vh;
+    font-size: 4vh;
     border-radius: 10px;
 }
 
@@ -179,13 +180,21 @@ img {
 
 .search-field {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .magnifier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    right: 30px;
-    top: 5px;
+    height: 4vh;
+    right: 3vw;
+    font-size: 4vh;
+    box-sizing: border-box;
 }
+
 
 .result-tree {
     /* border: blue 2px solid; */
@@ -210,4 +219,13 @@ img {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
+}
+
+.search-but {
+    background-color: white;
+    border: none;
+}
+
+.search-but:hover {
+    box-shadow: none;
 }
