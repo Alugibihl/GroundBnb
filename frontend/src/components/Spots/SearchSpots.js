@@ -20,8 +20,6 @@ const SearchComponent = ({ spots }) => {
     const handleClear = async () => {
         setVisible(false)
         setQuery("")
-        await dispatch(spotCleanUp())
-        await dispatch(getSpots())
     }
 
     return (
