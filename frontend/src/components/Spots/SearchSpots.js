@@ -46,9 +46,7 @@ const SearchComponent = ({ spots }) => {
                 </div>
                 {searchResults?.length > 0 ? (
                     <ul className={visible ? 'result-tree' : "hidden"}>
-                        {searchResults?.map((spot) => (
-                            <SearchResults key={spot.id} spot={spot} />
-                        ))}
+                        {searchResults?.map((spot) => <SearchResults key={spot.id} spot={spot} />)}
                     </ul>
                 ) : (
                     <p className={visible ? "" : "hidden"}>No results found.</p>
@@ -57,4 +55,5 @@ const SearchComponent = ({ spots }) => {
         </div>
     );
 };
+
 export default SearchComponent
