@@ -16,7 +16,6 @@ const CreateReviewForm = ({ spot }) => {
     const { closeModal } = useModal();
     const ulRef = useRef();
     let spotId = spot.id
-    // console.log('spotId', spotId, 'user', user)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -32,7 +31,6 @@ const CreateReviewForm = ({ spot }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log('handle submit running', reviewDetails)
         const reviewInfo = { spotId, reviewDetails, stars }
         return dispatch(createReview(reviewInfo))
             .then(dispatch(getSpotsDetail(spotId)))

@@ -27,10 +27,8 @@ const CreateBookingModal = ({ spot }) => {
             startDate,
             endDate,
         };
-        // console.log("bookingData", bookingData);
         const data = await dispatch(createBookingThunk(bookingData));
         if (!data.id && (data.startDate || data.endDate)) {
-            // console.log("data", data);
             setErrors(data);
         } else {
             closeModal();

@@ -108,7 +108,6 @@ export const addImage = (data) => async (dispatch) => {
         })
         if (!response.ok) return
         const images = await response.json()
-        // console.log('this is returned image in add image thunk!!!!!', images);
     }
     dispatch(getSpotsDetail(spotId))
     return true

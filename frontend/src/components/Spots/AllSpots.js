@@ -8,11 +8,19 @@ import './Spots.css'
 const AllSpots = () => {
     const spotsInfo = useSelector((state) => state.spots)
     const dispatch = useDispatch()
+    let spotholder = Object.values(spotsInfo)
+    let spots = []
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
-    let spots = Object.values(spotsInfo)
-    if (!spots.length) { return null }
+
+    if (!spotsInfo) { return null }
+    for (let spot of spotholder) {
+        if (spots.length < 20) {
+            spots.push(spot)
+        }
+    }
+
     return (
         <div>
             <div><SearchComponent spots={spotsInfo} /></div>

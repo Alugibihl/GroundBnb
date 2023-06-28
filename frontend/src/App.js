@@ -12,10 +12,10 @@ import EditSpotForm from "./components/Spots/EditSpotForm";
 import ManageSpots from "./components/Spots/ManageSpots";
 import ManageReviews from "./components/Reviews/ManageReviews";
 import CreateReviewForm from "./components/Reviews/CreatReviewForm";
-import Footer from "./footer";
 import NotFound from "./components/NotFound";
 import EditReviewForm from "./components/Reviews/EditReviewForm";
 import ManageBookings from "./components/Bookings/MangageBookings";
+import Footer from "./components/footer/index"
 
 function App() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { performSearch } from '../../store/spotsReducer';
+import { getSpots, performSearch, spotCleanUp } from '../../store/spotsReducer';
 import SearchResults from './SearchResults';
 
 
@@ -13,13 +13,15 @@ const SearchComponent = ({ spots }) => {
     useEffect(() => {
     }, [dispatch, query])
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         setVisible(true)
-        dispatch(performSearch(query));
+        await dispatch(performSearch(query));
     };
-    const handleClear = () => {
+    const handleClear = async () => {
         setVisible(false)
         setQuery("")
+        await dispatch(spotCleanUp())
+        await dispatch(getSpots())
     }
 
     return (
@@ -34,7 +36,7 @@ const SearchComponent = ({ spots }) => {
                             onChange={(e) => setQuery(e.target.value)}
                         />
                         <div className='magnifier'>
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <button className='search-but' onClick={handleSearch}><i className={`fas fa-search dynamic-icon`}></i></button>
                         </div>
                     </div>
                     <div className='search-buttons'>
@@ -44,9 +46,7 @@ const SearchComponent = ({ spots }) => {
                 </div>
                 {searchResults?.length > 0 ? (
                     <ul className={visible ? 'result-tree' : "hidden"}>
-                        {searchResults?.map((spot) => (
-                            <SearchResults key={spot.id} spot={spot} />
-                        ))}
+                        {searchResults?.map((spot) => <SearchResults key={spot.id} spot={spot} />)}
                     </ul>
                 ) : (
                     <p className={visible ? "" : "hidden"}>No results found.</p>
@@ -55,4 +55,5 @@ const SearchComponent = ({ spots }) => {
         </div>
     );
 };
+
 export default SearchComponent

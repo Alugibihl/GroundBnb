@@ -16,12 +16,10 @@ const EditBookingModal = ({ booking, spot }) => {
     const [startDate, setStartDate] = useState(booking.startDate ? new Date(booking.startDate) : new Date());
     const [endDate, setEndDate] = useState(booking.endDate ? new Date(booking.endDate) : new Date());
     const [errors, setErrors] = useState({})
-    // console.log("booking", booking, "spot", spot);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log("before", startDate, endDate);
         const bookingData = {
             spotId: spot.id,
             startDate: startDate.toISOString().split("T")[0],
