@@ -118,7 +118,6 @@ img {
 }
 
 .review-holder {
-    /* border: 2px solid red; */
     margin-left: 20px;
     margin-bottom: 10px;
 }
@@ -208,6 +207,7 @@ img {
     display: flex;
     flex-direction: column;
     position: relative;
+    /* border: blue 2px solid; */
 }
 
 .search-button {
@@ -219,6 +219,7 @@ img {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
+    margin-right: 4vh;
 }
 
 .search-but {
