@@ -285,7 +285,7 @@ module.exports = {
       },
       {
         spotId: 12,
-        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.io8Hy1kUZ9rMdiPifWNKkgAAAA%26pid%3DApi&f=1&ipt=cabaeff6c4a691ec750262364060517678b7425d308632dc182c3a9fe60191fa&ipo=images",
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fphotos.zillowstatic.com%2Fp_e%2FISyngko17hw7m30000000000.jpg&f=1&nofb=1&ipt=6d7bbfeaf333549e56746ac8227d68014967920b72e9fe08f88d75ecf59672a3&ipo=images",
         preview: true
       },
       {
