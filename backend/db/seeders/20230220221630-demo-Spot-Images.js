@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.travelawaits.com%2Fta%2Fuploads%2F2021%2F04%2Ff746c08b92dbef4cc3642e8675e7ef746c0-2048x2048.jpg&f=1&nofb=1&ipt=9a693d40e4aeb7a536be03b50a27677595a8013728c1353757455c0406b83982&ipo=images",
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.A10hjt9OT9VhF20JuMrjTQHaFj%26pid%3DApi&f=1&ipt=2757262a26d0051021d4912ee9d0b4a2e3796210947b7d806d487a30f13d9afe&ipo=images",
         preview: false
       },
       {
@@ -205,7 +205,7 @@ module.exports = {
       },
       {
         spotId: 8,
-        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwp.zillowstatic.com%2F1%2FZG_L0224-c70fd6.jpg&f=1&nofb=1&ipt=16086158fd47c30c1e52df0f5d9b96a5365bb3883058b2d9efad3ada61debb76&ipo=images",
+        url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Frock-cave-stadsaal-caves-art-site-cederberg-mountains-western-cape-province-south-africa-133708767.jpg&f=1&nofb=1&ipt=c5ea339a5e2320eec5ea919475ca1b20633fb142cdc7a585c284896a222ed6c3&ipo=images",
         preview: false
       },
       {
